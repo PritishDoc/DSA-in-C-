@@ -1,2 +1,2 @@
-# DSA-in-C-
-Covering full dsa syllabus as well as practicing the questions also like top question from gfg and leetcode.
+# DSA-in-C++
+Covering the full DSA syllabus as well as practicing the questions also like top questions from gfg and leetcode.
