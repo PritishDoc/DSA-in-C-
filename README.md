@@ -59,7 +59,7 @@ The repository covers a wide range of topics in DSA, including but not limited t
 
 1. **Clone the Repository:**
 
-   git clone https://github.com/your-username/DSA-Practice.git
+   git clone https://github.com/PritishDoc/DSA-Practice.git
    cd DSA-Practice
 2. **Navigate to a Topic:**
 Go to the directory of the topic you want to practice. For example:
