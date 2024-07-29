@@ -21,29 +21,11 @@ int main()
 Best Case: 𝑂(𝑛log⁡𝑛)
 O(nlogn) – This is when the array is already sorted or nearly sorted.
 Average Case: 
-𝑂
-(
-𝑛
-log
-⁡
-𝑛
-)
+𝑂(𝑛log⁡𝑛)
 O(nlogn) – This is for an average unsorted array.
 Worst Case: 
-𝑂
-(
-𝑛
-log
-⁡
-𝑛
-)
+𝑂(𝑛log⁡𝑛)
 O(nlogn) – Thanks to Introsort, which switches to HeapSort to maintain 
-𝑂
-(
-𝑛
-log
-⁡
-𝑛
-)
+𝑂(𝑛log 𝑛)
 O(nlogn) performance even in the worst case scenario
 */
