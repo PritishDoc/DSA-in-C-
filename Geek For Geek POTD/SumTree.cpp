@@ -31,45 +31,55 @@ Constraints:
 
 */
 /* Tree node structure */
-struct Node {
-    int data;
-    Node* left, * right;
-};
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <climits>
 
 class Solution {
 public:
-    // Helper function to check Sum Tree and return sum of the subtree
-    int checkSumTree(Node* node, bool& isSumTree) {
-        // Base case: If node is NULL, return sum as 0
-        if (node == nullptr) {
-            return 0;
+    int SumofMiddleElements(std::vector<int> &arr1, std::vector<int> &arr2) {
+        int n = arr1.size();
+        
+        // Ensure arr1 is the smaller array
+        if (arr1[0] > arr2[0]) std::swap(arr1, arr2);
+        
+        int low = 0, high = n;
+        
+        while (low <= high) {
+            int cut1 = (low + high) / 2;
+            int cut2 = n - cut1;
+            
+            int left1 = (cut1 == 0) ? INT_MIN : arr1[cut1 - 1];
+            int left2 = (cut2 == 0) ? INT_MIN : arr2[cut2 - 1];
+            
+            int right1 = (cut1 == n) ? INT_MAX : arr1[cut1];
+            int right2 = (cut2 == n) ? INT_MAX : arr2[cut2];
+            
+            if (left1 <= right2 && left2 <= right1) {
+                // Found the partition
+                return std::max(left1, left2) + std::min(right1, right2);
+            } else if (left1 > right2) {
+                // We are too far right on arr1, move left
+                high = cut1 - 1;
+            } else {
+                // We are too far left on arr1, move right
+                low = cut1 + 1;
+            }
         }
-
-        // If node is a leaf node, return its own value
-        if (node->left == nullptr && node->right == nullptr) {
-            return node->data;
-        }
-
-        // Recur for left and right subtrees
-        int leftSum = checkSumTree(node->left, isSumTree);
-        int rightSum = checkSumTree(node->right, isSumTree);
-
-        // Check if the current node's data is equal to sum of its left and right subtree
-        if (node->data != leftSum + rightSum) {
-            isSumTree = false;
-        }
-
-        // Return the sum of values under the current subtree rooted at `node`
-        return node->data + leftSum + rightSum;
-    }
-
-    bool isSumTree(Node* root) {
-        // Variable to keep track if the tree is Sum Tree or not
-        bool isSumTreeFlag = true;
-
-        // Helper function call to initialize the recursion
-        checkSumTree(root, isSumTreeFlag);
-
-        return isSumTreeFlag;
+        
+        return 0;
     }
 };
+
+int main() {
+    Solution sol;
+
+    std::vector<int> arr1 = {1, 2, 4, 6, 10};
+    std::vector<int> arr2 = {4, 5, 6, 9, 12};
+
+    int result = sol.SumofMiddleElements(arr1, arr2);
+    std::cout << "Sum of middle elements: " << result << std::endl; // Output: 11
+
+    std::vector<int> arr3 = {1, 12, 15, 26, 38};
+    std::vector
