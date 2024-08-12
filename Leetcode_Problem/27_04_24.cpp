@@ -1,8 +1,6 @@
 /*
 Sort the Jumbled Numbers
-Medium
-Topics
-Companies
+
 Hint
 You are given a 0-indexed integer array mapping which represents the mapping rule of a shuffled decimal system. mapping[i] = j means digit i should be mapped to digit j in this system.
 

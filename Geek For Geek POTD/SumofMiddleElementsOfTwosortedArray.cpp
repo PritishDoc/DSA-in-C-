@@ -1,6 +1,6 @@
 /*
 Sum of Middle elements of two sorted arrays
-Difficulty: MediumAccuracy: 47.98%Submissions: 67K+Points: 4
+Difficulty: Medium Accuracy: 47.98%Submissions: 67K+Points: 4
 Given 2 sorted integer arrays arr1 and arr2. Find the sum of the middle elements of two sorted arrays arr1 and arr2.
 
 Examples:
