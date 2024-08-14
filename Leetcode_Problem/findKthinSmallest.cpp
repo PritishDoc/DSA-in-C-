@@ -1,9 +1,6 @@
 /*
 Find K-th Smallest Pair Distance
-Solved
-Hard
-Topics
-Companies
+
 Hint
 The distance of a pair of integers a and b is defined as the absolute difference between a and b.
 
