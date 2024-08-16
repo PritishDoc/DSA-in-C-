@@ -1,8 +1,6 @@
 /*
 1395. Count Number of Teams
-Solved
-Medium
-Topics
+
 Companies
 Hint
 There are n soldiers standing in a line. Each soldier is assigned a unique rating value.
