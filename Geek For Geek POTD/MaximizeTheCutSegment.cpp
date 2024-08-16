@@ -27,4 +27,35 @@ Constraints
 
 */
 
-
+class Solution
+{
+    public:
+    // Function to find the maximum number of cuts.
+    int maximizeTheCuts(int n, int x, int y, int z)
+    {
+        // Initialize a dp array of size n+1 with all elements as -1.
+        vector<int> dp(n + 1, -1);
+        
+        // Base case: dp[0] = 0, since 0 length can be obtained with 0 cuts.
+        dp[0] = 0;
+        
+        // Iterate over all lengths from 1 to n.
+        for (int i = 1; i <= n; ++i) {
+            // If it's possible to cut a piece of length x.
+            if (i >= x && dp[i - x] != -1) {
+                dp[i] = max(dp[i], dp[i - x] + 1);
+            }
+            // If it's possible to cut a piece of length y.
+            if (i >= y && dp[i - y] != -1) {
+                dp[i] = max(dp[i], dp[i - y] + 1);
+            }
+            // If it's possible to cut a piece of length z.
+            if (i >= z && dp[i - z] != -1) {
+                dp[i] = max(dp[i], dp[i - z] + 1);
+            }
+        }
+        
+        // If dp[n] is still -1, it means no valid cuts could be made, so return 0.
+        return dp[n] == -1 ? 0 : dp[n];
+    }
+};
