@@ -31,3 +31,25 @@ m == arrays.length
 arrays[i] is sorted in ascending order.
 There will be at most 105 integers in all the arrays.
 */
+
+class Solution {
+public:
+    int maxDistance(std::vector<std::vector<int>>& arrays) {
+        int minVal = arrays[0][0];
+        int maxVal = arrays[0].back();
+        int maxDist = 0;
+
+        for (int i = 1; i < arrays.size(); ++i) {
+            int currMin = arrays[i][0];
+            int currMax = arrays[i].back();
+
+            maxDist = std::max(maxDist, std::max(abs(currMax - minVal), abs(maxVal - currMin)));
+
+            // Update minVal and maxVal for next iteration
+            minVal = std::min(minVal, currMin);
+            maxVal = std::max(maxVal, currMax);
+        }
+
+        return maxDist;
+    }
+};
