@@ -27,3 +27,31 @@ nums[i] may contain duplicates.
 
 */
 
+class Solution {
+public:
+    vector<long long int> productExceptSelf(vector<long long int>& nums) {
+        int n = nums.size();
+        
+        // Initialize the left and right product arrays
+        vector<long long int> leftProducts(n, 1);
+        vector<long long int> rightProducts(n, 1);
+        vector<long long int> result(n, 1);
+        
+        // Fill leftProducts array
+        for (int i = 1; i < n; ++i) {
+            leftProducts[i] = leftProducts[i-1] * nums[i-1];
+        }
+        
+        // Fill rightProducts array
+        for (int i = n - 2; i >= 0; --i) {
+            rightProducts[i] = rightProducts[i+1] * nums[i+1];
+        }
+        
+        // Combine the results
+        for (int i = 0; i < n; ++i) {
+            result[i] = leftProducts[i] * rightProducts[i];
+        }
+        
+        return result;
+    }
+};
