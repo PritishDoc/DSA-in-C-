@@ -48,3 +48,45 @@ n == points[r].length
 1 <= m * n <= 105
 0 <= points[r][c] <= 105
 */
+class Solution {
+public:
+    long long maxPoints(vector<vector<int>>& points) {
+        int m = points.size();
+        int n = points[0].size();
+        
+        // DP array to store the maximum points up to each row
+        vector<long long> dp(n, 0);
+        
+        // Initialize the first row
+        for (int c = 0; c < n; ++c) {
+            dp[c] = points[0][c];
+        }
+        
+        // Iterate over each row
+        for (int r = 1; r < m; ++r) {
+            vector<long long> leftMax(n, 0), rightMax(n, 0), newDp(n, 0);
+            
+            // Fill leftMax array
+            leftMax[0] = dp[0];
+            for (int c = 1; c < n; ++c) {
+                leftMax[c] = max(leftMax[c-1] - 1, dp[c]);
+            }
+            
+            // Fill rightMax array
+            rightMax[n-1] = dp[n-1];
+            for (int c = n-2; c >= 0; --c) {
+                rightMax[c] = max(rightMax[c+1] - 1, dp[c]);
+            }
+            
+            // Calculate new dp values for row r
+            for (int c = 0; c < n; ++c) {
+                newDp[c] = points[r][c] + max(leftMax[c], rightMax[c]);
+            }
+            
+            dp = newDp;  // Update dp for the next row
+        }
+        
+        // The maximum value in the last row dp array is the answer
+        return *max_element(dp.begin(), dp.end());
+    }
+};
