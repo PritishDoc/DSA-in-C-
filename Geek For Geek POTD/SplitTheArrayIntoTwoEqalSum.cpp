@@ -18,3 +18,28 @@ Constraints:
 1<=arr.size()<=105 
 1<=arr[i]<=106
 */
+class Solution {
+public:
+    bool canSplit(vector<int>& arr) {
+        int totalSum = accumulate(arr.begin(), arr.end(), 0);
+        
+        // If the total sum is odd, it cannot be split into two equal parts
+        if (totalSum % 2 != 0) {
+            return false;
+        }
+        
+        int target = totalSum / 2;
+        int runningSum = 0;
+        
+        for (int i = 0; i < arr.size(); ++i) {
+            runningSum += arr[i];
+            
+            // If the running sum equals half of the total sum, we can split the array
+            if (runningSum == target) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+};
