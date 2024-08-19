@@ -21,3 +21,45 @@ Constraints:
 1<= arr[i] <= 106
 1 <= k <= n
 */
+
+
+
+#include <vector>
+#include <algorithm>
+
+class Solution {
+public:
+    int partition(std::vector<int>& arr, int low, int high) {
+        int pivot = arr[high];  // Choose the last element as pivot
+        int i = low;  // Index of smaller element
+        
+        for (int j = low; j < high; ++j) {
+            if (arr[j] <= pivot) {
+                std::swap(arr[i], arr[j]);
+                i++;
+            }
+        }
+        std::swap(arr[i], arr[high]);
+        return i;  // Return the partition index
+    }
+    
+    int quickSelect(std::vector<int>& arr, int low, int high, int k) {
+        if (low <= high) {
+            int pi = partition(arr, low, high);
+            
+            if (pi == k - 1) {
+                return arr[pi];  // k-th smallest element found
+            } else if (pi > k - 1) {
+                return quickSelect(arr, low, pi - 1, k);
+            } else {
+                return quickSelect(arr, pi + 1, high, k);
+            }
+        }
+        return -1;  // If something goes wrong (though it shouldn't)
+    }
+    
+    int kthSmallest(std::vector<int>& arr, int k) {
+        int n = arr.size();
+        return quickSelect(arr, 0, n - 1, k);
+    }
+};
