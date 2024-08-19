@@ -35,3 +35,24 @@ Constraints:
 
 1 <= n <= 1000
 */
+class Solution {
+public:
+    int minSteps(int n) {
+        // DP array to store the minimum number of operations
+        vector<int> dp(n + 1, 0);
+        
+        // Start calculating from 2 to n
+        for (int i = 2; i <= n; ++i) {
+            dp[i] = i;  // Maximum steps would be i (by only pasting one character at a time)
+            for (int j = 1; j * j <= i; ++j) {
+                if (i % j == 0) {
+                    // if j is a factor, we check both j and i/j
+                    dp[i] = min(dp[i], dp[j] + (i / j));
+                    dp[i] = min(dp[i], dp[i / j] + j);
+                }
+            }
+        }
+        
+        return dp[n];
+    }
+};
