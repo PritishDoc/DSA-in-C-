@@ -1,9 +1,4 @@
 /*
-
-Code
-Testcase
-Test Result
-Test Result
 650. 2 Keys Keyboard
 Medium
 Topics
