@@ -1,8 +1,5 @@
 /*
 650. 2 Keys Keyboard
-Medium
-Topics
-Companies
 Hint
 There is only one character 'A' on the screen of a notepad. You can perform one of two operations on this notepad for each step:
 
