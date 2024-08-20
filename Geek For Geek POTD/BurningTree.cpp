@@ -47,3 +47,94 @@ Constraints:
 
 1 ≤ values of nodes ≤ 105
 */
+class Solution {
+public:
+    int minTime(Node* root, int target) {
+        if (!root) return 0;
+        
+        // Step 1: Create a parent map and find the target node
+        std::unordered_map<Node*, Node*> parentMap; // Node -> Parent mapping
+        Node* targetNode = NULL;
+        createParentMap(root, parentMap, targetNode, target);
+        
+        // Step 2: Perform BFS to burn the tree
+        return burnTree(targetNode, parentMap);
+    }
+
+private:
+    // Function to create a parent map and find the target node
+    void createParentMap(Node* root, std::unordered_map<Node*, Node*>& parentMap, Node*& targetNode, int target) {
+        std::queue<Node*> q;
+        q.push(root);
+
+        while (!q.empty()) {
+            Node* current = q.front();
+            q.pop();
+
+            // Check if this is the target node
+            if (current->data == target) {
+                targetNode = current;
+            }
+
+            // Push left and right children to the queue and set their parent
+            if (current->left) {
+                parentMap[current->left] = current;
+                q.push(current->left);
+            }
+
+            if (current->right) {
+                parentMap[current->right] = current;
+                q.push(current->right);
+            }
+        }
+    }
+
+    // Function to perform BFS and calculate the minimum time to burn the tree
+    int burnTree(Node* targetNode, std::unordered_map<Node*, Node*>& parentMap) {
+        std::queue<Node*> q;
+        std::set<Node*> visited; // Set to track visited nodes
+        q.push(targetNode);
+        visited.insert(targetNode);
+
+        int time = 0;
+
+        while (!q.empty()) {
+            int size = q.size();
+            bool anyBurned = false;
+
+            // Process all nodes at the current level
+            for (int i = 0; i < size; ++i) {
+                Node* current = q.front();
+                q.pop();
+
+                // Burn the left child
+                if (current->left && visited.find(current->left) == visited.end()) {
+                    anyBurned = true;
+                    q.push(current->left);
+                    visited.insert(current->left);
+                }
+
+                // Burn the right child
+                if (current->right && visited.find(current->right) == visited.end()) {
+                    anyBurned = true;
+                    q.push(current->right);
+                    visited.insert(current->right);
+                }
+
+                // Burn the parent
+                if (parentMap.find(current) != parentMap.end() && visited.find(parentMap[current]) == visited.end()) {
+                    anyBurned = true;
+                    q.push(parentMap[current]);
+                    visited.insert(parentMap[current]);
+                }
+            }
+
+            // Increment time if any nodes were burned at this level
+            if (anyBurned) {
+                time++;
+            }
+        }
+
+        return time;
+    }
+};
