@@ -1,8 +1,5 @@
 /*
 1140. Stone Game II
-Medium
-Topics
-Companies
 Hint
 Alice and Bob continue their games with piles of stones.  There are a number of piles arranged in a row, and each pile has a positive integer number of stones piles[i].  The objective of the game is to end with the most stones. 
 
