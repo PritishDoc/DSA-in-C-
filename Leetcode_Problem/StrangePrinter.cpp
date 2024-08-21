@@ -1,9 +1,7 @@
 /*
 
 664. Strange Printer
-Hard
-Topics
-Companies
+
 There is a strange printer with the following two special properties:
 
 The printer can only print a sequence of the same character each time.
