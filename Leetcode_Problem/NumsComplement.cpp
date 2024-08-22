@@ -26,3 +26,21 @@ Constraints:
 
 1 <= num < 231
 */
+class Solution {
+public:
+    int findComplement(int num) {
+        // Step 1: Calculate the number of bits in the number
+        int bit_length = 0;
+        int n = num;
+        while (n > 0) {
+            bit_length++;
+            n >>= 1;
+        }
+        
+        // Step 2: Create a mask with the same number of bits as num using unsigned int
+        unsigned int mask = (1U << bit_length) - 1;
+        
+        // Step 3: XOR num with the mask to flip the bits
+        return num ^ mask;
+    }
+};
