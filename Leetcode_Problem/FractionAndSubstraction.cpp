@@ -31,3 +31,45 @@ The input only contains valid irreducible fractions, where the numerator and den
 The number of given fractions will be in the range [1, 10].
 The numerator and denominator of the final result are guaranteed to be valid and in the range of 32-bit int.
 */
+#include <string>
+#include <numeric>
+#include <sstream>
+
+class Solution {
+public:
+    std::string fractionAddition(std::string expression) {
+        int numerator = 0, denominator = 1;  // Start with 0/1
+        
+        for (int i = 0; i < expression.size(); ) {
+            // Determine the sign of the current fraction
+            int sign = 1;  // Default is positive
+            if (expression[i] == '-' || expression[i] == '+') {
+                sign = (expression[i] == '-') ? -1 : 1;
+                i++;
+            }
+            
+            // Parse the fraction numerator and denominator
+            int num = 0, den = 0;
+            while (i < expression.size() && isdigit(expression[i])) {
+                num = num * 10 + (expression[i] - '0');
+                i++;
+            }
+            i++;  // Skip the '/'
+            while (i < expression.size() && isdigit(expression[i])) {
+                den = den * 10 + (expression[i] - '0');
+                i++;
+            }
+            
+            // Add the current fraction to the accumulated fraction
+            numerator = numerator * den + sign * num * denominator;
+            denominator *= den;
+            
+            // Reduce the fraction by the greatest common divisor
+            int gcd = std::gcd(abs(numerator), denominator);
+            numerator /= gcd;
+            denominator /= gcd;
+        }
+        
+        return std::to_string(numerator) + "/" + std::to_string(denominator);
+    }
+};
