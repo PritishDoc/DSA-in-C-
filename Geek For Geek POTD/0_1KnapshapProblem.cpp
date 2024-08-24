@@ -24,3 +24,25 @@ Constraints:
 
 
 */
+class Solution {
+public:
+    // Function to return max value that can be put in knapsack of capacity W.
+    int knapSack(int W, vector<int>& wt, vector<int>& val) {
+        int n = val.size();  // Number of items
+        vector<vector<int>> dp(n + 1, vector<int>(W + 1, 0));
+        
+        // Build the DP table
+        for (int i = 1; i <= n; ++i) {
+            for (int w = 1; w <= W; ++w) {
+                if (wt[i-1] <= w) {
+                    dp[i][w] = max(dp[i-1][w], dp[i-1][w - wt[i-1]] + val[i-1]);
+                } else {
+                    dp[i][w] = dp[i-1][w];
+                }
+            }
+        }
+        
+        // The answer is the maximum value for the full capacity and all items
+        return dp[n][W];
+    }
+};
