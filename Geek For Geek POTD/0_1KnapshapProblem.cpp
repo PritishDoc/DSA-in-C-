@@ -1,5 +1,4 @@
 /*
-
 0 - 1 Knapsack Problem
 Difficulty: MediumAccuracy: 31.76%Submissions: 427K+Points: 4
 You are given weights and values of items, and put these items in a knapsack of capacity W to get the maximum total value in the knapsack. Note that we have only one quantity of each item.
