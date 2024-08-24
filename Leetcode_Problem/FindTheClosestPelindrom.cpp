@@ -1,13 +1,7 @@
 /*
 
-Code
-Testcase
-Test Result
-Test Result
 564. Find the Closest Palindrome
-Hard
-Topics
-Companies
+
 Hint
 Given a string n representing an integer, return the closest integer (not including itself), which is a palindrome. If there is a tie, return the smaller one.
 
