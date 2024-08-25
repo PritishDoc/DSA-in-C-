@@ -1,9 +1,5 @@
 /*
 1105. Filling Bookcase Shelves
-Solved
-Medium
-Topics
-Companies
 Hint
 You are given an array books where books[i] = [thicknessi, heighti] indicates the thickness and height of the ith book. You are also given an integer shelfWidth.
 
