@@ -28,3 +28,21 @@ The number of nodes in the tree is in the range [0, 104].
 The height of the n-ary tree is less than or equal to 1000.
  
 */
+class Solution {
+public:
+    vector<int> postorder(Node* root) {
+        vector<int> result;
+        if (!root) return result;  // If root is null, return an empty result.
+
+        // Traverse all the children first.
+        for (Node* child : root->children) {
+            vector<int> childResult = postorder(child);
+            result.insert(result.end(), childResult.begin(), childResult.end());
+        }
+
+        // After traversing children, add the current node's value.
+        result.push_back(root->val);
+        
+        return result;
+    }
+};
