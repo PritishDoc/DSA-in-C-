@@ -28,3 +28,38 @@ Constraints:
 
 
 */
+class Solution {
+public:
+    int wildCard(string pattern, string str) {
+        int m = pattern.size();
+        int n = str.size();
+
+        // Create a DP table with (m+1) x (n+1) dimensions initialized to 0.
+        vector<vector<int>> dp(m + 1, n + 1, 0);
+
+        // Base case: Empty pattern matches with empty string.
+        dp[0][0] = 1;
+
+        // Handle patterns like '*', '**', etc., which can match with an empty string.
+        for (int i = 1; i <= m; i++) {
+            if (pattern[i - 1] == '*')
+                dp[i][0] = dp[i - 1][0];
+        }
+
+        // Fill the DP table.
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (pattern[i - 1] == '?') {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else if (pattern[i - 1] == '*') {
+                    dp[i][j] = dp[i - 1][j] || dp[i][j - 1];
+                } else if (pattern[i - 1] == str[j - 1]) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                }
+            }
+        }
+
+        // The result is in dp[m][n].
+        return dp[m][n];
+    }
+};
