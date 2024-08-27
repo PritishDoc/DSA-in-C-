@@ -18,3 +18,53 @@ Constraints:
 1 <= arr.size() <= 106
 1<= arr[i] <=109
 */
+#include <vector>
+#include <stack>
+#include <cmath>
+using namespace std;
+
+class Solution {
+public:
+    int findMaxDiff(vector<int>& arr) {
+        int n = arr.size();
+        
+        // Arrays to store the nearest smaller to left and right
+        vector<int> ls(n, 0), rs(n, 0);
+        stack<int> st;
+
+        // Find nearest smaller to left
+        for (int i = 0; i < n; ++i) {
+            while (!st.empty() && st.top() >= arr[i]) {
+                st.pop();
+            }
+            if (!st.empty()) {
+                ls[i] = st.top();
+            }
+            st.push(arr[i]);
+        }
+
+        // Clear the stack for the next computation
+        while (!st.empty()) {
+            st.pop();
+        }
+
+        // Find nearest smaller to right
+        for (int i = n - 1; i >= 0; --i) {
+            while (!st.empty() && st.top() >= arr[i]) {
+                st.pop();
+            }
+            if (!st.empty()) {
+                rs[i] = st.top();
+            }
+            st.push(arr[i]);
+        }
+
+        // Compute the maximum absolute difference
+        int maxDiff = 0;
+        for (int i = 0; i < n; ++i) {
+            maxDiff = max(maxDiff, abs(ls[i] - rs[i]));
+        }
+
+        return maxDiff;
+    }
+};
