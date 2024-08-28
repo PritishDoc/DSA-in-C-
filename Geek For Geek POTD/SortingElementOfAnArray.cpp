@@ -18,3 +18,38 @@ Constraints:
 1 ≤ arr.size() ≤ 105
 1 ≤ arr[i]≤ 105
 */
+class Solution {
+public:
+    // Function to sort the array according to frequency of elements.
+    vector<int> sortByFreq(vector<int>& arr) {
+        // Step 1: Count frequency of each element
+        unordered_map<int, int> freq;
+        for (int num : arr) {
+            freq[num]++;
+        }
+
+        // Step 2: Create a vector of pairs (element, frequency)
+        vector<pair<int, int>> freqArr;
+        for (auto& it : freq) {
+            freqArr.push_back(it);
+        }
+
+        // Step 3: Sort the vector of pairs by custom comparator
+        sort(freqArr.begin(), freqArr.end(), [](pair<int, int>& a, pair<int, int>& b) {
+            if (a.second == b.second) {
+                return a.first < b.first;  // If frequencies are the same, sort by element value
+            }
+            return a.second > b.second;  // Sort by frequency in descending order
+        });
+
+        // Step 4: Construct the result array
+        vector<int> result;
+        for (auto& it : freqArr) {
+            for (int i = 0; i < it.second; i++) {
+                result.push_back(it.first);
+            }
+        }
+
+        return result;
+    }
+};
