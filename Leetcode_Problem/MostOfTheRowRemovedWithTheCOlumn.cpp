@@ -45,3 +45,57 @@ Constraints:
 No two stones are at the same coordinate point.
 */
 
+class Solution {
+public:
+    int findParent(int node, vector<int>& parent) {
+        if (parent[node] == node) {
+            return node;
+        }
+        return parent[node] = findParent(parent[node], parent); // Path compression
+    }
+    
+    void unionNodes(int u, int v, vector<int>& parent, vector<int>& rank) {
+        int pu = findParent(u, parent);
+        int pv = findParent(v, parent);
+        
+        if (pu != pv) {
+            if (rank[pu] > rank[pv]) {
+                parent[pv] = pu;
+            } else if (rank[pu] < rank[pv]) {
+                parent[pu] = pv;
+            } else {
+                parent[pv] = pu;
+                rank[pu]++;
+            }
+        }
+    }
+    
+    int removeStones(vector<vector<int>>& stones) {
+        int n = stones.size();
+        vector<int> parent(n);
+        vector<int> rank(n, 0);
+        
+        // Initially, each node is its own parent (disjoint sets)
+        for (int i = 0; i < n; ++i) {
+            parent[i] = i;
+        }
+        
+        // Union nodes that share the same row or column
+        for (int i = 0; i < n; ++i) {
+            for (int j = i + 1; j < n; ++j) {
+                if (stones[i][0] == stones[j][0] || stones[i][1] == stones[j][1]) {
+                    unionNodes(i, j, parent, rank);
+                }
+            }
+        }
+        
+        // Find the number of connected components
+        unordered_set<int> uniqueParents;
+        for (int i = 0; i < n; ++i) {
+            uniqueParents.insert(findParent(i, parent));
+        }
+        
+        // The number of stones that can be removed is (total stones - number of components)
+        return n - uniqueParents.size();
+    }
+};
