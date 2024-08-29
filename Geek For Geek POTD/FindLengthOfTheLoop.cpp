@@ -51,3 +51,39 @@ Constraints:
 1 <= no. of nodes <= 106
 0 <= node.data <=106
 */
+class Solution {
+  public:
+    // Function to find the length of a loop in the linked list.
+    int countNodesinLoop(Node *head) {
+        Node *slow = head;
+        Node *fast = head;
+        
+        // Step 1: Detect loop using Floyd's Cycle Detection Algorithm
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
+            
+            // Loop detected
+            if (slow == fast) {
+                // Step 2: Count the number of nodes in the loop
+                return countLoopLength(slow);
+            }
+        }
+        
+        // No loop
+        return 0;
+    }
+    
+    // Helper function to count the number of nodes in the loop
+    int countLoopLength(Node *loopNode) {
+        Node *temp = loopNode;
+        int length = 1;
+        
+        while (temp->next != loopNode) {
+            length++;
+            temp = temp->next;
+        }
+        
+        return length;
+    }
+};
