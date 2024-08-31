@@ -41,3 +41,52 @@ Constraints:
 0 <= start, end < n
 start != end*/
 
+class Solution {
+public:
+    double maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start_node, int end_node) {
+        // Step 1: Build the graph
+        vector<vector<pair<int, double>>> graph(n);
+        for (int i = 0; i < edges.size(); ++i) {
+            int u = edges[i][0];
+            int v = edges[i][1];
+            double prob = succProb[i];
+            graph[u].emplace_back(v, prob);
+            graph[v].emplace_back(u, prob);
+        }
+        
+        // Step 2: Priority queue for max-heap (probability, node)
+        priority_queue<pair<double, int>> pq;
+        pq.emplace(1.0, start_node); // (probability, node)
+        
+        // Step 3: Probability array to store max probability to each node
+        vector<double> maxProb(n, 0.0);
+        maxProb[start_node] = 1.0;
+        
+        // Step 4: Dijkstra-like approach
+        while (!pq.empty()) {
+            double prob = pq.top().first;
+            int node = pq.top().second;
+            pq.pop();
+            
+            // If we reach the end node, return the probability
+            if (node == end_node) {
+                return prob;
+            }
+            
+            // Traverse neighbors
+            for (auto& neighbor : graph[node]) {
+                int nextNode = neighbor.first;
+                double edgeProb = neighbor.second;
+                
+                // If we find a path with higher probability, update and push to the queue
+                if (maxProb[nextNode] < prob * edgeProb) {
+                    maxProb[nextNode] = prob * edgeProb;
+                    pq.emplace(maxProb[nextNode], nextNode);
+                }
+            }
+        }
+        
+        // If we cannot reach the end node, return 0
+        return 0.0;
+    }
+};
