@@ -28,6 +28,32 @@ Constraints:
 class Solution {
   public:
     vector<int> find3Numbers(vector<int> &arr) {
-        // Code here
+        int n = arr.size();
+        if (n < 3) return {}; // Return an empty array if the size is less than 3
+
+        // Arrays to store the smallest and largest elements on left and right of each element
+        vector<int> smallest(n), largest(n);
+
+        // Fill the smallest array, smallest[i] will hold the smallest value till index i
+        smallest[0] = arr[0];
+        for (int i = 1; i < n; i++) {
+            smallest[i] = min(smallest[i - 1], arr[i]);
+        }
+
+        // Fill the largest array, largest[i] will hold the largest value from index i till the end
+        largest[n - 1] = arr[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            largest[i] = max(largest[i + 1], arr[i]);
+        }
+
+        // Find the subsequence
+        for (int j = 1; j < n - 1; j++) {
+            if (arr[j] > smallest[j - 1] && arr[j] < largest[j + 1]) {
+                return {smallest[j - 1], arr[j], largest[j + 1]};
+            }
+        }
+
+        // If no such triplet is found
+        return {};
     }
 };
