@@ -25,3 +25,9 @@ Constraints:
 1 <= arr[i] <= 106
 
 */
+class Solution {
+  public:
+    vector<int> find3Numbers(vector<int> &arr) {
+        // Code here
+    }
+};
