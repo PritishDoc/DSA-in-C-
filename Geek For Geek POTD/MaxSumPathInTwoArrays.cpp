@@ -18,8 +18,41 @@ Expected Auxiliary Space: O(1)
 Constraints:
 1 <= arr1.size(), arr2.size() <= 104
 1 <= arr1[i], arr2[i] <= 105
+*/
+class Solution {
+public:
+    int maxPathSum(vector<int> &arr1, vector<int> &arr2) {
+        int i = 0, j = 0;
+        int sum1 = 0, sum2 = 0;
+        int result = 0;
+
+        while (i < arr1.size() && j < arr2.size()) {
+            if (arr1[i] < arr2[j]) {
+                sum1 += arr1[i++];
+            } else if (arr1[i] > arr2[j]) {
+                sum2 += arr2[j++];
+            } else {
+                result += max(sum1, sum2) + arr1[i];
+                sum1 = 0;
+                sum2 = 0;
+                i++;
+                j++;
+            }
+        }
+
+        while (i < arr1.size()) {
+            sum1 += arr1[i++];
+        }
+
+        while (j < arr2.size()) {
+            sum2 += arr2[j++];
+        }
+
+        result += max(sum1, sum2);
+
+        return result;
+    }
+};
 
 
-
-/
 
