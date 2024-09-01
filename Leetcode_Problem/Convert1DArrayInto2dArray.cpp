@@ -41,3 +41,24 @@ Constraints:
 1 <= m, n <= 4 * 104
 */
 
+class Solution {
+public:
+    vector<vector<int>> construct2DArray(vector<int>& original, int m, int n) {
+        // Check if the total number of elements in the original array matches m * n
+        if (original.size() != m * n) {
+            return {};  // Return an empty 2D vector if it's not possible
+        }
+
+        // Create a 2D vector with m rows and n columns
+        vector<vector<int>> result(m, vector<int>(n));
+
+        // Fill the 2D vector with elements from the original vector
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                result[i][j] = original[i * n + j];
+            }
+        }
+
+        return result;
+    }
+};
