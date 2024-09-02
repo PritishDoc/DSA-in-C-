@@ -27,3 +27,54 @@ Expected Auxiliary Space: O(n2)
  Constraints:
 1 ≤ n ≤ 500
 */
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    // Function to return the minimum cost to reach the bottom-right cell from the top-left cell.
+    int minimumCostPath(vector<vector<int>>& grid) {
+        int n = grid.size();
+        vector<vector<int>> dist(n, vector<int>(n, INT_MAX));
+        
+        // Priority queue to store the cells to be processed (min-heap).
+        priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> pq;
+        
+        // Direction arrays for moving in four possible directions.
+        int dx[] = {-1, 1, 0, 0};
+        int dy[] = {0, 0, -1, 1};
+        
+        // Start with the top-left cell.
+        dist[0][0] = grid[0][0];
+        pq.push({grid[0][0], {0, 0}});
+        
+        while (!pq.empty()) {
+            auto curr = pq.top();
+            pq.pop();
+            
+            int cost = curr.first;
+            int x = curr.second.first;
+            int y = curr.second.second;
+            
+            // If we reach the bottom-right corner, return the cost.
+            if (x == n-1 && y == n-1) return cost;
+            
+            // Explore the neighbors.
+            for (int i = 0; i < 4; ++i) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+                
+                // Check if the new position is within bounds.
+                if (nx >= 0 && ny >= 0 && nx < n && ny < n) {
+                    int new_cost = cost + grid[nx][ny];
+                    if (new_cost < dist[nx][ny]) {
+                        dist[nx][ny] = new_cost;
+                        pq.push({new_cost, {nx, ny}});
+                    }
+                }
+            }
+        }
+        
+        return -1; // Should never reach here if the grid is well-formed.
+    }
+};
