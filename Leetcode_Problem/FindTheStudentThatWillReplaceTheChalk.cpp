@@ -48,3 +48,27 @@ chalk.length == n
 1 <= chalk[i] <= 105
 1 <= k <= 109
 */
+#include <vector>
+#include <numeric> // for accumulate
+using namespace std;
+
+class Solution {
+public:
+    int chalkReplacer(vector<int>& chalk, int k) {
+        // Calculate the total chalk consumption in one complete round
+        long long total_chalk = accumulate(chalk.begin(), chalk.end(), 0LL);
+        
+        // Reduce k using modulo to eliminate complete rounds
+        k %= total_chalk;
+        
+        // Iterate through the students to find out who will replace the chalk
+        for (int i = 0; i < chalk.size(); ++i) {
+            if (k < chalk[i]) {
+                return i;
+            }
+            k -= chalk[i];
+        }
+        
+        return -1; // Should never reach here as per the problem constraints
+    }
+};
