@@ -42,3 +42,33 @@ Output: 8
 
 
 */
+class Solution {
+public:
+    int getLucky(string s, int k) {
+        string numericString = "";
+        
+        // Convert the string into the corresponding numeric string
+        for (char c : s) {
+            int value = c - 'a' + 1;  // Convert char to its alphabet position
+            numericString += to_string(value);  // Append to numeric string
+        }
+        
+        // Helper function to calculate the sum of digits of a number represented as a string
+        auto sumOfDigits = [](string num) {
+            int sum = 0;
+            for (char digit : num) {
+                sum += digit - '0';  // Convert char digit to integer and sum up
+            }
+            return sum;
+        };
+        
+        // Perform the transformation k times
+        for (int i = 0; i < k; ++i) {
+            int sum = sumOfDigits(numericString);
+            numericString = to_string(sum);  // Update numericString with the new sum as string
+        }
+        
+        // Return the final integer after k transformations
+        return stoi(numericString);
+    }
+};
