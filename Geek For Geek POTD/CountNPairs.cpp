@@ -20,3 +20,10 @@ Constraints:
 1 ≤ n ≤ 104
 
 */
+class Solution {
+public:
+    int nthStair(int n) {
+        // The number of distinct ways is given by 1 + n / 2.
+        return (n / 2) + 1;
+    }
+};
