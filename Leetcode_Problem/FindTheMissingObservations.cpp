@@ -38,3 +38,35 @@ Constraints:
 m == rolls.length
 1 <= n, m <= 105
 */
+class Solution {
+public:
+    vector<int> missingRolls(vector<int>& rolls, int mean, int n) {
+        int m = rolls.size();
+        int total_sum = mean * (n + m);
+        int sum_of_rolls = 0;
+        
+        for(int roll : rolls) {
+            sum_of_rolls += roll;
+        }
+        
+        int missing_sum = total_sum - sum_of_rolls;
+        
+        // Check if it's possible to distribute the missing_sum across n rolls
+        if(missing_sum < n || missing_sum > 6 * n) {
+            return {};
+        }
+        
+        // Result vector to store the missing rolls
+        vector<int> result(n, 1);
+        missing_sum -= n;  // Initially, we have assigned 1 to each missing roll
+        
+        // Distribute the remaining missing_sum across the rolls
+        for(int i = 0; i < n && missing_sum > 0; ++i) {
+            int add = min(5, missing_sum);  // Add at most 5 to each roll (since 1 is already added)
+            result[i] += add;
+            missing_sum -= add;
+        }
+        
+        return result;
+    }
+};
