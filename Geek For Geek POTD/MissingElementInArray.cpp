@@ -18,3 +18,19 @@ Constraints:
 1 ≤ n ≤ 105
 1 ≤ arr[i] ≤ n
 */
+class Solution {
+public:
+    int missingNumber(int n, vector<int>& arr) {
+        // Calculate the expected sum of numbers from 1 to n
+        int expected_sum = n * (n + 1) / 2;
+        
+        // Calculate the sum of elements in the array
+        int sum_of_array = 0;
+        for (int num : arr) {
+            sum_of_array += num;
+        }
+        
+        // The missing number is the difference between expected_sum and sum_of_array
+        return expected_sum - sum_of_array;
+    }
+};
