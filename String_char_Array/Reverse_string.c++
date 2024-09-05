@@ -14,6 +14,7 @@ int getLength(char name[]){
     }
     return count ;
 }
+
 int main(){
 
     char name[20];
