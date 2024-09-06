@@ -23,3 +23,25 @@ Constraints:
 -107 ≤ arr[i] ≤ 107
 
 */
+class Solution {
+  public:
+    // Function to find the sum of contiguous subarray with maximum sum.
+    int maxSubarraySum(std::vector<int> &arr) {
+        int n = arr.size();
+        
+        // Initialize variables to store the maximum sum and current subarray sum
+        int maxSum = arr[0];
+        int currentSum = arr[0];
+        
+        // Traverse the array starting from the second element
+        for (int i = 1; i < n; i++) {
+            // Update the current subarray sum
+            currentSum = std::max(arr[i], currentSum + arr[i]);
+            
+            // Update the maximum sum found so far
+            maxSum = std::max(maxSum, currentSum);
+        }
+        
+        return maxSum;
+    }
+};
