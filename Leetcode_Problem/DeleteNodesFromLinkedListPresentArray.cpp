@@ -55,3 +55,49 @@ The number of nodes in the given list is in the range [1, 105].
 1 <= Node.val <= 105
 The input is generated such that there is at least one node in the linked list that has a value not present in nums.
 */
+
+#include <unordered_set>
+#include <vector>
+
+// Definition for singly-linked list.
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution {
+public:
+    ListNode* modifiedList(std::vector<int>& nums, ListNode* head) {
+        // Create a hash set for quick lookup of values in nums
+        std::unordered_set<int> numSet(nums.begin(), nums.end());
+        
+        // Dummy node to handle edge cases like removing the head
+        ListNode* dummy = new ListNode(0);
+        dummy->next = head;
+        
+        // Pointer to track the current node
+        ListNode* current = dummy;
+        
+        // Traverse the linked list
+        while (current->next != nullptr) {
+            // If the next node's value is in nums, remove it
+            if (numSet.count(current->next->val)) {
+                ListNode* nodeToDelete = current->next;
+                current->next = current->next->next;
+                delete nodeToDelete;  // Free the memory of the removed node
+            } else {
+                // Move to the next node if no deletion occurs
+                current = current->next;
+            }
+        }
+        
+        // The new head is dummy->next
+        ListNode* newHead = dummy->next;
+        delete dummy;  // Free the memory of the dummy node
+        
+        return newHead;
+    }
+};
