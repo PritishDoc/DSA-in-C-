@@ -1,8 +1,6 @@
 /*
 Delete Nodes From Linked List Present in Array
-Medium
-Topics
-Companies
+
 Hint
 You are given an array of integers nums and the head of a linked list. Return the head of the modified linked list after removing all nodes from the linked list that have a value that exists in nums.
 
