@@ -1,8 +1,6 @@
 /*
  Split Linked List in Parts
-Medium
-Topics
-Companies
+
 Hint
 Given the head of a singly linked list and an integer k, split the linked list into k consecutive linked list parts.
 
