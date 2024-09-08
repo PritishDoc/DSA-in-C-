@@ -35,3 +35,6 @@ The number of nodes in the list is in the range [0, 1000].
 0 <= Node.val <= 1000
 1 <= k <= 50
 */
+Class solution{
+    
+}
