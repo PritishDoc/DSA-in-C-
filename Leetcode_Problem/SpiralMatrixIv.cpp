@@ -45,19 +45,46 @@ Constraints:
 The number of nodes in the list is in the range [1, m * n].
 0 <= Node.val <= 1000
 */
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
 public:
     vector<vector<int>> spiralMatrix(int m, int n, ListNode* head) {
+        // Initialize the matrix with -1
+        vector<vector<int>> matrix(m, vector<int>(n, -1));
         
+        // Define the boundaries for the spiral traversal
+        int top = 0, bottom = m - 1, left = 0, right = n - 1;
+        
+        // Traverse the matrix in spiral order
+        while (head && top <= bottom && left <= right) {
+            // Traverse from left to right along the top boundary
+            for (int i = left; i <= right && head; ++i) {
+                matrix[top][i] = head->val;
+                head = head->next;
+            }
+            top++; // Move the top boundary down
+            
+            // Traverse from top to bottom along the right boundary
+            for (int i = top; i <= bottom && head; ++i) {
+                matrix[i][right] = head->val;
+                head = head->next;
+            }
+            right--; // Move the right boundary left
+            
+            // Traverse from right to left along the bottom boundary
+            for (int i = right; i >= left && head; --i) {
+                matrix[bottom][i] = head->val;
+                head = head->next;
+            }
+            bottom--; // Move the bottom boundary up
+            
+            // Traverse from bottom to top along the left boundary
+            for (int i = bottom; i >= top && head; --i) {
+                matrix[i][left] = head->val;
+                head = head->next;
+            }
+            left++; // Move the left boundary right
+        }
+        
+        return matrix;
     }
 };
