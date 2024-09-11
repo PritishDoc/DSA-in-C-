@@ -1,5 +1,5 @@
 /*
-   1
+    1
    121
   12321
  1234321
@@ -22,6 +22,7 @@ int main(){
             cout<<j;
         
         }
+        //Printing the num2
         for(int j=i;j>0;j--){
             cout<<j;
         }
