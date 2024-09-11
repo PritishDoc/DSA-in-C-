@@ -1,5 +1,14 @@
 /*
 Hollow Diamond Pattern
+
+   *
+  * *
+ *   *
+*     *
+ *   *
+  * *
+   *
+
 */
 
 #include<iostream>
