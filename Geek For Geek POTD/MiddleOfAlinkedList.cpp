@@ -19,3 +19,24 @@ Expected Auxiliary Space: O(1)
 Constraints:
 1 <= no. of nodes <= 105
 */
+class Solution {
+public:
+    // Function to return the data of the middle node of the linked list
+    int getMiddle(Node* head) {
+        // Step 1: If the list is empty, return -1
+        if (head == NULL) return -1;
+
+        // Step 2: Initialize slow and fast pointers
+        Node* slow = head;
+        Node* fast = head;
+
+        // Step 3: Traverse the list with slow and fast pointers
+        while (fast != NULL && fast->next != NULL) {
+            slow = slow->next; // Move slow by 1 step
+            fast = fast->next->next; // Move fast by 2 steps
+        }
+
+        // Step 4: When the loop ends, slow will be at the middle
+        return slow->data;
+    }
+};
