@@ -36,3 +36,30 @@ The characters in allowed are distinct.
 words[i] and allowed contain only lowercase English letters.
 */
 
+class Solution {
+public:
+    int countConsistentStrings(string allowed, vector<string>& words) {
+        // Step 1: Convert the allowed string to a set for O(1) lookup.
+        unordered_set<char> allowedSet(allowed.begin(), allowed.end());
+        
+        // Step 2: Initialize a counter for consistent strings.
+        int consistentCount = 0;
+        
+        // Step 3: Check each word in the words array.
+        for (const string& word : words) {
+            bool isConsistent = true;
+            for (char ch : word) {
+                if (allowedSet.find(ch) == allowedSet.end()) {
+                    // If a character in the word is not in the allowed set, mark it inconsistent.
+                    isConsistent = false;
+                    break;
+                }
+            }
+            if (isConsistent) {
+                ++consistentCount; // Increment the count if the word is consistent.
+            }
+        }
+        
+        return consistentCount; // Return the total count of consistent strings.
+    }
+};
