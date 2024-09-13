@@ -40,3 +40,4 @@ Constraints:
 queries[i].length == 2
 0 <= lefti <= righti < arr.length
 */
+
