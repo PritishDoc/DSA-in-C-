@@ -1,8 +1,6 @@
 /*
 Longest Subarray With Maximum Bitwise AND
-Medium
-Topics
-Companies
+
 Hint
 You are given an integer array nums of size n.
 
