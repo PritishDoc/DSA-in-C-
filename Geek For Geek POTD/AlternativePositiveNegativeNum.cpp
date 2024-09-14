@@ -25,3 +25,41 @@ Constraints:
 -106 ≤ arr[i] ≤ 107
 
 */
+class Solution {
+public:
+    void rearrange(vector<int> &arr) {
+        vector<int> pos, neg;
+        
+        // Step 1: Separate positive and negative numbers
+        for (int num : arr) {
+            if (num >= 0) {
+                pos.push_back(num);  // consider 0 as positive
+            } else {
+                neg.push_back(num);
+            }
+        }
+        
+        // Step 2: Merge positive and negative numbers alternately
+        int i = 0, j = 0, k = 0;
+        bool turnPositive = true;  // To track whether to insert positive or negative
+        
+        while (i < pos.size() && j < neg.size()) {
+            if (turnPositive) {
+                arr[k++] = pos[i++];
+            } else {
+                arr[k++] = neg[j++];
+            }
+            turnPositive = !turnPositive;  // Alternate the turns
+        }
+        
+        // Step 3: If any positive numbers are left, append them
+        while (i < pos.size()) {
+            arr[k++] = pos[i++];
+        }
+        
+        // Step 4: If any negative numbers are left, append them
+        while (j < neg.size()) {
+            arr[k++] = neg[j++];
+        }
+    }
+};
