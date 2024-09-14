@@ -36,3 +36,25 @@ Constraints:
 1 <= nums.length <= 105
 1 <= nums[i] <= 106
 */
+
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums) {
+        // Step 1: Find the maximum value in the array
+        int maxVal = *max_element(nums.begin(), nums.end());
+        
+        // Step 2: Traverse the array and find the longest subarray with maxVal
+        int maxLen = 0, currentLen = 0;
+        
+        for (int num : nums) {
+            if (num == maxVal) {
+                currentLen++;  // continue the current subarray
+                maxLen = max(maxLen, currentLen);  // update the maximum length
+            } else {
+                currentLen = 0;  // reset the current length if the value is not maxVal
+            }
+        }
+        
+        return maxLen;
+    }
+};
