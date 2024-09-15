@@ -36,3 +36,42 @@ Constraints:
 1 ≤ Number of nodes ≤ 105
 0 ≤ Data of a node ≤ 105
 */
+class Solution {
+public:
+    Node* prev = NULL; // To track the previous node
+    Node* head = NULL; // To store the head of the DLL
+
+    // Utility function to convert binary tree to DLL
+    void inorderTraversal(Node* root) {
+        if (!root) return;
+
+        // Recursively convert the left subtree
+        inorderTraversal(root->left);
+
+        // Now convert the current node
+        if (prev == NULL) {
+            // If prev is NULL, this is the leftmost node (head of DLL)
+            head = root;
+        } else {
+            // Adjust the pointers to link the previous node with the current one
+            prev->right = root;
+            root->left = prev;
+        }
+        // Move prev to current node
+        prev = root;
+
+        // Recursively convert the right subtree
+        inorderTraversal(root->right);
+    }
+
+    // This function returns the head of the DLL
+    Node* bToDLL(Node* root) {
+        if (!root) return NULL;
+
+        // Perform the inorder traversal to convert the tree to DLL
+        inorderTraversal(root);
+
+        // Return the head of the DLL
+        return head;
+    }
+};
