@@ -30,6 +30,7 @@ Constraints
 1 ≤ arr[i] ≤ 107
 */
 
+
 class Solution {
   public:
     int getMinDiff(vector<int>& arr, int k) {
@@ -42,27 +43,20 @@ class Solution {
         // Initial difference between max and min
         int result = arr[n-1] - arr[0];
 
-        // Minimum and maximum values after modifications
+        // Minimum and maximum values after modifying the first and last elements
         int smallest = arr[0] + k;
         int largest = arr[n-1] - k;
 
-        // Swap if smallest becomes greater than largest
-        if (smallest > largest) swap(smallest, largest);
+        // Traverse the array and adjust the middle elements
+        for (int i = 0; i < n-1; i++) {
+            int minHeight = min(smallest, arr[i+1] - k);
+            int maxHeight = max(largest, arr[i] + k);
 
-        // Traverse through the array and find the minimum difference
-        for (int i = 1; i < n-1; i++) {
-            int add = arr[i] + k;
-            int subtract = arr[i] - k;
+            // Ensure that we don't have negative heights
+            if (minHeight < 0) continue;
 
-            // If subtracting k makes the tower negative, skip it
-            if (subtract < 0) continue;
-
-            // Find the new minimum and maximum after modifying the current tower
-            int new_min = min(smallest, subtract);
-            int new_max = max(largest, add);
-
-            // Update the result with the new difference
-            result = min(result, new_max - new_min);
+            // Update the result with the minimum difference
+            result = min(result, maxHeight - minHeight);
         }
 
         return result;
