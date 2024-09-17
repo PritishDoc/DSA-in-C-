@@ -35,3 +35,39 @@ s1 and s2 do not have leading or trailing spaces.
 All the words in s1 and s2 are separated by a single space.
 
 */
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <sstream>
+using namespace std;
+
+class Solution {
+public:
+    vector<string> uncommonFromSentences(string s1, string s2) {
+        unordered_map<string, int> wordCount;
+        vector<string> result;
+
+        // Helper function to split and count words
+        auto countWords = [&](string sentence) {
+            stringstream ss(sentence);
+            string word;
+            while (ss >> word) {
+                wordCount[word]++;
+            }
+        };
+
+        // Count words in both sentences
+        countWords(s1);
+        countWords(s2);
+
+        // Collect words that appear exactly once
+        for (const auto& entry : wordCount) {
+            if (entry.second == 1) {
+                result.push_back(entry.first);
+            }
+        }
+
+        return result;
+    }
+};
+
