@@ -29,3 +29,42 @@ Constraints
 1 ≤ n ≤ 105
 1 ≤ arr[i] ≤ 107
 */
+
+class Solution {
+  public:
+    int getMinDiff(vector<int>& arr, int k) {
+        int n = arr.size();
+        if (n == 1) return 0;
+
+        // Sort the array
+        sort(arr.begin(), arr.end());
+
+        // Initial difference between max and min
+        int result = arr[n-1] - arr[0];
+
+        // Minimum and maximum values after modifications
+        int smallest = arr[0] + k;
+        int largest = arr[n-1] - k;
+
+        // Swap if smallest becomes greater than largest
+        if (smallest > largest) swap(smallest, largest);
+
+        // Traverse through the array and find the minimum difference
+        for (int i = 1; i < n-1; i++) {
+            int add = arr[i] + k;
+            int subtract = arr[i] - k;
+
+            // If subtracting k makes the tower negative, skip it
+            if (subtract < 0) continue;
+
+            // Find the new minimum and maximum after modifying the current tower
+            int new_min = min(smallest, subtract);
+            int new_max = max(largest, add);
+
+            // Update the result with the new difference
+            result = min(result, new_max - new_min);
+        }
+
+        return result;
+    }
+};
