@@ -26,36 +26,3 @@ Constraints:
 
  
 */
-class Solution {
-public:
-    // Function to check if brackets are balanced or not.
-    bool ispar(string x) {
-        std::stack<char> s;
-
-        // Traverse the string
-        for (char c : x) {
-            // If it's an opening bracket, push it onto the stack
-            if (c == '(' || c == '{' || c == '[') {
-                s.push(c);
-            } 
-            // If it's a closing bracket, check for a matching opening bracket
-            else {
-                // If stack is empty, it's unbalanced
-                if (s.empty()) return false;
-
-                char top = s.top();
-                s.pop();
-
-                // Check if the current closing bracket matches the top opening bracket
-                if ((c == ')' && top != '(') ||
-                    (c == '}' && top != '{') ||
-                    (c == ']' && top != '[')) {
-                    return false;
-                }
-            }
-        }
-
-        // If stack is not empty, there are unmatched opening brackets
-        return s.empty();
-    }
-};
