@@ -28,3 +28,14 @@ Constraints:
 -3 * 104 <= nums[i] <= 3 * 104
 Each element in the array appears twice except for one element which appears only once.
 */
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int ans=0;
+        
+        for(int val: nums){
+            ans ^=val; 
+        }
+        return ans;
+    }
+};
