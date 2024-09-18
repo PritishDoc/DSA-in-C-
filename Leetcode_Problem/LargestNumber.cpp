@@ -23,3 +23,33 @@ Constraints:
 0 <= nums[i] <= 109
 
 */
+
+
+class Solution {
+public:
+    string largestNumber(vector<int>& nums) {
+        // Convert all integers in nums to strings
+        vector<string> numStrs;
+        for (int num : nums) {
+            numStrs.push_back(to_string(num));
+        }
+        
+        // Custom comparator to sort based on the largest concatenation result
+        sort(numStrs.begin(), numStrs.end(), [](string &a, string &b) {
+            return a + b > b + a;
+        });
+        
+        // If the largest number after sorting is "0", return "0"
+        if (numStrs[0] == "0") {
+            return "0";
+        }
+        
+        // Join the sorted strings to form the largest number
+        string result;
+        for (string &numStr : numStrs) {
+            result += numStr;
+        }
+        
+        return result;
+    }
+};
