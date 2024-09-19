@@ -19,3 +19,4 @@ int main(){
     cout<<"Max subarray sum is: "<<maxSum;
     
 }
+//T(n)=O(n^2)
