@@ -21,7 +21,6 @@ Constraints:
 1 ≤ height.size() ≤ 106
 1 ≤ heighti ≤ 108
 
-
 */
 class Solution {
   public:
