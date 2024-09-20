@@ -29,6 +29,8 @@ n == nums.length
 
 Follow-up: Could you solve the problem in linear time and in O(1) space?
  */
+
+//This is the brute force approch not optimized 
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
