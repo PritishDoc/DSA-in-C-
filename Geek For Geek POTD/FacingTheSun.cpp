@@ -23,3 +23,20 @@ Constraints:
 
 
 */
+class Solution {
+  public:
+    // Returns count of buildings that can see the sunrise
+    int countBuildings(vector<int> &height) {
+        int count = 0;         // To store the number of buildings that can see the sunrise
+        int max_height = 0;    // To store the maximum height encountered so far
+
+        for (int h : height) {
+            if (h > max_height) {
+                count++;          // If current building is taller, it can see the sunrise
+                max_height = h;   // Update the max height
+            }
+        }
+
+        return count;  // Return the total count of buildings that can see the sunrise
+    }
+};
