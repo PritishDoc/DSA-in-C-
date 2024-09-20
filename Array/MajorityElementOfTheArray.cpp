@@ -29,3 +29,21 @@ n == nums.length
 
 Follow-up: Could you solve the problem in linear time and in O(1) space?
  */
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        for(int val:nums){
+            int freq=0;//initially set the frequency at zero
+            for(int el:nums){
+                if(el==val){//while elment is repeating 
+                    freq++;//just increase the frequency of that same element
+                }
+            }
+            if(freq>nums.size()/2){//while frequency is greater then the half of the size of the array
+                return val;
+            }
+        }
+        return -1;//else
+    }
+    
+};
