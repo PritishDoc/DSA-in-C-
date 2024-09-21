@@ -12,6 +12,7 @@ int main(){
         ans =arr[i];
     }
     if(ans==arr[i]){
+        
     freq++;
     }
     else{
