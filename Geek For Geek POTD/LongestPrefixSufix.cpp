@@ -25,8 +25,33 @@ str contains lower case English alphabets
 */
 
 class Solution {
-  public:
+public:
     int lps(string str) {
-        // Your code goes here
+        int n = str.length();
+        vector<int> lps(n, 0);  // Create an array to store the lps values
+        
+        int len = 0;  // Length of the previous longest prefix suffix
+        int i = 1;
+        
+        // Build the lps array
+        while (i < n) {
+            if (str[i] == str[len]) {
+                len++;
+                lps[i] = len;
+                i++;
+            } else {
+                if (len != 0) {
+                    // Fall back to the last longest prefix suffix
+                    len = lps[len - 1];
+                } else {
+                    lps[i] = 0;
+                    i++;
+                }
+            }
+        }
+        
+        // The value of lps[n-1] will give us the length of the longest proper prefix
+        // which is also a proper suffix
+        return lps[n - 1];
     }
 };
