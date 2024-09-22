@@ -23,3 +23,10 @@ Constraints:
 1 ≤ |str| ≤ 106
 str contains lower case English alphabets
 */
+
+class Solution {
+  public:
+    int lps(string str) {
+        // Your code goes here
+    }
+};
