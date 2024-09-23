@@ -18,3 +18,31 @@ Constraints:
 2 ≤ n ≤ 105
 1 ≤ arr[i] ≤ n
 */
+
+class Solution {
+  public:
+    vector<int> findTwoElement(vector<int>& arr) {
+        int n = arr.size();
+        int repeating = -1, missing = -1;
+
+        // Step 1: Find the repeating number
+        for (int i = 0; i < n; i++) {
+            int index = abs(arr[i]) - 1;
+            if (arr[index] < 0) {
+                repeating = abs(arr[i]);  // This is the repeating number
+            } else {
+                arr[index] = -arr[index]; // Mark as visited
+            }
+        }
+
+        // Step 2: Find the missing number
+        for (int i = 0; i < n; i++) {
+            if (arr[i] > 0) {
+                missing = i + 1;  // Missing number is i+1
+                break;
+            }
+        }
+
+        return {repeating, missing};
+    }
+};
