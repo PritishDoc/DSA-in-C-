@@ -29,3 +29,31 @@ dictionary[i] and s consists of only lowercase English letters
 dictionary contains distinct words
 
 */
+class Solution {
+public:
+    int minExtraChar(string s, vector<string>& dictionary) {
+        int n = s.length();
+        // Use an unordered_set for quick lookup of words in the dictionary
+        unordered_set<string> dict(dictionary.begin(), dictionary.end());
+        
+        // dp[i] represents the minimum number of extra characters in s[i:]
+        vector<int> dp(n + 1, 0);
+        
+        // Start from the end of the string and fill dp array
+        for (int i = n - 1; i >= 0; i--) {
+            // Default choice: treat the current character as extra
+            dp[i] = dp[i + 1] + 1;
+            
+            // Try to match any word in the dictionary starting from index i
+            for (int j = i; j < n; j++) {
+                string sub = s.substr(i, j - i + 1);
+                if (dict.count(sub)) {
+                    dp[i] = min(dp[i], dp[j + 1]);
+                }
+            }
+        }
+        
+        // The answer is the value at dp[0]
+        return dp[0];
+    }
+};
