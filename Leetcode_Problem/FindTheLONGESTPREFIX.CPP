@@ -1,6 +1,6 @@
 /*
  Find the Length of the Longest Common Prefix
-Medium
+
 
 
 Hint
