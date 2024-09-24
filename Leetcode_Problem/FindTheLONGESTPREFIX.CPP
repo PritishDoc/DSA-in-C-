@@ -2,7 +2,7 @@
  Find the Length of the Longest Common Prefix
 Medium
 Topics
-Companies
+
 Hint
 You are given two arrays with positive integers arr1 and arr2.
 
