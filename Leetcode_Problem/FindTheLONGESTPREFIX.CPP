@@ -1,7 +1,7 @@
 /*
  Find the Length of the Longest Common Prefix
 Medium
-Topics
+
 
 Hint
 You are given two arrays with positive integers arr1 and arr2.
