@@ -40,9 +40,44 @@ Constraints:
 
 
 */
+#include <vector>
+#include <string>
+#include <algorithm>
+using namespace std;
+
 class Solution {
 public:
+    // Function to calculate the common prefix length of two strings
+    int commonPrefixLength(const string& s1, const string& s2) {
+        int len = min(s1.size(), s2.size());
+        for (int i = 0; i < len; ++i) {
+            if (s1[i] != s2[i]) {
+                return i;
+            }
+        }
+        return len;
+    }
+
     int longestCommonPrefix(vector<int>& arr1, vector<int>& arr2) {
-        
+        int maxPrefixLength = 0;
+
+        // Convert all integers to strings for easier prefix comparison
+        vector<string> strArr1, strArr2;
+        for (int num : arr1) {
+            strArr1.push_back(to_string(num));
+        }
+        for (int num : arr2) {
+            strArr2.push_back(to_string(num));
+        }
+
+        // Compare each pair of strings from strArr1 and strArr2
+        for (const string& s1 : strArr1) {
+            for (const string& s2 : strArr2) {
+                int prefixLen = commonPrefixLength(s1, s2);
+                maxPrefixLength = max(maxPrefixLength, prefixLen);
+            }
+        }
+
+        return maxPrefixLength;
     }
 };
