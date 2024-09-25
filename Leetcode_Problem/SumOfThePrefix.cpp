@@ -48,3 +48,9 @@ Constraints:
 words[i] consists of lowercase English letters.
 
 */
+class Solution {
+public:
+    vector<int> sumPrefixScores(vector<string>& words) {
+        
+    }
+};
