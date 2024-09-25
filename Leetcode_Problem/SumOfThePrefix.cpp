@@ -2,7 +2,7 @@
 2416. Sum of Prefix Scores of Strings
 Hard
 Topics
-Companies
+
 Hint
 You are given an array words of size n consisting of non-empty strings.
 
