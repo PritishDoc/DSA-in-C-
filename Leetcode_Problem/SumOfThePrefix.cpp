@@ -48,9 +48,65 @@ Constraints:
 words[i] consists of lowercase English letters.
 
 */
+class TrieNode {
+public:
+    unordered_map<char, TrieNode*> children; // Store children nodes
+    int count; // Number of words passing through this node
+
+    TrieNode() : count(0) {}
+};
+
+class Trie {
+public:
+    TrieNode* root;
+
+    Trie() {
+        root = new TrieNode();
+    }
+
+    // Insert a word into the Trie
+    void insert(const string& word) {
+        TrieNode* node = root;
+        for (char c : word) {
+            if (node->children.find(c) == node->children.end()) {
+                node->children[c] = new TrieNode();
+            }
+            node = node->children[c];
+            node->count++; // Increment the count for each character
+        }
+    }
+
+    // Calculate the sum of prefix scores for a given word
+    int getPrefixScore(const string& word) {
+        TrieNode* node = root;
+        int prefixScore = 0;
+        for (char c : word) {
+            if (node->children.find(c) == node->children.end()) {
+                break;
+            }
+            node = node->children[c];
+            prefixScore += node->count;
+        }
+        return prefixScore;
+    }
+};
+
 class Solution {
 public:
     vector<int> sumPrefixScores(vector<string>& words) {
-        
+        Trie trie;
+        vector<int> result;
+
+        // Insert all words into the Trie
+        for (const string& word : words) {
+            trie.insert(word);
+        }
+
+        // Calculate the sum of prefix scores for each word
+        for (const string& word : words) {
+            result.push_back(trie.getPrefixScore(word));
+        }
+
+        return result;
     }
 };
