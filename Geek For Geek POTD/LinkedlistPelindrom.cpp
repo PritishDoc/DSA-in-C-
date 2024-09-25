@@ -1,3 +1,5 @@
+/*
+
 Palindrome Linked List
 Difficulty: MediumAccuracy: 41.48%Submissions: 334K+Points: 4
 Given a singly linked list of integers. The task is to check if the given linked list is palindrome or not.
@@ -19,3 +21,5 @@ Note: You should not use the recursive stack space as well
 Constraints:
 1 <= number of nodes <= 105
 1 ≤ node->data ≤ 103
+
+*/
