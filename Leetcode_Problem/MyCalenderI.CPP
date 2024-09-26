@@ -1,7 +1,6 @@
 /*
 My Calendar I
 Medium
-Topics
 
 Hint
 You are implementing a program to use as your calendar. We can add a new event if adding the event will not cause a double booking.
