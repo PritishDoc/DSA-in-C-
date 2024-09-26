@@ -35,3 +35,28 @@ Constraints:
 At most 1000 calls will be made to book.
 
 */
+class MyCalendar {
+private:
+    // A vector to store all booked intervals as pairs of {start, end}
+    vector<pair<int, int>> bookings;
+
+public:
+    // Constructor to initialize the MyCalendar object
+    MyCalendar() {
+    }
+    
+    // Method to attempt to book an event with a given start and end time
+    bool book(int start, int end) {
+        // Check if the new event overlaps with any existing bookings
+        for (auto &event : bookings) {
+            int bookedStart = event.first;
+            int bookedEnd = event.second;
+            if (start < bookedEnd && bookedStart < end) {
+                return false; // If there's an overlap, return false
+            }
+        }
+        // If no overlap, add the new event to the list of bookings
+        bookings.push_back({start, end});
+        return true; // Successfully booked the event
+    }
+};
