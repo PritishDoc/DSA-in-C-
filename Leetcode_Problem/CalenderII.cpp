@@ -39,3 +39,34 @@ Constraints:
 0 <= start < end <= 109
 At most 1000 calls will be made to book.
 */
+class MyCalendarTwo {
+private:
+    vector<pair<int, int>> booked;  // To store single bookings
+    vector<pair<int, int>> overlaps; // To store double bookings
+
+public:
+    MyCalendarTwo() {
+        
+    }
+    
+    bool book(int start, int end) {
+        // Check for overlap with double bookings
+        for (auto& overlap : overlaps) {
+            if (max(overlap.first, start) < min(overlap.second, end)) {
+                return false; // Triple booking detected
+            }
+        }
+        
+        // Check for overlap with single bookings and add to overlaps
+        for (auto& event : booked) {
+            if (max(event.first, start) < min(event.second, end)) {
+                // Add the overlapping range to overlaps
+                overlaps.push_back({max(event.first, start), min(event.second, end)});
+            }
+        }
+        
+        // If no triple booking, add the event to the booked list
+        booked.push_back({start, end});
+        return true;
+    }
+};
