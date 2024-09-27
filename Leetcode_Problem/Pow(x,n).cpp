@@ -31,3 +31,27 @@ n is an integer.
 Either x is not zero or n > 0.
 -104 <= xn <= 104
 */
+class Solution {
+public:
+    double myPow(double x, int n) {
+        if(n==0)return 1.0;
+        if(x==0) return 0.0;
+        if(x==-1 && n%2==0)return 1.0;
+        if(x==-1 && n%2 !=0) return -1.0;
+        long Bf=n;
+        double ans=1;
+        if(n<0){
+           x=1/x;
+           Bf=-Bf; 
+        }
+        while(Bf>0){
+            if(Bf%2 == 1){
+                ans*=x;
+
+            }
+            x*=x;
+            Bf/=2;
+        }
+        return ans;
+    }
+};
