@@ -35,3 +35,35 @@ Constraints:
 1 ≤ k ≤ sizeof(arr)
 0 ≤ arr[i] ≤ 109
 */
+
+class Solution {
+  public:
+    // Function to find the maximum of each subarray of size k.
+    vector<int> max_of_subarrays(int k, vector<int>& arr) {
+        deque<int> dq; // Store indices of useful elements for the current window
+        vector<int> result; // To store the maximum of each subarray
+        
+        // Traverse the array
+        for (int i = 0; i < arr.size(); ++i) {
+            // Remove elements from the front if they are out of the current window
+            if (!dq.empty() && dq.front() == i - k) {
+                dq.pop_front();
+            }
+            
+            // Remove elements from the back if they are smaller than the current element
+            while (!dq.empty() && arr[dq.back()] <= arr[i]) {
+                dq.pop_back();
+            }
+            
+            // Add the current element's index to the deque
+            dq.push_back(i);
+            
+            // Start adding to result after the first window is formed
+            if (i >= k - 1) {
+                result.push_back(arr[dq.front()]); // Maximum of the current window
+            }
+        }
+        
+        return result;
+    }
+};
