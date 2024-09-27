@@ -2,7 +2,7 @@
  Find Missing Observations
 Medium
 Topics
-Companies
+
 Hint
 You have observations of n + m 6-sided dice rolls with each face numbered from 1 to 6. n of the observations went missing, and you only have the observations of m rolls. Fortunately, you have also calculated the average value of the n + m rolls.
 
