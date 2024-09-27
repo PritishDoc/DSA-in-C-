@@ -1,6 +1,6 @@
 /*
  Find Missing Observations
-Medium
+
 
 
 Hint
