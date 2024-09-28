@@ -21,3 +21,22 @@ Constraint:
 1 <= k <= 100
 1 <= arr[i] <= 104
 */
+int minimumCost(int k, vector<int> &arr) {
+    int n = arr.size();
+    // Initialize DP array with infinity
+    vector<long long> dp(n, LONG_MAX);
+    dp[0] = 0; // Cost to reach the first stone is 0
+
+    for (int i = 1; i < n; ++i) {
+        // Check all possible jumps from i-1 to i-k
+        for (int j = max(0, i - k); j < i; ++j) {
+            if (dp[j] != LONG_MAX) {
+                dp[i] = min(dp[i], dp[j] + abs(arr[i] - arr[j]));
+            }
+        }
+    }
+
+    return dp[n - 1];
+}
+
+// Driver co
