@@ -44,3 +44,48 @@ Constraints:
 0 <= val <= 100
 At most 1000 calls will be made to each method of increment, push and pop each separately.
 */
+
+class CustomStack {
+private:
+    int maxSize;
+    std::vector<int> stack;
+    std::vector<long> inc; // Use long to prevent potential integer overflow
+
+public:
+    // Constructor to initialize the stack with a maximum size
+    CustomStack(int maxSize) {
+        this->maxSize = maxSize;
+        stack.reserve(maxSize);
+        inc.reserve(maxSize);
+    }
+    
+    // Push operation: Add element x to the top of the stack if it's not full
+    void push(int x) {
+        if (stack.size() < maxSize) {
+            stack.push_back(x);
+            inc.push_back(0); // Initialize the increment value for this element
+        }
+    }
+    
+    // Pop operation: Remove and return the top element of the stack
+    int pop() {
+        if (stack.empty()) {
+            return -1;
+        }
+        int i = stack.size() - 1;
+        if (i > 0) {
+            inc[i - 1] += inc[i]; // Propagate the increment to the next element
+        }
+        int res = stack.back() + inc[i];
+        stack.pop_back();
+        inc.pop_back();
+        return res;
+    }
+    
+    // Increment operation: Increment the bottom k elements by val
+    void increment(int k, int val) {
+        if (stack.empty()) return;
+        int idx = std::min(k, (int)stack.size()) - 1;
+        inc[idx] += val;
+    }
+};
