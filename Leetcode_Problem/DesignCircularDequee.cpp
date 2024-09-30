@@ -1,6 +1,5 @@
 /*
  Design Circular Deque
-Medium
 
 
 Design your implementation of the circular double-ended queue (deque).
