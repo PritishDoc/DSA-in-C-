@@ -2,7 +2,7 @@
  Design Circular Deque
 Medium
 Topics
-Companies
+
 Design your implementation of the circular double-ended queue (deque).
 
 Implement the MyCircularDeque class:
