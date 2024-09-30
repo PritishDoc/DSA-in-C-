@@ -46,3 +46,65 @@ Constraints:
 
 
 */
+class Solution {
+  public:
+    // Helper function to perform in-order traversal and collect elements
+    void inorderTraversal(Node* root, vector<int>& elems) {
+        if (root == NULL)
+            return;
+        inorderTraversal(root->left, elems);
+        elems.push_back(root->data);
+        inorderTraversal(root->right, elems);
+    }
+
+    // Function to merge two sorted vectors into one sorted vector
+    vector<int> mergeSortedVectors(const vector<int>& v1, const vector<int>& v2) {
+        vector<int> merged;
+        int i = 0, j = 0;
+        int n1 = v1.size();
+        int n2 = v2.size();
+        merged.reserve(n1 + n2); // Reserve space to avoid reallocations
+
+        while (i < n1 && j < n2) {
+            if (v1[i] <= v2[j]) {
+                merged.push_back(v1[i]);
+                i++;
+            }
+            else {
+                merged.push_back(v2[j]);
+                j++;
+            }
+        }
+
+        // Append remaining elements from v1
+        while (i < n1) {
+            merged.push_back(v1[i]);
+            i++;
+        }
+
+        // Append remaining elements from v2
+        while (j < n2) {
+            merged.push_back(v2[j]);
+            j++;
+        }
+
+        return merged;
+    }
+
+    // Function to return a list of integers denoting the node
+    // values of both the BSTs in a sorted order.
+    vector<int> merge(Node *root1, Node *root2) {
+        // Vector to store in-order traversal of first BST
+        vector<int> elems1;
+        inorderTraversal(root1, elems1);
+
+        // Vector to store in-order traversal of second BST
+        vector<int> elems2;
+        inorderTraversal(root2, elems2);
+
+        // Merge the two sorted vectors
+        vector<int> mergedList = mergeSortedVectors(elems1, elems2);
+
+        return mergedList;
+    }
+};
