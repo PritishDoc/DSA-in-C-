@@ -38,3 +38,42 @@ n is even.
 -109 <= arr[i] <= 109
 1 <= k <= 105
 */
+class Solution {
+public:
+    bool canArrange(vector<int>& arr, int k) {
+        // Initialize a frequency vector for remainders
+        vector<int> freq(k, 0);
+        
+        // Populate the frequency vector
+        for(auto num : arr){
+            // Compute positive remainder
+            int rem = ((num % k) + k) % k;
+            freq[rem]++;
+        }
+        
+        // Iterate through all possible remainders
+        for(int m = 0; m < k; ++m){
+            // For remainder 0
+            if(m == 0){
+                if(freq[m] % 2 != 0){
+                    return false;
+                }
+            }
+            // If k is even, check the middle remainder
+            else if(k % 2 == 0 && m == k/2){
+                if(freq[m] % 2 != 0){
+                    return false;
+                }
+            }
+            else{
+                // Check if freq[m] equals freq[k - m]
+                if(freq[m] != freq[k - m]){
+                    return false;
+                }
+            }
+        }
+        
+        // All conditions satisfied
+        return true;
+    }
+};
