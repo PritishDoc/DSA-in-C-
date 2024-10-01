@@ -2,7 +2,7 @@
 
  Check If Array Pairs Are Divisible by k
 Medium
-Topics
+
 
 Hint
 Given an array of integers arr of even length n and an integer k.
