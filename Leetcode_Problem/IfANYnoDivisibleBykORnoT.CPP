@@ -1,7 +1,7 @@
 /*
 
  Check If Array Pairs Are Divisible by k
-Medium
+
 
 
 Hint
