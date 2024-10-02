@@ -22,3 +22,27 @@ Expected Auxiliary Space: O(1)
 Constraints:
 1 <= arr.size() <= 103
 */
+
+class Solution {
+public:
+    int rotateDelete(vector<int> &arr) {
+        int n = arr.size();
+        
+        // Perform sz/2 operations
+        for (int k = 1; k <= n / 2; ++k) {
+            // Rotate array clockwise by one (right-rotation)
+            int lastElement = arr.back();  // Store the last element
+            arr.pop_back();                // Remove the last element
+            arr.insert(arr.begin(), lastElement);  // Insert the last element at the front
+            
+            // Calculate the (n-k+1)-th element to delete
+            int indexToDelete = arr.size() - k;  // Adjusting the 1-based index to 0-based
+            
+            // Delete the element at the calculated index
+            arr.erase(arr.begin() + indexToDelete);
+        }
+        
+        // Return the first element after all operations
+        return arr[0];
+    }
+};
