@@ -3,7 +3,7 @@ Rank Transform of an Array
 Easy
 Topics
 Companies
-Hint
+
 Given an array of integers arr, replace each element with its rank.
 
 The rank represents how large the element is. The rank has the following rules:
