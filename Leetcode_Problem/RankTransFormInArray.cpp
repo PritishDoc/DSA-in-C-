@@ -1,7 +1,6 @@
 /*
 Rank Transform of an Array
 Easy
-Topics
 
 Given an array of integers arr, replace each element with its rank.
 
