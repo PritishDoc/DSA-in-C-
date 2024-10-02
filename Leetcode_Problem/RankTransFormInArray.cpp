@@ -32,3 +32,30 @@ Constraints:
 -109 <= arr[i] <= 109
 
 */
+class Solution {
+public:
+    vector<int> arrayRankTransform(vector<int>& arr) {
+        if (arr.empty()) return {};  // Edge case: if the input array is empty
+        
+        vector<int> sortedArr = arr;  // Create a copy of the input array
+        sort(sortedArr.begin(), sortedArr.end());  // Sort the copied array
+        
+        // Create a map to store the rank of each element
+        unordered_map<int, int> rankMap;
+        int rank = 1;
+        
+        // Assign ranks to the unique elements
+        for (int num : sortedArr) {
+            if (rankMap.find(num) == rankMap.end()) {
+                rankMap[num] = rank++;
+            }
+        }
+        
+        // Replace each element in the original array with its rank
+        for (int i = 0; i < arr.size(); ++i) {
+            arr[i] = rankMap[arr[i]];
+        }
+        
+        return arr;
+    }
+};
