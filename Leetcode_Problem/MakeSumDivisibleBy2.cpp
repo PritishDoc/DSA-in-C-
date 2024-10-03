@@ -1,7 +1,6 @@
 /*
 
 Make Sum Divisible by P
-Medium
 
 
 Hint
