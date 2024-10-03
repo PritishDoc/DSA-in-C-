@@ -36,3 +36,35 @@ Constraints:
 1 <= nums[i] <= 109
 1 <= p <= 109
 */
+class Solution {
+public:
+    int minSubarray(vector<int>& nums, int p) {
+        int n = nums.size();
+        long long totalSum = accumulate(nums.begin(), nums.end(), 0LL);
+        int rem = totalSum % p;
+
+        if (rem == 0) return 0;  // No need to remove anything, already divisible by p
+
+        unordered_map<int, int> prefixMap;
+        prefixMap[0] = -1;  // We start with the prefix sum of 0 at index -1
+        int prefixSum = 0;
+        int minLength = n;  // Initialize to maximum possible size
+
+        for (int i = 0; i < n; ++i) {
+            prefixSum = (prefixSum + nums[i]) % p;
+
+            // We want to find a prefix sum that satisfies: (prefixSum - rem) % p == 0
+            int target = (prefixSum - rem + p) % p;
+
+            if (prefixMap.find(target) != prefixMap.end()) {
+                minLength = min(minLength, i - prefixMap[target]);
+            }
+
+            // Store the latest occurrence of prefixSum % p
+            prefixMap[prefixSum] = i;
+        }
+
+        // If we didn't find any valid subarray, return -1
+        return minLength == n ? -1 : minLength;
+    }
+};
