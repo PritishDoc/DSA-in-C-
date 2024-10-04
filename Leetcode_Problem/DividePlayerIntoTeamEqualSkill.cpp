@@ -41,3 +41,50 @@ skill.length is even.
 1 <= skill[i] <= 1000
 
 */
+
+class Solution {
+public:
+    long long dividePlayers(vector<int>& skill) {
+        int n = skill.size();
+        long long S = 0;
+        for(auto s : skill) S += s;
+        
+        // Check if 2*S is divisible by n
+        if((2 * S) % n != 0) return -1;
+        
+        long long target = (2 * S) / n;
+        
+        // Initialize frequency array
+        vector<int> freq(1001, 0);
+        for(auto s : skill) freq[s]++;
+        
+        long long sumChemistry = 0;
+        
+        // Iterate through possible skill values
+        for(int a = 1; a <= 1000; a++) {
+            while(freq[a] > 0){
+                int b = target - a;
+                
+                // Check if b is within valid range
+                if(b <1 || b >1000) return -1;
+                
+                // Check if the complement exists
+                if(freq[b] == 0) return -1;
+                
+                if(a == b){
+                    if(freq[a] <2) return -1;
+                    sumChemistry += (long long)a * b;
+                    freq[a] -=2;
+                }
+                else{
+                    if(freq[b] <1) return -1;
+                    sumChemistry += (long long)a * b;
+                    freq[a]--;
+                    freq[b]--;
+                }
+            }
+        }
+        
+        return sumChemistry;
+    }
+};
