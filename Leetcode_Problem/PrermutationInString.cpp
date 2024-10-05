@@ -29,3 +29,39 @@ Constraints:
 1 <= s1.length, s2.length <= 104
 s1 and s2 consist of lowercase English letters.
 */
+#include <vector>
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        if (s1.size() > s2.size()) return false;
+        
+        vector<int> s1_freq(26, 0), window_freq(26, 0);
+        
+        // Calculate the frequency of characters in s1
+        for (char c : s1) {
+            s1_freq[c - 'a']++;
+        }
+        
+        // Initial window frequency for the first window in s2
+        for (int i = 0; i < s1.size(); i++) {
+            window_freq[s2[i] - 'a']++;
+        }
+        
+        // Sliding window comparison
+        for (int i = s1.size(); i < s2.size(); i++) {
+            if (s1_freq == window_freq) {
+                return true; // Found a matching permutation
+            }
+            
+            // Slide the window: include s2[i], exclude s2[i - s1.size()]
+            window_freq[s2[i] - 'a']++;
+            window_freq[s2[i - s1.size()] - 'a']--;
+        }
+        
+        // Check the last window
+        return s1_freq == window_freq;
+    }
+};
