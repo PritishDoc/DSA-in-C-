@@ -20,3 +20,19 @@ Constraints
 1 <= arr.size() <= 106
 1 <= arr[i] <= 108
 */
+
+class Solution {
+public:
+    long long findSmallest(vector<int> &arr) {
+        long long smallest_missing = 1; // Start with the smallest number we can't form
+        for (int i = 0; i < arr.size(); i++) {
+            // If the current element is greater than smallest_missing, we found the answer
+            if (arr[i] > smallest_missing) {
+                break;
+            }
+            // Otherwise, we can form all sums up to smallest_missing + arr[i]
+            smallest_missing += arr[i];
+        }
+        return smallest_missing;
+    }
+};
