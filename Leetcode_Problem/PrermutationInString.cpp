@@ -3,7 +3,7 @@
 Permutation in String
 Medium
 Topics
-Companies
+
 Hint
 Given two strings s1 and s2, return true if s2 contains a 
 permutation
