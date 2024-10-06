@@ -3,7 +3,7 @@
  Sentence Similarity III
 Medium
 Topics
-Companies
+
 Hint
 You are given two strings sentence1 and sentence2, each representing a sentence composed of words. A sentence is a list of words that are separated by a single space with no leading or trailing spaces. Each word consists of only uppercase and lowercase English characters.
 
