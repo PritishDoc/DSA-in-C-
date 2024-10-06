@@ -59,6 +59,7 @@ public:
         }
     }
     
+    
     int numIslands(vector<vector<char>>& grid) {
         if(grid.empty()) return 0;
         
@@ -66,6 +67,7 @@ public:
         int m = grid[0].size();
         int islandCount = 0;
         
+
         // Initialize visited matrix
         vector<vector<bool>> visited(n, vector<bool>(m, false));
         
