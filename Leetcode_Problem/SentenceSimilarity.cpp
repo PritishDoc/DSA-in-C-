@@ -56,3 +56,46 @@ sentence1 and sentence2 consist of lowercase and uppercase English letters and s
 The words in sentence1 and sentence2 are separated by a single space.
 
 */
+class Solution {
+public:
+    // Helper function to split the sentence into words
+    vector<string> splitSentence(const string& sentence) {
+        vector<string> words;
+        string word;
+        istringstream iss(sentence);
+        while (iss >> word) {
+            words.push_back(word);
+        }
+        return words;
+    }
+
+    bool areSentencesSimilar(string sentence1, string sentence2) {
+        // Split the sentences into words
+        vector<string> words1 = splitSentence(sentence1);
+        vector<string> words2 = splitSentence(sentence2);
+        
+        int n1 = words1.size();
+        int n2 = words2.size();
+        
+        // Ensure that sentence1 is the longer one
+        if (n1 < n2) {
+            swap(words1, words2);
+            swap(n1, n2);
+        }
+        
+        // Try to match as many words as possible from the start (prefix)
+        int prefixMatch = 0;
+        while (prefixMatch < n2 && words1[prefixMatch] == words2[prefixMatch]) {
+            prefixMatch++;
+        }
+        
+        // Try to match as many words as possible from the end (suffix)
+        int suffixMatch = 0;
+        while (suffixMatch < n2 && words1[n1 - 1 - suffixMatch] == words2[n2 - 1 - suffixMatch]) {
+            suffixMatch++;
+        }
+        
+        // Check if the combined length of prefix and suffix matches the shorter sentence
+        return (prefixMatch + suffixMatch >= n2);
+    }
+};
