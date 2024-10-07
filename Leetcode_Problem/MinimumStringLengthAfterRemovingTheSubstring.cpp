@@ -2,7 +2,6 @@
 
 Minimum String Length After Removing Substrings
 Easy
-Topics
 
 Hint
 You are given a string s consisting only of uppercase English letters.
