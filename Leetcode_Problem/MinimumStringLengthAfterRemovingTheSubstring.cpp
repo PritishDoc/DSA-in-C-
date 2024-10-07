@@ -37,3 +37,23 @@ Constraints:
 1 <= s.length <= 100
 s consists only of uppercase English letters.
 */
+class Solution {
+public:
+    int minLength(std::string s) {
+        std::stack<char> st;
+
+        // Traverse each character in the string
+        for (char ch : s) {
+            if (!st.empty() && ((st.top() == 'A' && ch == 'B') || (st.top() == 'C' && ch == 'D'))) {
+                // If top of the stack and current char form "AB" or "CD", pop the stack
+                st.pop();
+            } else {
+                // Otherwise, push the current character onto the stack
+                st.push(ch);
+            }
+        }
+
+        // The size of the stack gives the length of the reduced string
+        return st.size();
+    }
+};
