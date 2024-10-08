@@ -19,3 +19,23 @@ Constraints:
 2 ≤ arr.size() ≤ 106
 0 ≤ arr[i] ≤ 106
 */
+class Solution {
+public:
+    int pairsum(std::vector<int> &arr) {
+        int first_max = INT_MIN;
+        int second_max = INT_MIN;
+        
+        // Traverse the array to find the two largest elements
+        for (int num : arr) {
+            if (num > first_max) {
+                second_max = first_max;  // Update second_max before changing first_max
+                first_max = num;
+            } else if (num > second_max) {
+                second_max = num;
+            }
+        }
+        
+        // Return the sum of the two largest elements
+        return first_max + second_max;
+    }
+};
