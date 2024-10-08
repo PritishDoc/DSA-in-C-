@@ -48,3 +48,28 @@ n is even.
 s[i] is either '[' or ']'.
 The number of opening brackets '[' equals n / 2, and the number of closing brackets ']' equals n / 2.
 */
+class Solution {
+public:
+    int minSwaps(std::string s) {
+        int balance = 0; // Tracks the balance between '[' and ']'
+        int max_imbalance = 0; // Tracks the maximum imbalance encountered
+
+        // Traverse the string to calculate balance
+        for (char c : s) {
+            if (c == '[') {
+                balance++;  // Opening bracket increases balance
+            } else {
+                balance--;  // Closing bracket decreases balance
+            }
+            
+            // If balance goes negative, track the imbalance
+            if (balance < 0) {
+                max_imbalance = std::max(max_imbalance, -balance);
+            }
+        }
+        
+        // Number of swaps needed is half the max imbalance (rounded up)
+        // Each swap can fix 2 brackets, so divide max imbalance by 2
+        return (max_imbalance + 1) / 2;
+    }
+};
