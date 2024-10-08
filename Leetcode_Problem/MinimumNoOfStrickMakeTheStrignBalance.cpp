@@ -3,7 +3,7 @@
 
 Minimum Number of Swaps to Make the String Balanced
 Medium
-Topics
+
 Companies
 Hint
 You are given a 0-indexed string s of even length n. The string consists of exactly n / 2 opening brackets '[' and n / 2 closing brackets ']'.
