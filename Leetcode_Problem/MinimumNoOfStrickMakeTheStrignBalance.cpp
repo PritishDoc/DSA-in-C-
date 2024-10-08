@@ -2,7 +2,6 @@
 
 
 Minimum Number of Swaps to Make the String Balanced
-Medium
 
 Companies
 Hint
