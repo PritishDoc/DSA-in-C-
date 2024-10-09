@@ -3,7 +3,7 @@
 
 Minimum Add to Make Parentheses Valid
 Medium
-Topics
+
 A parentheses string is valid if and only if:
 
 It is the empty string,
