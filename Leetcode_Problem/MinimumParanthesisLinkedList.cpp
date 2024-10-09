@@ -2,7 +2,6 @@
 
 
 Minimum Add to Make Parentheses Valid
-Medium
 
 A parentheses string is valid if and only if:
 
