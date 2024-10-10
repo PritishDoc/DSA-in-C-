@@ -21,3 +21,24 @@ Constraints:
 1 <= arr.size() <= 106
 1 <= arr[i] <= 109
 */
+
+class Solution {
+public:
+    int maxDistance(vector<int> &arr) {
+        unordered_map<int, int> firstOccurrence;  // Stores the first occurrence index of each element
+        int maxDist = 0;  // Stores the maximum distance
+
+        for (int i = 0; i < arr.size(); i++) {
+            if (firstOccurrence.find(arr[i]) == firstOccurrence.end()) {
+                // If this is the first time we've seen this element, store its index
+                firstOccurrence[arr[i]] = i;
+            } else {
+                // If we've seen this element before, calculate the distance
+                int dist = i - firstOccurrence[arr[i]];
+                maxDist = max(maxDist, dist);  // Update the max distance if this is larger
+            }
+        }
+
+        return maxDist;
+    }
+};
