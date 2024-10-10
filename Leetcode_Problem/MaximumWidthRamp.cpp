@@ -27,3 +27,30 @@ Constraints:
 0 <= nums[i] <= 5 * 104
 
 */
+class Solution {
+public:
+    int maxWidthRamp(vector<int>& nums) {
+        stack<int> st;  // Monotonic decreasing stack (stores indices)
+        int n = nums.size();
+        
+        // Step 1: Build a decreasing stack of indices
+        for (int i = 0; i < n; ++i) {
+            if (st.empty() || nums[st.top()] > nums[i]) {
+                st.push(i);
+            }
+        }
+        
+        int maxWidth = 0;
+        
+        // Step 2: Traverse from the end to find the maximum width ramp
+        for (int j = n - 1; j >= 0; --j) {
+            while (!st.empty() && nums[st.top()] <= nums[j]) {
+                // Calculate width and update maxWidth
+                maxWidth = max(maxWidth, j - st.top());
+                st.pop();  // We pop because this index has been used
+            }
+        }
+        
+        return maxWidth;
+    }
+};
