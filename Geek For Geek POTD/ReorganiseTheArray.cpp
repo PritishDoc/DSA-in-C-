@@ -21,3 +21,37 @@ Constraints:
 
 
 */
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Solution {
+  public:
+    vector<int> rearrange(const vector<int>& arr) {
+        int n = arr.size();
+        vector<int> result(n, -1);  // Initialize result with -1
+        
+        // Rearrange elements
+        for (int i = 0; i < n; ++i) {
+            if (arr[i] != -1 && arr[i] < n) {
+                result[arr[i]] = arr[i];
+            }
+        }
+        
+        return result;
+    }
+};
+
+int main() {
+    Solution sol;
+    vector<int> arr = {-1, -1, 6, 1, 9, 3, 2, -1, 4, -1};
+    
+    vector<int> result = sol.rearrange(arr);
+    
+    for (int i = 0; i < result.size(); ++i) {
+        cout << result[i] << " ";
+    }
+    
+    return 0;
+}
