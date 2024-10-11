@@ -49,3 +49,52 @@ times[i].length == 2
 0 <= targetFriend <= n - 1
 Each arrivali time is distinct.
 */
+class Solution {
+public:
+    int smallestChair(vector<vector<int>>& times, int targetFriend) {
+        int n = times.size();
+        
+        // Augment times with the friend index
+        vector<pair<int, int>> arrival_times;
+        for (int i = 0; i < n; ++i) {
+            arrival_times.push_back({times[i][0], i});
+        }
+        
+        // Sort by arrival time
+        sort(arrival_times.begin(), arrival_times.end());
+        
+        // Priority queue to store the next available time for each chair {leaving time, chair number}
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> leaving;
+        
+        // Min-heap for the smallest available chair
+        priority_queue<int, vector<int>, greater<int>> availableChairs;
+        
+        // Initially, all chairs 0 to n-1 are available
+        for (int i = 0; i < n; ++i) {
+            availableChairs.push(i);
+        }
+        
+        // Iterate over each friend's arrival time in sorted order
+        for (const auto& [arrival, friendIndex] : arrival_times) {
+            // Free up chairs of friends who have left by the current arrival time
+            while (!leaving.empty() && leaving.top().first <= arrival) {
+                availableChairs.push(leaving.top().second);
+                leaving.pop();
+            }
+            
+            // Assign the smallest available chair
+            int assignedChair = availableChairs.top();
+            availableChairs.pop();
+            
+            // If this is the target friend, return the assigned chair
+            if (friendIndex == targetFriend) {
+                return assignedChair;
+            }
+            
+            // Record the leaving time of the friend
+            leaving.push({times[friendIndex][1], assignedChair});
+        }
+        
+        return -1;  // Should never reach here
+    }
+};
