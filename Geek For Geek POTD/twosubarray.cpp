@@ -29,3 +29,22 @@ Constraints:
 1<=arr.size()<=105 
 1<=arr[i]<=105
 */
+class Solution {
+public:
+    int pairWithMaxSum(vector<int>& arr) {
+        // If the array has less than 2 elements, return -1
+        if (arr.size() < 2) {
+            return -1;
+        }
+
+        int maxSum = -1;
+        
+        // Traverse the array to calculate the sum of each adjacent pair
+        for (int i = 1; i < arr.size(); i++) {
+            int currentSum = arr[i] + arr[i - 1]; // Sum of adjacent elements
+            maxSum = max(maxSum, currentSum);     // Track the maximum sum
+        }
+        
+        return maxSum;
+    }
+};
