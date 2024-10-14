@@ -38,3 +38,47 @@ Constraints:
 1 <= nums.length, k <= 105
 1 <= nums[i] <= 109
 */
+#include <iostream>
+#include <queue>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    long long maxKelements(vector<int>& nums, int k) {
+        // Using max heap (priority queue) to always extract the largest element
+        priority_queue<long long> maxHeap(nums.begin(), nums.end());
+        long long score = 0;
+
+        for (int i = 0; i < k; ++i) {
+            // Get the largest element from the heap
+            long long largest = maxHeap.top();
+            maxHeap.pop();
+            
+            // Add the largest element to the score
+            score += largest;
+            
+            // Replace it with ceil(largest / 3) and push it back to the heap
+            long long newVal = (largest + 2) / 3;  // ceil operation
+            maxHeap.push(newVal);
+        }
+
+        return score;
+    }
+};
+
+int main() {
+    Solution sol;
+
+    // Example 1
+    vector<int> nums1 = {10, 10, 10, 10, 10};
+    int k1 = 5;
+    cout << "Max Score: " << sol.maxKelements(nums1, k1) << endl;  // Output: 50
+
+    // Example 2
+    vector<int> nums2 = {1, 10, 3, 3, 3};
+    int k2 = 3;
+    cout << "Max Score: " << sol.maxKelements(nums2, k2) << endl;  // Output: 17
+
+    return 0;
+}
