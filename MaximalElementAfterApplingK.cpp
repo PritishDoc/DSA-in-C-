@@ -2,7 +2,7 @@
 Maximal Score After Applying K Operations
 Medium
 Topics
-Companies
+
 Hint
 You are given a 0-indexed integer array nums and an integer k. You have a starting score of 0.
 
