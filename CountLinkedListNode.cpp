@@ -22,3 +22,26 @@ Constraints:
 
 
 */
+/* Link list node */
+struct Node
+{
+    int data;
+    Node* next;
+    Node(int x) {  data = x;  next = NULL; }
+};
+
+class Solution {
+  public:
+    // Function to count nodes of a linked list.
+    int getCount(struct Node* head) {
+        int count = 0;          // Initialize counter
+        Node* current = head;   // Start from the head node
+
+        while (current != NULL) {  // Traverse until the end of the list
+            count++;               // Increment the counter
+            current = current->next; // Move to the next node
+        }
+
+        return count;  // Return the total count
+    }
+};
