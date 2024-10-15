@@ -41,3 +41,45 @@ Constraints:
 1 <= n == s.length <= 105
 s[i] is either '0' or '1'.
 */
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    long long minimumSteps(string s) {
+        long long swaps = 0; // To count the total number of swaps
+        int zero_count = 0;  // To keep track of the number of '0's encountered so far
+        
+        // Traverse the string
+        for (char c : s) {
+            if (c == '0') {
+                zero_count++;  // Increment the count of '0's
+            } else if (c == '1') {
+                // For each '1', add the number of '0's encountered so far to swaps
+                swaps += zero_count;
+            }
+        }
+        
+        return swaps; // Return the total number of swaps
+    }
+};
+
+// Below is a simple main function to test the above solution.
+
+int main() {
+    Solution sol;
+
+    // Test Case 1
+    string s1 = "101";
+    cout << "Output: " << sol.minimumSteps(s1) << endl;  // Expected: 1
+
+    // Test Case 2
+    string s2 = "100";
+    cout << "Output: " << sol.minimumSteps(s2) << endl;  // Expected: 2
+
+    // Test Case 3
+    string s3 = "0111";
+    cout << "Output: " << sol.minimumSteps(s3) << endl;  // Expected: 0
+
+    return 0;
+}
