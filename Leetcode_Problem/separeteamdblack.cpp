@@ -47,23 +47,23 @@ using namespace std;
 class Solution {
 public:
     long long minimumSteps(string s) {
-        long long swaps = 0; // To count the total number of swaps
-        int zero_count = 0;  // To keep track of the number of '0's encountered so far
-        
-        // Traverse the string
-        for (char c : s) {
-            if (c == '0') {
-                zero_count++;  // Increment the count of '0's
-            } else if (c == '1') {
-                // For each '1', add the number of '0's encountered so far to swaps
-                swaps += zero_count;
+        long long swaps = 0;      // Total number of swaps required
+        long long ones_count = 0; // Number of '1's encountered so far
+
+        for(char c : s){
+            if(c == '1'){
+                // Increment the count of '1's
+                ones_count++;
+            }
+            else if(c == '0'){
+                // Each '0' needs to swap past all previous '1's
+                swaps += ones_count;
             }
         }
-        
-        return swaps; // Return the total number of swaps
+
+        return swaps;
     }
 };
-
 
 int main() {
     Solution sol;
