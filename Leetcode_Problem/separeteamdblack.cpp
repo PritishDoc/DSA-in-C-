@@ -2,7 +2,7 @@
  Separate Black and White Balls
 Medium
 Topics
-Companies
+
 Hint
 There are n balls on a table, each ball has a color black or white.
 
