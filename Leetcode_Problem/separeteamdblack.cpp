@@ -1,6 +1,5 @@
 /*
  Separate Black and White Balls
-Medium
 
 Hint
 There are n balls on a table, each ball has a color black or white.
