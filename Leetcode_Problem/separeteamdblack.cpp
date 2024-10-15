@@ -64,7 +64,6 @@ public:
     }
 };
 
-// Below is a simple main function to test the above solution.
 
 int main() {
     Solution sol;
