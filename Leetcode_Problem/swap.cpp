@@ -17,3 +17,46 @@ Constraints:
 1 ≤ arr.size() ≤ 106
 1 ≤ arr[i] ≤ arr.size()
 */
+#include <vector>
+#include <algorithm>
+
+class Solution {
+public:
+    bool checkSorted(std::vector<int> &arr) {
+        // Get a sorted version of the array
+        std::vector<int> sortedArr = arr;
+        std::sort(sortedArr.begin(), sortedArr.end());
+
+        // Find the indices where the array is not sorted
+        std::vector<int> misplacedIndices;
+        for (int i = 0; i < arr.size(); ++i) {
+            if (arr[i] != sortedArr[i]) {
+                misplacedIndices.push_back(i);
+            }
+        }
+
+        // If no elements are misplaced, the array is already sorted
+        if (misplacedIndices.size() == 0) return true;
+
+        // If there are more than 4 misplaced elements, we cannot sort with exactly two swaps
+        if (misplacedIndices.size() > 4) return false;
+
+        // If there are exactly 2 misplaced elements, one swap can sort it
+        if (misplacedIndices.size() == 2) {
+            // Swap the two misplaced elements and check if the array gets sorted
+            std::swap(arr[misplacedIndices[0]], arr[misplacedIndices[1]]);
+            return arr == sortedArr;
+        }
+
+        // If there are exactly 4 misplaced elements, try two swaps to sort the array
+        if (misplacedIndices.size() == 4) {
+            // First swap between the first pair of misplaced elements
+            std::swap(arr[misplacedIndices[0]], arr[misplacedIndices[1]]);
+            // Then swap between the second pair of misplaced elements
+            std::swap(arr[misplacedIndices[2]], arr[misplacedIndices[3]]);
+            return arr == sortedArr;
+        }
+
+        return false;
+    }
+};
