@@ -24,3 +24,38 @@ Constraints:
 
 
 */
+class Solution {
+  public:
+    vector<Node*> alternatingSplitList(struct Node* head) {
+        // Create dummy nodes for the two lists
+        Node* dummy1 = new Node(0);  // First list
+        Node* dummy2 = new Node(0);  // Second list
+        
+        Node* list1 = dummy1;  // Pointer for first list
+        Node* list2 = dummy2;  // Pointer for second list
+        Node* current = head;  // Pointer to traverse the original list
+        
+        // Flag to toggle between two lists
+        bool toggle = true;
+        
+        // Traverse the original linked list
+        while (current != nullptr) {
+            if (toggle) {
+                list1->next = current;  // Add to first list
+                list1 = list1->next;    // Move the pointer of the first list
+            } else {
+                list2->next = current;  // Add to second list
+                list2 = list2->next;    // Move the pointer of the second list
+            }
+            toggle = !toggle;  // Alternate the lists
+            current = current->next;  // Move to the next node in the original list
+        }
+        
+        // Terminate the lists
+        list1->next = nullptr;
+        list2->next = nullptr;
+        
+        // Return the heads of the two sublists (skipping dummy nodes)
+        return {dummy1->next, dummy2->next};
+    }
+};
