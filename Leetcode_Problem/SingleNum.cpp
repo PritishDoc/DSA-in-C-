@@ -18,4 +18,14 @@ Expected Auxiliary Space: O(1)
 Constraints:
 1 ≤ arr.size() ≤ 106
 0 ≤ arri ≤ 105
-*/
+*/class Solution {
+  public:
+    int getSingle(vector<int>& arr) {
+        int result = 0;
+        // XOR all the elements
+        for (int num : arr) {
+            result ^= num;
+        }
+        return result;
+    }
+};
