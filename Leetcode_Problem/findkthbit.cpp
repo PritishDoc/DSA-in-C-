@@ -40,3 +40,27 @@ Constraints:
 1 <= n <= 20
 1 <= k <= 2n - 1
 */
+class Solution {
+public:
+    char findKthBit(int n, int k) {
+        // Base case: S1 is just "0"
+        if (n == 1) return '0';
+        
+        int length = (1 << n) - 1;  // Length of Sn = 2^n - 1
+        int mid = length / 2 + 1;   // Middle position is (2^n) / 2
+        
+        if (k == mid) {
+            return '1';  // Middle bit is always '1'
+        } else if (k < mid) {
+            // If k is in the first half, it corresponds to the kth bit in S_{n-1}
+            return findKthBit(n - 1, k);
+        } else {
+            // If k is in the second half, it corresponds to the reverse of inverted S_{n-1}
+            // Map k to the corresponding position in the first half
+            int mirrorIndex = length - k + 1;
+            char mirrorBit = findKthBit(n - 1, mirrorIndex);
+            // Invert the bit
+            return mirrorBit == '0' ? '1' : '0';
+        }
+    }
+};
