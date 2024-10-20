@@ -44,3 +44,62 @@ Constraints:
 1 <= expression.length <= 2 * 104
 expression[i] is one following characters: '(', ')', '&', '|', '!', 't', 'f', and ','.
 */
+class Solution {
+public:
+    bool parseBoolExpr(string expression) {
+        stack<char> stk;  // Stack to hold characters as we process the expression
+
+        // Traverse the entire expression
+        for (char ch : expression) {
+            // If the character is not a closing parenthesis, we push it onto the stack
+            if (ch != ')') {
+                if (ch != ',') {
+                    stk.push(ch);  // We ignore commas as they are separators
+                }
+            } else {
+                // When we encounter a closing parenthesis ')', we evaluate the expression inside the parentheses
+                vector<char> values;
+                
+                // Pop elements until we find the opening parenthesis '('
+                while (stk.top() != '(') {
+                    values.push_back(stk.top());
+                    stk.pop();
+                }
+                stk.pop();  // Remove the '(' from the stack
+
+                // The operator before the '(' determines how we evaluate the expression
+                char op = stk.top();
+                stk.pop();  // Pop the operator ('!', '&', '|')
+                
+                // Evaluate based on the operator
+                if (op == '!') {
+                    // Logical NOT: there's only one value inside the parentheses
+                    stk.push(values[0] == 'f' ? 't' : 'f');
+                } else if (op == '&') {
+                    // Logical AND: all values must be true for the result to be true
+                    bool result = true;
+                    for (char val : values) {
+                        if (val == 'f') {
+                            result = false;
+                            break;
+                        }
+                    }
+                    stk.push(result ? 't' : 'f');
+                } else if (op == '|') {
+                    // Logical OR: at least one value must be true for the result to be true
+                    bool result = false;
+                    for (char val : values) {
+                        if (val == 't') {
+                            result = true;
+                            break;
+                        }
+                    }
+                    stk.push(result ? 't' : 'f');
+                }
+            }
+        }
+
+        // The final result will be the only element left in the stack
+        return stk.top() == 't';
+    }
+};
