@@ -34,3 +34,40 @@ Constraints:
 
 1 <= s.length <= 16
 */
+
+class Solution {
+public:
+    int maxUniqueSplit(string s) {
+        unordered_set<string> uniqueSubstrings;
+        return backtrack(s, 0, uniqueSubstrings);
+    }
+    
+    int backtrack(const string& s, int start, unordered_set<string>& uniqueSubstrings) {
+        if (start == s.length()) {
+            // Base case: If we have reached the end of the string, return 0 splits remaining
+            return 0;
+        }
+        
+        int maxSplits = 0;
+        string currentSubstring = "";
+        
+        // Try all possible substrings starting from 'start' to the end of the string
+        for (int i = start; i < s.length(); ++i) {
+            currentSubstring += s[i];
+            
+            // If the current substring is unique, we attempt to split further
+            if (uniqueSubstrings.find(currentSubstring) == uniqueSubstrings.end()) {
+                uniqueSubstrings.insert(currentSubstring);
+                
+                // Recursively find the number of splits for the remaining string
+                int splits = 1 + backtrack(s, i + 1, uniqueSubstrings);
+                maxSplits = max(maxSplits, splits);
+                
+                // Backtrack: remove the current substring and try another split
+                uniqueSubstrings.erase(currentSubstring);
+            }
+        }
+        
+        return maxSplits;
+    }
+};
