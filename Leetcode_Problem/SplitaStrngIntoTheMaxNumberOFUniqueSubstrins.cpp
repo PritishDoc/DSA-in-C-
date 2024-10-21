@@ -2,7 +2,6 @@
 
  Split a String Into the Max Number of Unique Substrings
 Medium
-Topics
 
 Hint
 Given a string s, return the maximum number of unique substrings that the given string can be split into.
