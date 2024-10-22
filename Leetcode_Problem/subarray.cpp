@@ -29,3 +29,32 @@ Constraints:
 
 
 */
+class Solution {
+public:
+    int sameOccurrence(vector<int>& arr, int x, int y) {
+        // HashMap to store frequency of count_diff
+        unordered_map<int, int> count_map;
+        int count_diff = 0;  // Difference between counts of x and y
+        int result = 0;
+
+        // Initialize the count_map with 0 count_diff seen once
+        count_map[0] = 1;
+
+        for (int num : arr) {
+            // Update count_diff
+            if (num == x) {
+                count_diff++;
+            } else if (num == y) {
+                count_diff--;
+            }
+
+            // If count_diff has been seen before, add the number of occurrences
+            result += count_map[count_diff];
+
+            // Increment the count of this particular count_diff
+            count_map[count_diff]++;
+        }
+
+        return result;
+    }
+};
