@@ -18,3 +18,60 @@ Constraints:
 1 ≤ arr.size() ≤ 105
 
 */
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+//[1, 2, 3, 6, 7, 8, 9]
+class Solution {
+public:
+    vector<int> alternateSort(vector<int>& arr) {
+        // Step 1: Sort the array
+        sort(arr.begin(), arr.end());
+
+        vector<int> result;
+        int left = 0, right = arr.size() - 1;
+
+        // Step 2: Use two-pointer approach to add largest and smallest elements alternately
+        while (left <= right) {
+            // Add largest remaining element
+            if (left != right) {
+                result.push_back(arr[right--]);
+            }
+            // Add smallest remaining element
+            result.push_back(arr[left++]);
+        }
+
+        return result;
+    }
+};
+
+int main() {
+    Solution solution;
+    int n;
+
+    // Input: size of the array
+    cout << "Enter the number of elements: ";
+    cin >> n;
+
+    vector<int> arr(n);
+
+    // Input: elements of the array
+    cout << "Enter the elements: ";
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    // Call the function
+    vector<int> result = solution.alternateSort(arr);
+
+    // Output the result
+    cout << "Rearranged array: ";
+    for (int x : result) {
+        cout << x << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
