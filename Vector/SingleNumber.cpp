@@ -1,18 +1,19 @@
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-int main(){
-    vector<int>vec;
+int solution(vector<int> nums) {
+    int ans = 0;
+    for (int val : nums) {
+        ans = ans ^ val;  // XOR each element individually
+    }
+    return ans;
+}
 
-    vec.push_back(0);
-    vec.push_back(1);
-    vec.push_back(2);
-    vec.push_back(3);
-    vec.push_back(4);
-
-    cout<<vec.size()<<endl;
-    cout<<vec.capacity()<<endl;
+int main() {
+    vector<int> nums = {2, 4, 5, 4, 5};
+    int ans = solution(nums);
+    cout << "The unique element is: " << ans << endl;
     return 0;
 }
