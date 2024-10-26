@@ -1,6 +1,5 @@
 /*
 Height of Binary Tree After Subtree Removal Queries
-Hard
 
 Hint
 You are given the root of a binary tree with n nodes. Each node is assigned a unique value from 1 to n. You are also given an array queries of size m.
