@@ -20,3 +20,21 @@ Constraints:
 1 ≤ number of nodes, key ≤ 105
 1 ≤ data of node ≤ 105
 */
+class Solution {
+  public:
+    int count(struct Node* head, int key) {
+        int count = 0;  // Initialize counter
+        struct Node* current = head;  // Start from the head node
+        
+        // Traverse the linked list
+        while (current != nullptr) {
+            // Check if current node's data matches the key
+            if (current->data == key) {
+                count++;
+            }
+            current = current->next;  // Move to the next node
+        }
+        
+        return count;  // Return the total count of occurrences
+    }
+};
