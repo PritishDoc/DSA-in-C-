@@ -17,7 +17,6 @@ The height of a tree is the number of edges in the longest simple path from the 
 
 Example 1:
 
-
 Input: root = [1,3,4,2,null,6,5,null,null,null,null,null,7], queries = [4]
 Output: [2]
 Explanation: The diagram above shows the tree after removing the subtree rooted at node with value 4.
@@ -33,9 +32,7 @@ Explanation: We have the following queries:
 - Removing the subtree rooted at node with value 4. The height of the tree becomes 3 (The path 5 -> 8 -> 2 -> 6).
 - Removing the subtree rooted at node with value 8. The height of the tree becomes 2 (The path 5 -> 9 -> 3).
  
-
 Constraints:
-
 The number of nodes in the tree is n.
 2 <= n <= 105
 1 <= Node.val <= n
