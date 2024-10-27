@@ -19,3 +19,38 @@ Constraints:
 0 <= arr[i] <= 105
 
 */
+class Solution {
+public:
+    bool findTriplet(std::vector<int>& arr) {
+        int n = arr.size();
+        
+        // Sort the array to use the two-pointer technique
+        std::sort(arr.begin(), arr.end());
+
+        // Traverse the array, considering each element as the target sum
+        for (int i = 0; i < n; i++) {
+            int target = arr[i];
+            int left = 0;
+            int right = n - 1;
+            
+            // Find if there exists two elements whose sum is equal to target
+            while (left < right) {
+                // Skip the target element itself
+                if (left == i) left++;
+                else if (right == i) right--;
+                else {
+                    int sum = arr[left] + arr[right];
+                    
+                    if (sum == target) {
+                        return true; // Found the triplet
+                    } else if (sum < target) {
+                        left++;
+                    } else {
+                        right--;
+                    }
+                }
+            }
+        }
+        return false; // No such triplet found
+    }
+};
