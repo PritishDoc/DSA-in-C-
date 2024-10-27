@@ -1,7 +1,5 @@
 /*
 Count Square Submatrices with All Ones
-Medium
-
 Hint
 Given a m * n matrix of ones and zeros, return how many square submatrices have all ones.
 
