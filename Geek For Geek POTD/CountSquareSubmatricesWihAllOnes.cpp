@@ -44,3 +44,34 @@ Constraints:
 0 <= arr[i][j] <= 1
 
 */
+class Solution {
+public:
+    int countSquares(std::vector<std::vector<int>>& matrix) {
+        int rows = matrix.size();
+        int cols = matrix[0].size();
+        int totalSquares = 0;
+        
+        // DP matrix to store the size of the largest square ending at each cell
+        std::vector<std::vector<int>> dp(rows, std::vector<int>(cols, 0));
+        
+        // Fill the DP matrix based on the given conditions
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                // Only process cell if it is a 1
+                if (matrix[i][j] == 1) {
+                    if (i == 0 || j == 0) {
+                        // For first row or first column, dp[i][j] is just matrix[i][j]
+                        dp[i][j] = 1;
+                    } else {
+                        // Otherwise, use the min of the three neighbors plus one
+                        dp[i][j] = std::min({dp[i-1][j], dp[i][j-1], dp[i-1][j-1]}) + 1;
+                    }
+                    // Add the current dp[i][j] value to the total count
+                    totalSquares += dp[i][j];
+                }
+            }
+        }
+        
+        return totalSquares;
+    }
+};
