@@ -1,5 +1,4 @@
 /*
-
 Longest Square Streak in an Array
 
 Hint
