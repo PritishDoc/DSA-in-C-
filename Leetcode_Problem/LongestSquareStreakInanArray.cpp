@@ -1,7 +1,6 @@
 /*
 
 Longest Square Streak in an Array
-Medium
 
 Hint
 You are given an integer array nums. A subsequence of nums is called a square streak if:
