@@ -3,7 +3,7 @@
 Longest Square Streak in an Array
 Medium
 Topics
-Companies
+
 Hint
 You are given an integer array nums. A subsequence of nums is called a square streak if:
 
