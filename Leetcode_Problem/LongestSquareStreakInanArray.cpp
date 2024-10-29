@@ -34,32 +34,3 @@ Constraints:
 2 <= nums[i] <= 105
 
 */
-#include <vector>
-#include <algorithm>
-#include <unordered_map>
-#include <cmath>
-
-class Solution {
-public:
-    int longestSquareStreak(std::vector<int>& nums) {
-        std::sort(nums.begin(), nums.end());
-        std::unordered_map<int, int> streakLength;
-        int maxLength = 0;
-        
-        for (int num : nums) {
-            int root = std::sqrt(num);
-            if (root * root == num && streakLength.count(root)) {
-                // Extend the square streak from root to num
-                streakLength[num] = streakLength[root] + 1;
-            } else {
-                // Start a new streak with this number
-                streakLength[num] = 1;
-            }
-            // Track the maximum streak length
-            maxLength = std::max(maxLength, streakLength[num]);
-        }
-        
-        // If the longest streak is less than 2, return -1 as per the problem statement
-        return maxLength >= 2 ? maxLength : -1;
-    }
-};
