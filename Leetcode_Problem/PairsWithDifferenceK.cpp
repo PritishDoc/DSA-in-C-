@@ -18,3 +18,31 @@ Constraints:
 0 <= arr[i] <= 106
 
 */
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+class Solution {
+public:
+    int countPairsWithDiffK(vector<int>& arr, int k) {
+        unordered_map<int, int> freqMap;
+        int count = 0;
+
+        // Fill the frequency map with each element's frequency
+        for (int num : arr) {
+            freqMap[num]++;
+        }
+
+        // Count pairs with difference k
+        for (auto it = freqMap.begin(); it != freqMap.end(); ++it) {
+            int num = it->first;
+            int freq = it->second;
+            
+            if (freqMap.count(num + k)) {
+                count += freq * freqMap[num + k];
+            }
+        }
+
+        return count;
+    }
+};
