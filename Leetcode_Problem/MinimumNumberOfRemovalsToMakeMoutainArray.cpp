@@ -1,7 +1,6 @@
 /*
 Minimum Number of Removals to Make Mountain Array
 Solved
-Hard
 
 Hint
 You may recall that an array arr is a mountain array if and only if:
