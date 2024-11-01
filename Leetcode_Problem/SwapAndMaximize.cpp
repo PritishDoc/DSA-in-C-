@@ -17,3 +17,42 @@ Constraints:
 2 ≤ arr.size()≤ 105
 1 <= arr[i] <= 105
 */
+#include <vector>
+#include <algorithm>
+#include <cmath>
+
+using namespace std;
+
+class Solution {
+  public:
+    long long maxSum(vector<int>& arr) {
+        // Step 1: Sort the array
+        sort(arr.begin(), arr.end());
+        
+        // Step 2: Arrange elements in an alternate max-min order
+        int n = arr.size();
+        vector<int> result;
+        int i = 0, j = n - 1;
+        
+        while (i <= j) {
+            if (i == j) {
+                result.push_back(arr[i]);
+            } else {
+                result.push_back(arr[i]);
+                result.push_back(arr[j]);
+            }
+            i++;
+            j--;
+        }
+
+        // Step 3: Calculate the sum of absolute differences in a circular way
+        long long max_sum = 0;
+        for (int k = 1; k < n; k++) {
+            max_sum += abs(result[k] - result[k - 1]);
+        }
+        // Circular difference between the last and first element
+        max_sum += abs(result[0] - result[n - 1]);
+
+        return max_sum;
+    }
+};
