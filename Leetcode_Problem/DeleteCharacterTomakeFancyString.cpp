@@ -2,7 +2,6 @@
 
 Delete Characters to Make Fancy String
 Easy
-Topics
 
 Hint
 A fancy string is a string where no three consecutive characters are equal.
