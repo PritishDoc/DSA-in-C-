@@ -17,7 +17,7 @@ For example, "leetcode exercises sound delightful", "eetcode", "leetcode eats so
 
 Given a string sentence, return true if it is circular. Otherwise, return false.
 
- 
+
 
 Example 1:
 
