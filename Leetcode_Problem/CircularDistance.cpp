@@ -52,3 +52,34 @@ There are no leading or trailing spaces.
 
 
 */
+#include <string>
+#include <vector>
+#include <sstream>
+
+class Solution {
+public:
+    bool isCircularSentence(std::string sentence) {
+        // Split the sentence into words
+        std::vector<std::string> words;
+        std::istringstream iss(sentence);
+        std::string word;
+        
+        while (iss >> word) {
+            words.push_back(word);
+        }
+        
+        // Check if the last character of each word matches the first character of the next word
+        for (size_t i = 0; i < words.size() - 1; ++i) {
+            if (words[i].back() != words[i + 1].front()) {
+                return false;
+            }
+        }
+        
+        // Check if the last character of the last word matches the first character of the first word
+        if (words.back().back() != words.front().front()) {
+            return false;
+        }
+        
+        return true;
+    }
+};
