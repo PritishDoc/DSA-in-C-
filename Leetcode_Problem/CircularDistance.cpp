@@ -1,6 +1,5 @@
 /*
 Circular Sentence
-Easy
 
 Hint
 A sentence is a list of words that are separated by a single space with no leading or trailing spaces.
