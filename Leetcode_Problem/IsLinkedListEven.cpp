@@ -23,3 +23,20 @@ Constraints:
 
 
 */
+class Solution {
+  public:
+    bool isLengthEven(struct Node **head) {
+        // Pointer to traverse the linked list
+        Node *current = *head;
+        int count = 0;
+
+        // Traverse the list and count the nodes
+        while (current != NULL) {
+            count++;
+            current = current->next;
+        }
+
+        // Check if the count is even
+        return (count % 2 == 0);
+    }
+};
