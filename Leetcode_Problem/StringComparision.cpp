@@ -47,3 +47,29 @@ Constraints:
 word consists only of lowercase English letters.
 
 */
+#include <string>
+
+class Solution {
+public:
+    std::string compressedString(std::string word) {
+        std::string comp = "";
+        int n = word.length();
+        int i = 0;
+
+        while (i < n) {
+            char currentChar = word[i];
+            int count = 0;
+
+            // Count up to 9 occurrences of the current character
+            while (i < n && word[i] == currentChar && count < 9) {
+                count++;
+                i++;
+            }
+
+            // Append the count and character to the result
+            comp += std::to_string(count) + currentChar;
+        }
+
+        return comp;
+    }
+};
