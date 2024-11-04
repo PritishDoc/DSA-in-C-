@@ -1,7 +1,6 @@
 /*
 
 String Compression III
-Medium
 
 Hint
 Given a string word, compress it using the following algorithm:
