@@ -3,7 +3,6 @@
 String Compression III
 Medium
 Topics
-Companies
 Hint
 Given a string word, compress it using the following algorithm:
 
