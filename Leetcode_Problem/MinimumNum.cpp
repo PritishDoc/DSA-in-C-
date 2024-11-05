@@ -2,7 +2,7 @@
  Minimum Number of Changes to Make Binary String Beautiful
 Medium
 Topics
-Companies
+
 Hint
 You are given a 0-indexed binary string s having an even length.
 
