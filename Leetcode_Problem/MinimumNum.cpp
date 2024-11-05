@@ -41,6 +41,8 @@ Constraints:
 s has an even length.
 s[i] is either '0' or '1
 */
+
+
 class Solution {
 public:
     int minChanges(const std::string& s) {
