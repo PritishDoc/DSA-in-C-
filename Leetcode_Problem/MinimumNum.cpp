@@ -23,6 +23,8 @@ It can be seen that the string "1100" is beautiful because we can partition it i
 It can be proven that 2 is the minimum number of changes needed to make the string beautiful.
 Example 2:
 
+
+
 Input: s = "10"
 Output: 1
 Explanation: We change s[1] to 1 to get string "11".
