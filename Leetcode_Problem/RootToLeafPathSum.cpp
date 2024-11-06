@@ -24,3 +24,20 @@ Constraints:
 1 ≤ number of nodes ≤ 31
 1 ≤ node->data ≤ 100
 */
+class Solution {
+  public:
+    int treePathsSum(Node* root, int current_value = 0) {
+        if (!root) return 0; // Base case: if root is null, return 0
+
+        // Update the current number
+        current_value = current_value * 10 + root->data;
+
+        // If leaf node is reached, return the current value
+        if (!root->left && !root->right) {
+            return current_value;
+        }
+
+        // Recursively sum for left and right children
+        return treePathsSum(root->left, current_value) + treePathsSum(root->right, current_value);
+    }
+};
