@@ -3,7 +3,6 @@
 
 3011. Find if Array Can Be Sorted
 Medium
-Topics
 
 Hint
 You are given a 0-indexed array of positive integers nums.
