@@ -65,6 +65,8 @@ public:
                 currMin = nums[i];
                 currMax = nums[i];
             }
+
+            
         }
 
         return currMin > prevMax;
