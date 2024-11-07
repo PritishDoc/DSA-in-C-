@@ -21,6 +21,8 @@ Constraints:
 0 ≤ arr[i] ≤ 106
 
 */
+
+
 class Solution {
 public:
     vector<int> findSplit(vector<int>& arr) {
