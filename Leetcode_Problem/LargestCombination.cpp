@@ -35,3 +35,28 @@ Constraints:
 1 <= candidates[i] <= 107
 
 */
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    int largestCombination(vector<int>& candidates) {
+        int maxCombination = 0;
+        
+        // Loop over 24 bits (since the maximum number is ≤ 10^7, which requires only 24 bits)
+        for (int bit = 0; bit < 24; ++bit) {
+            int count = 0;
+            for (int num : candidates) {
+                // Check if the `bit` position is set in `num`
+                if (num & (1 << bit)) {
+                    ++count;
+                }
+            }
+            // Update the maximum combination size
+            maxCombination = max(maxCombination, count);
+        }
+        
+        return maxCombination;
+    }
+};
