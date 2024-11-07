@@ -1,6 +1,5 @@
 /*
 5. Largest Combination With Bitwise AND Greater Than Zero
-Medium
 
 Hint
 The bitwise AND of an array nums is the bitwise AND of all integers in nums.
