@@ -1,7 +1,6 @@
 /*
  Maximum XOR for Each Query
 Medium
-Topics
 
 Hint
 You are given a sorted array nums of n non-negative integers and an integer maximumBit. You want to perform the following query n times:
