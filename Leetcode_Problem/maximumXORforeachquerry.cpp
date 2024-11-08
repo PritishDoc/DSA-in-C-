@@ -43,3 +43,28 @@ nums.length == n
 nums​​​ is sorted in ascending order
 
 */
+#include <vector>
+
+class Solution {
+public:
+    std::vector<int> getMaximumXor(std::vector<int>& nums, int maximumBit) {
+        int maxXorVal = (1 << maximumBit) - 1;  // 2^maximumBit - 1, the maximum value with maximumBit bits
+        int currentXor = 0;
+        std::vector<int> result;
+
+        // Compute the XOR of all elements in nums
+        for (int num : nums) {
+            currentXor ^= num;
+        }
+
+        // Process queries in reverse order
+        for (int i = nums.size() - 1; i >= 0; --i) {
+            // Calculate k that maximizes XOR with currentXor
+            result.push_back(maxXorVal ^ currentXor);
+            // Update currentXor by "removing" the last element in the current list
+            currentXor ^= nums[i];
+        }
+
+        return result;
+    }
+};
