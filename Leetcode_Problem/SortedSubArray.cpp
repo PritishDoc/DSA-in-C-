@@ -2,8 +2,7 @@
 
 
 Shortest Subarray With OR at Least K II
-Medium
-Topics
+
 Hint
 You are given an array nums of non-negative integers and an integer k.
 
