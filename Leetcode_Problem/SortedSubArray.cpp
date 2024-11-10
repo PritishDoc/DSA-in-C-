@@ -4,7 +4,6 @@
 Shortest Subarray With OR at Least K II
 Medium
 Topics
-Companies
 Hint
 You are given an array nums of non-negative integers and an integer k.
 
