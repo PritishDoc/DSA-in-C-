@@ -1,7 +1,6 @@
 /*
 . Prime Subtraction Operation
 Medium
-Topics
 
 Hint
 You are given a 0-indexed integer array nums of length n.
