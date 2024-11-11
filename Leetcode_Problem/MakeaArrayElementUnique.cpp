@@ -20,3 +20,24 @@ Constraints:
 0 ≤ arr[i] ≤ 106
 
 */
+class Solution {
+public:
+    int minIncrements(std::vector<int>& arr) {
+        // Step 1: Sort the array
+        std::sort(arr.begin(), arr.end());
+        
+        int increments = 0;
+        
+        // Step 2: Traverse the array and make each element unique
+        for (int i = 1; i < arr.size(); i++) {
+            // If current element is not greater than the previous, we need to increment it
+            if (arr[i] <= arr[i - 1]) {
+                int requiredValue = arr[i - 1] + 1;
+                increments += requiredValue - arr[i];
+                arr[i] = requiredValue;  // Update the current element to be unique
+            }
+        }
+        
+        return increments;
+    }
+};
