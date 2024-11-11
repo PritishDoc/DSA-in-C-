@@ -1,5 +1,4 @@
 /*
-
 Make array elements unique
 Difficulty: MediumAccuracy: 51.43%Submissions: 45K+Points: 4
 Given an array arr[ ], your task is to find the minimum number of increment operations required to make all the elements of the array unique. i.e.- no value in the array should occur more than once. In one operation, a value can be incremented by 1 only.
