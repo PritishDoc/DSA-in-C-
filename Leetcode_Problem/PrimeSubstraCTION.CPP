@@ -2,7 +2,7 @@
 . Prime Subtraction Operation
 Medium
 Topics
-Companies
+
 Hint
 You are given a 0-indexed integer array nums of length n.
 
