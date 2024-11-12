@@ -47,3 +47,47 @@ Constraints:
 items[i].length == 2
 1 <= pricei, beautyi, queries[j] <= 109
 */
+#include <vector>
+#include <algorithm>
+#include <map>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> maximumBeauty(vector<vector<int>>& items, vector<int>& queries) {
+        // Sort items by price
+        sort(items.begin(), items.end());
+
+        // Precompute max beauty for each price
+        map<int, int> maxBeautyAtPrice;
+        int maxBeauty = 0;
+        for (const auto& item : items) {
+            maxBeauty = max(maxBeauty, item[1]);
+            maxBeautyAtPrice[item[0]] = maxBeauty;
+        }
+
+        // Flatten maxBeautyAtPrice to allow binary search on prices
+        vector<int> prices;
+        vector<int> beauties;
+        for (const auto& [price, beauty] : maxBeautyAtPrice) {
+            prices.push_back(price);
+            beauties.push_back(beauty);
+        }
+
+        // Answer each query
+        vector<int> answer(queries.size());
+        for (int i = 0; i < queries.size(); ++i) {
+            int query = queries[i];
+            
+            // Find the largest price <= query
+            auto it = upper_bound(prices.begin(), prices.end(), query);
+            if (it == prices.begin()) {
+                answer[i] = 0;
+            } else {
+                answer[i] = beauties[it - prices.begin() - 1];
+            }
+        }
+
+        return answer;
+    }
+};
