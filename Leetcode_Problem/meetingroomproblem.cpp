@@ -21,3 +21,25 @@ Constraints:
 
 
 */
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    bool canAttend(vector<vector<int>>& arr) {
+        // Step 1: Sort meetings by their start time
+        sort(arr.begin(), arr.end());
+        
+        // Step 2: Check for overlapping meetings
+        for (int i = 1; i < arr.size(); i++) {
+            // If the current meeting starts before the previous one ends, return false
+            if (arr[i][0] < arr[i - 1][1]) {
+                return false;
+            }
+        }
+        
+        // If no overlaps, return true
+        return true;
+    }
+};
