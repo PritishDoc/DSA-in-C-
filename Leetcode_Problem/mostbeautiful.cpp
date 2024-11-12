@@ -1,7 +1,6 @@
 /*
 
 Most Beautiful Item for Each Query
-Medium
 
 Hint
 You are given a 2D integer array items where items[i] = [pricei, beautyi] denotes the price and beauty of an item respectively.
