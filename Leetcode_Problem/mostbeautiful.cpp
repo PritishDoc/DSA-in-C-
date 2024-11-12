@@ -3,7 +3,7 @@
 Most Beautiful Item for Each Query
 Medium
 Topics
-Companies
+
 Hint
 You are given a 2D integer array items where items[i] = [pricei, beautyi] denotes the price and beauty of an item respectively.
 
