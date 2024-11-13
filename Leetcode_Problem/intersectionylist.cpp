@@ -29,3 +29,47 @@ Constraints:
 
 
 */
+class Solution {
+public:
+    // Function to find intersection point in Y shaped Linked Lists.
+    int intersectPoint(Node* head1, Node* head2) {
+        // Step 1: Calculate the lengths of both linked lists
+        int len1 = 0, len2 = 0;
+        Node* temp1 = head1;
+        Node* temp2 = head2;
+
+        while (temp1) {
+            len1++;
+            temp1 = temp1->next;
+        }
+        while (temp2) {
+            len2++;
+            temp2 = temp2->next;
+        }
+
+        // Step 2: Align the starting point of both lists
+        temp1 = head1;
+        temp2 = head2;
+        if (len1 > len2) {
+            for (int i = 0; i < len1 - len2; i++) {
+                temp1 = temp1->next;
+            }
+        } else {
+            for (int i = 0; i < len2 - len1; i++) {
+                temp2 = temp2->next;
+            }
+        }
+
+        // Step 3: Move both pointers and find the intersection point
+        while (temp1 && temp2) {
+            if (temp1 == temp2) {
+                return temp1->data;
+            }
+            temp1 = temp1->next;
+            temp2 = temp2->next;
+        }
+
+        // If no intersection point was found, return -1
+        return -1;
+    }
+};
