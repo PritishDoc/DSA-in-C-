@@ -23,24 +23,3 @@ Constraints:
 
 
 */
-class Solution {
-  public:
-    // Function to find the second largest element
-    int getSecondLargest(vector<int> &arr) {
-        int first = INT_MIN, second = INT_MIN;
-
-        for (int num : arr) {
-            if (num > first) {
-                // Update both first and second
-                second = first;
-                first = num;
-            } else if (num > second && num < first) {
-                // Update second if num is distinct and less than first
-                second = num;
-            }
-        }
-
-        // Return -1 if no valid second largest is found
-        return second == INT_MIN ? -1 : second;
-    }
-};
