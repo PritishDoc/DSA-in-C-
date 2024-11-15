@@ -1,6 +1,7 @@
 /*
 Shortest Subarray to be Removed to Make Array Sorted
 
+
 Hint
 Given an integer array arr, remove a subarray (can be empty) from arr such that the remaining elements in arr are non-decreasing.
 
