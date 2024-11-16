@@ -55,3 +55,32 @@ Constraints:
 
 
 */
+class Solution {
+public:
+    vector<int> resultsArray(vector<int>& nums, int k) {
+        vector<int> result; // To store the power of each subarray
+        
+        for (int i = 0; i <= nums.size() - k; ++i) {
+            bool isValid = true; // Flag to check if subarray is valid
+            int maxElement = nums[i]; // Initialize maxElement
+            
+            // Check if the subarray nums[i..i+k-1] is consecutive and sorted
+            for (int j = i; j < i + k - 1; ++j) {
+                if (nums[j] + 1 != nums[j + 1]) {
+                    isValid = false;
+                    break;
+                }
+                maxElement = max(maxElement, nums[j + 1]);
+            }
+            
+            // Append the result
+            if (isValid) {
+                result.push_back(maxElement);
+            } else {
+                result.push_back(-1);
+            }
+        }
+        
+        return result;
+    }
+};
