@@ -19,19 +19,3 @@ Constraints:
 0 ≤ arr[i] ≤ 10
 
 */
-
-class Solution {
-public:
-    void pushZerosToEnd(vector<int>& arr) {
-        int nonZeroIndex = 0; // Pointer for the next position of a non-zero element
-        
-        // Move non-zero elements to the front
-        for (int i = 0; i < arr.size(); ++i) {
-            if (arr[i] != 0) {
-                swap(arr[nonZeroIndex], arr[i]);
-                nonZeroIndex++;
-            }
-        }
-        // All zeros are automatically moved to the end due to swaps
-    }
-};
