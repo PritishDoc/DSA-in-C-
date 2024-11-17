@@ -58,5 +58,3 @@ public:
         return minLength == INT_MAX ? -1 : minLength;
     }
 };
-Complexity
-Time Comp
