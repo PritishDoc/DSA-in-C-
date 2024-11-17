@@ -22,8 +22,15 @@ Constraints:
 
 */
 class Solution {
-  public:
+public:
     void reverseArray(vector<int> &arr) {
-        // code here
+        int left = 0, right = arr.size() - 1;
+        while (left < right) {
+            // Swap elements at the left and right indices
+            swap(arr[left], arr[right]);
+            left++;
+            right--;
+        }
     }
 };
+Explana
