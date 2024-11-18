@@ -42,3 +42,39 @@ n == code.length
 1 <= code[i] <= 100
 -(n - 1) <= k <= n - 1
 */
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> decrypt(vector<int>& code, int k) {
+        int n = code.size();
+        vector<int> result(n, 0);
+
+        if (k == 0) {
+            // If k is 0, all elements in the result are 0.
+            return result;
+        }
+
+        // Expand the array for circular behavior
+        vector<int> extendedCode(code.begin(), code.end());
+        extendedCode.insert(extendedCode.end(), code.begin(), code.end());
+
+        // Calculate sums
+        int start = (k > 0) ? 1 : n + k;
+        int end = (k > 0) ? k : n - 1;
+
+        int currentSum = 0;
+        for (int i = start; i <= end; ++i) {
+            currentSum += extendedCode[i];
+        }
+
+        for (int i = 0; i < n; ++i) {
+            result[i] = currentSum;
+            currentSum -= extendedCode[start++];
+            currentSum += extendedCode[++end];
+        }
+
+        return result;
+    }
+};
