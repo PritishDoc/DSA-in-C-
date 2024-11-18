@@ -1,8 +1,7 @@
 /*
 
  Defuse the Bomb
-Easy
-Topics
+
 Hint
 You have a bomb to defuse, and your time is running out! Your informer will provide you with a circular array code of length of n and a key k.
 
