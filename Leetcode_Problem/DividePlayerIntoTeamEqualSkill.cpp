@@ -18,6 +18,8 @@ Output: 22
 Explanation: 
 Divide the players into the following teams: (1, 5), (2, 4), (3, 3), where each team has a total skill of 6.
 The sum of the chemistry of all the teams is: 1 * 5 + 2 * 4 + 3 * 3 = 5 + 8 + 9 = 22.
+
+
 Example 2:
 
 Input: skill = [3,4]
