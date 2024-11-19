@@ -1,6 +1,5 @@
 /*
  Maximum Sum of Distinct Subarrays With Length K
-Medium
 
 You are given an integer array nums and an integer k. Find the maximum subarray sum of all the subarrays of nums that meet the following conditions:
 
