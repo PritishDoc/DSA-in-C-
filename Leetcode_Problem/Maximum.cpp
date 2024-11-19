@@ -40,3 +40,34 @@ Constraints:
 1 <= nums[i] <= 105
 
 */
+class Solution {
+public:
+    long long maximumSubarraySum(vector<int>& nums, int k) {
+        unordered_set<int> uniqueElements;
+        long long currentSum = 0, maxSum = 0;
+        int start = 0;
+
+        for (int end = 0; end < nums.size(); ++end) {
+            // Add the current element to the window
+            while (uniqueElements.count(nums[end])) {
+                // Remove elements from the start until no duplicates
+                uniqueElements.erase(nums[start]);
+                currentSum -= nums[start];
+                start++;
+            }
+            uniqueElements.insert(nums[end]);
+            currentSum += nums[end];
+
+            // Check if the window size is k
+            if (end - start + 1 == k) {
+                maxSum = max(maxSum, currentSum);
+                // Shrink the window for the next iteration
+                uniqueElements.erase(nums[start]);
+                currentSum -= nums[start];
+                start++;
+            }
+        }
+
+        return maxSum;
+    }
+};
