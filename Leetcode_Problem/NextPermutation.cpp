@@ -23,28 +23,3 @@ Constraints:
 
 
 */
-class Solution {
-public:
-    void nextPermutation(vector<int>& arr) {
-        int n = arr.size();
-        int i = n - 2;
-
-        // Step 1: Find the breakpoint
-        while (i >= 0 && arr[i] >= arr[i + 1]) {
-            i--;
-        }
-
-        if (i >= 0) {
-            // Step 2: Find the next larger element
-            int j = n - 1;
-            while (arr[j] <= arr[i]) {
-                j--;
-            }
-            // Step 3: Swap
-            swap(arr[i], arr[j]);
-        }
-
-        // Step 4: Reverse the right part
-        reverse(arr.begin() + i + 1, arr.end());
-    }
-};
