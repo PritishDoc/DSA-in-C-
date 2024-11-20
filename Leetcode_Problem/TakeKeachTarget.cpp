@@ -33,3 +33,42 @@ Constraints:
 s consists of only the letters 'a', 'b', and 'c'.
 0 <= k <= s.length
 */
+
+class Solution {
+public:
+    int takeCharacters(string s, int k) {
+        // Step 1: Count total occurrences of 'a', 'b', and 'c'
+        unordered_map<char, int> totalCount;
+        for (char c : s) {
+            totalCount[c]++;
+        }
+
+        // Step 2: Check if it is possible to take at least k of each character
+        if (totalCount['a'] < k || totalCount['b'] < k || totalCount['c'] < k) {
+            return -1;
+        }
+
+        // Step 3: Use sliding window to find the longest subarray
+        int n = s.size();
+        unordered_map<char, int> windowCount;
+        int maxLength = 0, left = 0;
+
+        for (int right = 0; right < n; ++right) {
+            windowCount[s[right]]++;
+
+            // Shrink the window if the condition is violated
+            while (totalCount['a'] - windowCount['a'] < k ||
+                   totalCount['b'] - windowCount['b'] < k ||
+                   totalCount['c'] - windowCount['c'] < k) {
+                windowCount[s[left]]--;
+                left++;
+            }
+
+            // Update the maximum length of the valid window
+            maxLength = max(maxLength, right - left + 1);
+        }
+
+        // Step 4: Calculate the minimum minutes required
+        return n - maxLength;
+    }
+};
