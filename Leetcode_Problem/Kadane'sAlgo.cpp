@@ -2,6 +2,9 @@
 using namespace std;
 
 int main(){
+
+
+    
     int arr[5]={1,3,-4,8,-3};
 
     int currsum=0;
