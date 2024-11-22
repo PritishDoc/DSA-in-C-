@@ -1,6 +1,5 @@
 /*
 Insert Greatest Common Divisors in Linked List
-Medium
 
 Given the head of a linked list head, in which each node contains an integer value.
 
