@@ -24,3 +24,29 @@ Constraints
 
 
 */
+class Solution {
+public:
+    int getMinDiff(int k, vector<int>& arr) {
+        int n = arr.size();
+        if (n == 1) return 0; // If there's only one tower, difference is 0.
+
+        // Step 1: Sort the array
+        sort(arr.begin(), arr.end());
+
+        // Step 2: Initial difference
+        int diff = arr[n - 1] - arr[0];
+
+        // Step 3: Iterate to find the minimum difference
+        int smallest, largest;
+        for (int i = 0; i < n - 1; i++) {
+            // Maximum height after modifications
+            largest = max(arr[i] + k, arr[n - 1] - k);
+            // Minimum height after modifications
+            smallest = min(arr[0] + k, arr[i + 1] - k);
+            // Update the minimum difference
+            diff = min(diff, largest - smallest);
+        }
+
+        return diff;
+    }
+};
