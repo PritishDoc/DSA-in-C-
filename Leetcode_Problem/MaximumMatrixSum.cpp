@@ -53,7 +53,7 @@ public:
             }
         }
 
-        // If negativeCount is odd, adjust by subtracting twice the smallest absolute value
+        
         if (negativeCount % 2 != 0) {
             totalSum -= 2 * minAbsValue;
         }
