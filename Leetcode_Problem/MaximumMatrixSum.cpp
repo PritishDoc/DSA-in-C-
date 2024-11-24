@@ -2,7 +2,7 @@
 Maximum Matrix Sum
 Medium
 Topics
-Companies
+
 Hint
 You are given an n x n integer matrix. You can do the following operation any number of times:
 
