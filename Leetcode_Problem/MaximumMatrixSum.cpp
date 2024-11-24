@@ -35,3 +35,29 @@ n == matrix.length == matrix[i].length
 -105 <= matrix[i][j] <= 105
 
 */
+class Solution {
+public:
+    long long maxMatrixSum(vector<vector<int>>& matrix) {
+        long long totalSum = 0;
+        int negativeCount = 0;
+        int minAbsValue = INT_MAX;
+
+        for (int i = 0; i < matrix.size(); ++i) {
+            for (int j = 0; j < matrix[i].size(); ++j) {
+                int value = matrix[i][j];
+                totalSum += abs(value);  // Sum of absolute values
+                if (value < 0) {
+                    ++negativeCount;  // Count negative values
+                }
+                minAbsValue = min(minAbsValue, abs(value));  // Track smallest absolute value
+            }
+        }
+
+        // If negativeCount is odd, adjust by subtracting twice the smallest absolute value
+        if (negativeCount % 2 != 0) {
+            totalSum -= 2 * minAbsValue;
+        }
+
+        return totalSum;
+    }
+};
