@@ -20,3 +20,28 @@ Constraints:
 -10  ≤  arr[i]  ≤  10
 
 */
+class Solution {
+public:
+    int maxProduct(vector<int> &arr) {
+        int n = arr.size();
+        int maxProduct = arr[0]; // Global maximum product
+        int maxEndingHere = arr[0]; // Local maximum product ending at the current position
+        int minEndingHere = arr[0]; // Local minimum product ending at the current position
+
+        for (int i = 1; i < n; i++) {
+            if (arr[i] < 0) {
+                // Swap maxEndingHere and minEndingHere when a negative number is encountered
+                swap(maxEndingHere, minEndingHere);
+            }
+
+            // Update the local maximum and minimum products
+            maxEndingHere = max(arr[i], maxEndingHere * arr[i]);
+            minEndingHere = min(arr[i], minEndingHere * arr[i]);
+
+            // Update the global maximum product
+            maxProduct = max(maxProduct, maxEndingHere);
+        }
+
+        return maxProduct;
+    }
+};
