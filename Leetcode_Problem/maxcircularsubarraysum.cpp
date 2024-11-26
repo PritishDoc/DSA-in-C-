@@ -19,3 +19,50 @@ Constraints:
 -104 <= arr[i] <= 104
 
 */
+class Solution {
+public:
+    // Function to find the maximum circular subarray sum
+    int circularSubarraySum(vector<int>& arr) {
+        int n = arr.size();
+
+        // Step 1: Compute the total sum of the array
+        int total_sum = 0;
+        for (int num : arr) {
+            total_sum += num;
+        }
+
+        // Step 2: Kadane's algorithm for max subarray sum (non-circular)
+        int max_kadane = kadane(arr, false);
+
+        // Step 3: Kadane's algorithm for min subarray sum
+        int min_kadane = kadane(arr, true);
+
+        // Step 4: Compute max_wrap
+        int max_wrap = total_sum - min_kadane;
+
+        // Step 5: Return the result
+        // If all elements are negative, max_wrap will be 0, so return max_kadane
+        if (max_wrap == 0) return max_kadane;
+
+        return max(max_kadane, max_wrap);
+    }
+
+private:
+    // Helper function to perform Kadane's algorithm
+    int kadane(vector<int>& arr, bool find_min) {
+        int result = find_min ? INT_MAX : INT_MIN;
+        int current = find_min ? 0 : 0;
+
+        for (int num : arr) {
+            if (find_min) {
+                current = min(current + num, num);
+                result = min(result, current);
+            } else {
+                current = max(current + num, num);
+                result = max(result, current);
+            }
+        }
+
+        return result;
+    }
+};
