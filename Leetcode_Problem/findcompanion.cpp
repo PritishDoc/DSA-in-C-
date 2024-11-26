@@ -1,8 +1,6 @@
 /*
 Find Champion II
 Medium
-Topics
-
 Hint
 There are n teams numbered from 0 to n - 1 in a tournament; each team is also a node in a DAG.
 
