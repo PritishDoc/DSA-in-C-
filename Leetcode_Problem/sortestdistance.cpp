@@ -1,7 +1,6 @@
 /*
 Shortest Distance After Road Addition Queries I
 Medium
-Topics
 Hint
 You are given an integer n and a 2D integer array queries.
 
