@@ -61,3 +61,53 @@ queries[i].length == 2
 1 < queries[i][1] - queries[i][0]
 There are no repeated roads among the queries.
 */
+#include <vector>
+#include <queue>
+#include <limits.h>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> shortestDistanceAfterQueries(int n, vector<vector<int>>& queries) {
+        // Adjacency list representation of the graph
+        vector<vector<pair<int, int>>> graph(n);
+        for (int i = 0; i < n - 1; ++i) {
+            graph[i].push_back({i + 1, 1});
+        }
+        
+        vector<int> result;
+        
+        // Function to find shortest path using Dijkstra's algorithm
+        auto dijkstra = [&](int start, int end) {
+            vector<int> dist(n, INT_MAX);
+            priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
+            
+            dist[start] = 0;
+            pq.push({0, start});
+            
+            while (!pq.empty()) {
+                auto [d, u] = pq.top(); pq.pop();
+                
+                if (d > dist[u]) continue; // Skip outdated paths
+                
+                for (auto [v, w] : graph[u]) {
+                    if (dist[u] + w < dist[v]) {
+                        dist[v] = dist[u] + w;
+                        pq.push({dist[v], v});
+                    }
+                }
+            }
+            
+            return dist[end];
+        };
+        
+        // Process each query
+        for (auto& query : queries) {
+            int u = query[0], v = query[1];
+            graph[u].push_back({v, 1}); // Add the new road
+            result.push_back(dijkstra(0, n - 1)); // Compute shortest path
+        }
+        
+        return result;
+    }
+};
