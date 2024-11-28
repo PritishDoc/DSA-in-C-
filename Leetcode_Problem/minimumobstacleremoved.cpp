@@ -2,7 +2,6 @@
  Minimum Obstacle Removal to Reach Corner
 Hard
 Topics
-Companies
 Hint
 You are given a 0-indexed 2D integer array grid of size m x n. Each cell has one of two values:
 
