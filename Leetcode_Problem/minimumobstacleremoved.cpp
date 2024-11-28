@@ -40,3 +40,55 @@ grid[i][j] is either 0 or 1.
 grid[0][0] == grid[m - 1][n - 1] == 0
 
 */
+class Solution {
+public:
+    int minimumObstacles(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        
+        // Directions for moving up, down, left, and right
+        vector<pair<int, int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        
+        // Deque for 0-1 BFS
+        deque<pair<int, int>> dq;
+        vector<vector<int>> visited(m, vector<int>(n, INT_MAX)); // Min obstacles removed
+        
+        // Start from (0, 0)
+        dq.push_front({0, 0});
+        visited[0][0] = 0;
+        
+        while (!dq.empty()) {
+            auto [x, y] = dq.front();
+            dq.pop_front();
+            
+            // If we reached the target
+            if (x == m - 1 && y == n - 1) {
+                return visited[x][y];
+            }
+            
+            // Explore neighbors
+            for (auto [dx, dy] : directions) {
+                int nx = x + dx;
+                int ny = y + dy;
+                
+                if (nx >= 0 && ny >= 0 && nx < m && ny < n) {
+                    int newCost = visited[x][y] + grid[nx][ny];
+                    
+                    // If we find a better way to reach (nx, ny)
+                    if (newCost < visited[nx][ny]) {
+                        visited[nx][ny] = newCost;
+                        
+                        // Add to deque based on cost
+                        if (grid[nx][ny] == 0) {
+                            dq.push_front({nx, ny});
+                        } else {
+                            dq.push_back({nx, ny});
+                        }
+                    }
+                }
+            }
+        }
+        
+        return -1; // Shouldn't reach here
+    }
+};
