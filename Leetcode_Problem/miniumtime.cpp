@@ -2,7 +2,6 @@
 
 Minimum Time to Visit a Cell In a Grid
 Hard
-Topics
 
 Hint
 You are given a m x n matrix grid consisting of non-negative integers where grid[row][col] represents the minimum time required to be able to visit the cell (row, col), which means you can visit the cell (row, col) only when the time you visit it is greater than or equal to grid[row][col].
