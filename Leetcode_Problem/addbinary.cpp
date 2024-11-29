@@ -20,3 +20,31 @@ Constraints:
 1 ≤s1.size(), s2.size()≤ 106
 
 */
+class Solution {
+public:
+    string addBinary(string& s1, string& s2) {
+        int n1 = s1.size(), n2 = s2.size();
+        int carry = 0;
+        string result = "";
+
+        int i = n1 - 1, j = n2 - 1;
+        while (i >= 0 || j >= 0 || carry) {
+            int bit1 = (i >= 0) ? s1[i--] - '0' : 0; // Get bit from s1 or 0 if out of range
+            int bit2 = (j >= 0) ? s2[j--] - '0' : 0; // Get bit from s2 or 0 if out of range
+
+            int sum = bit1 + bit2 + carry; // Add bits and carry
+            result.push_back((sum % 2) + '0'); // Append the current bit to result
+            carry = sum / 2; // Update carry
+        }
+
+        reverse(result.begin(), result.end()); // Reverse the result to get the correct order
+
+        // Remove leading zeros, if any
+        size_t pos = result.find_first_not_of('0');
+        if (pos != string::npos) {
+            return result.substr(pos);
+        } else {
+            return "0"; // If the result is all zeros
+        }
+    }
+};
