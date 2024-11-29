@@ -48,3 +48,51 @@ n == grid[i].length
 grid[0][0] == 0
 
 */
+#include <vector>
+#include <queue>
+#include <utility>
+using namespace std;
+
+class Solution {
+public:
+    int minimumTime(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        
+        if (grid[1][0] > 1 && grid[0][1] > 1) return -1; // Impossible to move out of (0,0) if adjacent cells are inaccessible
+        
+        vector<vector<int>> directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        vector<vector<int>> minTime(m, vector<int>(n, INT_MAX));
+        priority_queue<pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<>> pq;
+        
+        pq.push({0, {0, 0}});
+        minTime[0][0] = 0;
+        
+        while (!pq.empty()) {
+            auto [currentTime, position] = pq.top();
+            int x = position.first;
+            int y = position.second;
+            pq.pop();
+            
+            if (x == m - 1 && y == n - 1) return currentTime;
+            
+            for (auto dir : directions) {
+                int nx = x + dir[0];
+                int ny = y + dir[1];
+                
+                if (nx >= 0 && nx < m && ny >= 0 && ny < n) {
+                    int waitTime = max(0, grid[nx][ny] - (currentTime + 1));
+                    if (waitTime % 2 == 1) waitTime++;
+                    
+                    int newTime = currentTime + 1 + waitTime;
+                    if (newTime < minTime[nx][ny]) {
+                        minTime[nx][ny] = newTime;
+                        pq.push({newTime, {nx, ny}});
+                    }
+                }
+            }
+        }
+        
+        return -1; // If we exit the loop without reaching the bottom-right corner
+    }
+};
