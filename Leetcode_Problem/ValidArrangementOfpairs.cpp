@@ -1,7 +1,6 @@
 /*
  Valid Arrangement of Pairs
 Hard
-Topics
 
 Hint
 You are given a 0-indexed 2D integer array pairs where pairs[i] = [starti, endi]. An arrangement of pairs is valid if for every index i where 1 <= i < pairs.length, we have endi-1 == starti.
