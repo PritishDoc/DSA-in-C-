@@ -49,3 +49,54 @@ starti != endi
 No two pairs are exactly the same.
 There exists a valid arrangement of pairs
 */
+class Solution {
+public:
+    vector<vector<int>> validArrangement(vector<vector<int>>& pairs) {
+        // Step 1: Build graph and track in/out degree
+        unordered_map<int, vector<int>> graph;
+        unordered_map<int, int> outDegree, inDegree;
+
+        for (const auto& pair : pairs) {
+            int u = pair[0], v = pair[1];
+            graph[u].push_back(v);
+            outDegree[u]++;
+            inDegree[v]++;
+        }
+
+        // Step 2: Find the start vertex
+        int start = pairs[0][0]; // Default to first pair's start
+        for (const auto& [node, outCount] : outDegree) {
+            if (outCount > inDegree[node]) {
+                start = node;
+                break;
+            }
+        }
+
+        // Step 3: Hierholzer's algorithm for Eulerian path
+        stack<int> stk;
+        deque<int> path; // Use deque for efficient insertion at the front
+        stk.push(start);
+
+        while (!stk.empty()) {
+            int u = stk.top();
+            if (!graph[u].empty()) {
+                int v = graph[u].back();
+                graph[u].pop_back();
+                stk.push(v);
+            } else {
+                path.push_front(u);
+                stk.pop();
+            }
+        }
+
+        // Step 4: Construct the result based on the path
+        vector<vector<int>> result;
+        auto it = path.begin();
+        while (next(it) != path.end()) {
+            result.push_back({*it, *next(it)});
+            ++it;
+        }
+
+        return result;
+    }
+};
