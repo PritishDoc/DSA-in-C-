@@ -22,3 +22,33 @@ Constraints:
 
 
 */
+class Solution {
+public:
+    // Function is to check whether two strings are anagram of each other or not.
+    bool areAnagrams(string& s1, string& s2) {
+        // Step 1: Check if lengths are different
+        if (s1.size() != s2.size()) {
+            return false;
+        }
+
+        // Step 2: Create a frequency array for characters (a-z)
+        vector<int> freq(26, 0);
+
+        // Step 3: Update frequency counts for both strings
+        for (char c : s1) {
+            freq[c - 'a']++;
+        }
+        for (char c : s2) {
+            freq[c - 'a']--;
+        }
+
+        // Step 4: Check if all frequencies are zero
+        for (int count : freq) {
+            if (count != 0) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+};
