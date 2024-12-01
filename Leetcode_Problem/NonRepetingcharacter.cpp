@@ -20,3 +20,25 @@ Constraints:
 
 
 */
+
+class Solution {
+public:
+    // Function to find the first non-repeating character in a string.
+    char nonRepeatingChar(string &s) {
+        unordered_map<char, int> freq; // To store frequency of characters
+
+        // Count the frequency of each character
+        for (char c : s) {
+            freq[c]++;
+        }
+
+        // Traverse the string again to find the first character with frequency 1
+        for (char c : s) {
+            if (freq[c] == 1) {
+                return c;
+            }
+        }
+
+        return '$'; // If no non-repeating character is found
+    }
+};
