@@ -36,3 +36,22 @@ Constraints:
 sentence consists of lowercase English letters and spaces.
 searchWord consists of lowercase English letters.
 */
+
+class Solution {
+public:
+    int isPrefixOfWord(string sentence, string searchWord) {
+        istringstream stream(sentence); // Split sentence into words
+        string word;
+        int index = 1; // Words are 1-indexed
+        
+        while (stream >> word) {
+            // Check if searchWord is a prefix of the current word
+            if (word.substr(0, searchWord.size()) == searchWord) {
+                return index;
+            }
+            index++;
+        }
+        
+        return -1; // If no word has searchWord as a prefix
+    }
+};
