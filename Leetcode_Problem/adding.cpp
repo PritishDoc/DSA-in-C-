@@ -1,7 +1,6 @@
 /*
 Adding Spaces to a String
 Medium
-Topics
 Hint
 You are given a 0-indexed string s and a 0-indexed integer array spaces that describes the indices in the original string where spaces will be added. Each space should be inserted before the character at the given index.
 
