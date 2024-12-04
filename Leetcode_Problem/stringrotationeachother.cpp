@@ -20,3 +20,17 @@ Explanation: Strings are not rotations of each other.
 Constraints:
 1 <= s1.size(), s2.size() <= 105
 */
+class Solution {
+public:
+    // Function to check if two strings are rotations of each other or not.
+    bool areRotations(string &s1, string &s2) {
+        // Check if the lengths of the strings are the same
+        if (s1.size() != s2.size()) return false;
+
+        // Concatenate s1 with itself
+        string temp = s1 + s1;
+
+        // Check if s2 is a substring of the concatenated string
+        return (temp.find(s2) != string::npos);
+    }
+};
