@@ -2,7 +2,6 @@
 
  Make String a Subsequence Using Cyclic Increments
 Medium
-Topics
 
 Hint
 You are given two 0-indexed strings str1 and str2.
