@@ -30,7 +30,56 @@ public:
         // Concatenate s1 with itself
         string temp = s1 + s1;
 
-        // Check if s2 is a substring of the concatenated string
-        return (temp.find(s2) != string::npos);
+        // Use KMP algorithm to check if s2 is a substring of temp
+        return kmpSearch(temp, s2);
+    }
+
+private:
+    // Helper function to create the LPS array for KMP
+    vector<int> computeLPS(string &pattern) {
+        int m = pattern.size();
+        vector<int> lps(m, 0);
+        int len = 0, i = 1;
+
+        while (i < m) {
+            if (pattern[i] == pattern[len]) {
+                len++;
+                lps[i] = len;
+                i++;
+            } else {
+                if (len > 0) {
+                    len = lps[len - 1];
+                } else {
+                    lps[i] = 0;
+                    i++;
+                }
+            }
+        }
+        return lps;
+    }
+
+    // KMP search function
+    bool kmpSearch(string &text, string &pattern) {
+        int n = text.size();
+        int m = pattern.size();
+        vector<int> lps = computeLPS(pattern);
+
+        int i = 0, j = 0; // Pointers for text and pattern
+        while (i < n) {
+            if (text[i] == pattern[j]) {
+                i++;
+                j++;
+            }
+            if (j == m) {
+                return true; // Found pattern in text
+            } else if (i < n && text[i] != pattern[j]) {
+                if (j > 0) {
+                    j = lps[j - 1];
+                } else {
+                    i++;
+                }
+            }
+        }
+        return false; // Pattern not found
     }
 };
