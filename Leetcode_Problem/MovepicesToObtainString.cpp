@@ -41,3 +41,40 @@ n == start.length == target.length
 start and target consist of the characters 'L', 'R', and '_'.
 
 */
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    bool canChange(string start, string target) {
+        int n = start.size();
+        int i = 0, j = 0;
+
+        // Traverse both strings
+        while (i < n || j < n) {
+            // Skip blanks in start
+            while (i < n && start[i] == '_') i++;
+            // Skip blanks in target
+            while (j < n && target[j] == '_') j++;
+
+            // If both are out of bounds, we are done
+            if (i == n && j == n) return true;
+
+            // If one is out of bounds but the other isn't, it's impossible
+            if (i == n || j == n) return false;
+
+            // If the characters don't match, return false
+            if (start[i] != target[j]) return false;
+
+            // Check movement constraints
+            if (start[i] == 'L' && i < j) return false; // 'L' can only move left
+            if (start[i] == 'R' && i > j) return false; // 'R' can only move right
+
+            // Move to the next character
+            i++;
+            j++;
+        }
+
+        return true;
+    }
+};
