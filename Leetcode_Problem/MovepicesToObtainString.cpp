@@ -1,7 +1,6 @@
 /*
 Move Pieces to Obtain a String
 Medium
-Topics
 Hint
 You are given two strings start and target, both of length n. Each string consists only of the characters 'L', 'R', and '_' where:
 
