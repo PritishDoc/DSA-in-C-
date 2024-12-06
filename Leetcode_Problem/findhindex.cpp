@@ -19,3 +19,31 @@ Constraints:
 1 ≤ citations.size() ≤ 106
 0 ≤ citations[i] ≤ 10
 */
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    // Function to find H-Index
+    int hIndex(vector<int>& citations) {
+        // Sort citations in non-decreasing order
+        sort(citations.begin(), citations.end());
+
+        int n = citations.size();
+        int hIndex = 0;
+
+        // Iterate through the sorted array
+        for (int i = 0; i < n; i++) {
+            // Number of papers with citations >= citations[i]
+            int papersWithMoreCitations = n - i;
+
+            // Update H-Index if valid
+            if (citations[i] >= papersWithMoreCitations) {
+                hIndex = papersWithMoreCitations;
+                break;
+            }
+        }
+        return hIndex;
+    }
+};
