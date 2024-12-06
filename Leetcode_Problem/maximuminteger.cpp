@@ -37,3 +37,31 @@ Constraints:
 1 <= maxSum <= 109
 
 */
+#include <vector>
+#include <unordered_set>
+using namespace std;
+
+class Solution {
+public:
+    int maxCount(vector<int>& banned, int n, int maxSum) {
+        // Use a hash set for quick look-up of banned integers
+        unordered_set<int> bannedSet(banned.begin(), banned.end());
+        
+        int sum = 0, count = 0;
+        
+        // Iterate through the range [1, n]
+        for (int i = 1; i <= n; i++) {
+            // Skip if the integer is banned
+            if (bannedSet.find(i) != bannedSet.end()) continue;
+            
+            // Check if adding this integer exceeds maxSum
+            if (sum + i > maxSum) break;
+            
+            // Add the integer
+            sum += i;
+            count++;
+        }
+        
+        return count;
+    }
+};
