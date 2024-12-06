@@ -1,6 +1,5 @@
 /*
  Maximum Number of Integers to Choose From a Range I
-Medium
 Hint
 You are given an integer array banned and two integers n and maxSum. You are choosing some number of integers following the below rules:
 
