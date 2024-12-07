@@ -42,3 +42,40 @@ Constraints:
 1 <= maxOperations, nums[i] <= 109
 
 */
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    // Function to check if a penalty P is feasible
+    bool canAchieve(vector<int>& nums, int maxOperations, int penalty) {
+        int operations = 0;
+        for (int balls : nums) {
+            // Calculate the required operations to make balls <= penalty
+            operations += (balls - 1) / penalty;
+            if (operations > maxOperations) {
+                return false; // Exceeds maxOperations
+            }
+        }
+        return true;
+    }
+
+    int minimumSize(vector<int>& nums, int maxOperations) {
+        int left = 1; // Minimum possible penalty
+        int right = *max_element(nums.begin(), nums.end()); // Maximum possible penalty
+        int result = right;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (canAchieve(nums, maxOperations, mid)) {
+                result = mid; // Update result if feasible
+                right = mid - 1; // Try smaller penalties
+            } else {
+                left = mid + 1; // Try larger penalties
+            }
+        }
+
+        return result;
+    }
+};
