@@ -24,3 +24,66 @@ Constraints:
 1 ≤ arr[i] ≤ 10
 
 */
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    // Function to count inversions in the array.
+    int mergeAndCount(vector<int>& arr, vector<int>& temp, int left, int mid, int right) {
+        int i = left;     // Starting index for left subarray
+        int j = mid + 1;  // Starting index for right subarray
+        int k = left;     // Starting index to store sorted elements
+        int count = 0;
+
+        // Merge two subarrays and count inversions.
+        while (i <= mid && j <= right) {
+            if (arr[i] <= arr[j]) {
+                temp[k++] = arr[i++];
+            } else {
+                temp[k++] = arr[j++];
+                count += (mid - i + 1); // Count inversions
+            }
+        }
+
+        // Copy remaining elements of left subarray, if any.
+        while (i <= mid) {
+            temp[k++] = arr[i++];
+        }
+
+        // Copy remaining elements of right subarray, if any.
+        while (j <= right) {
+            temp[k++] = arr[j++];
+        }
+
+        // Copy sorted elements back to the original array.
+        for (i = left; i <= right; i++) {
+            arr[i] = temp[i];
+        }
+
+        return count;
+    }
+
+    // Recursive function to count inversions using merge sort.
+    int mergeSortAndCount(vector<int>& arr, vector<int>& temp, int left, int right) {
+        int count = 0;
+
+        if (left < right) {
+            int mid = left + (right - left) / 2;
+
+            // Count inversions in left and right subarrays
+            count += mergeSortAndCount(arr, temp, left, mid);
+            count += mergeSortAndCount(arr, temp, mid + 1, right);
+
+            // Count split inversions
+            count += mergeAndCount(arr, temp, left, mid, right);
+        }
+
+        return count;
+    }
+
+    int inversionCount(vector<int>& arr) {
+        vector<int> temp(arr.size());
+        return mergeSortAndCount(arr, temp, 0, arr.size() - 1);
+    }
+};
