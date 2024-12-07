@@ -2,7 +2,7 @@
 Minimum Limit of Balls in a Bag
 Medium
 Topics
-Companies
+
 Hint
 You are given an integer array nums where the ith bag contains nums[i] balls. You are also given an integer maxOperations.
 
