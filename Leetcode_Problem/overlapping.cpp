@@ -12,7 +12,5 @@ Explanation: In the given intervals we have only two overlapping intervals here,
 Input: arr[][] = [[6,8],[1,9],[2,4],[4,7]]
 Output: [[1,9]]
 Explanation: In the given intervals all the intervals overlap with the interval [1,9]. Therefore we will return [1,9].
-Constraints:
-1 ≤ arr.size() ≤ 105
-0 ≤ starti ≤ endi ≤ 105
+
 */
