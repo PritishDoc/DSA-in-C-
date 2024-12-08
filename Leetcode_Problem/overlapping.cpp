@@ -14,3 +14,46 @@ Output: [[1,9]]
 Explanation: In the given intervals all the intervals overlap with the interval [1,9]. Therefore we will return [1,9].
 
 */
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    vector<vector<int>> mergeOverlap(vector<vector<int>>& arr) {
+        // Sort intervals based on the start time
+        sort(arr.begin(), arr.end());
+
+        vector<vector<int>> merged;
+
+        for (const auto& interval : arr) {
+            // If the merged list is empty or the current interval does not overlap
+            if (merged.empty() || merged.back()[1] < interval[0]) {
+                merged.push_back(interval);
+            } else {
+                // Overlapping intervals, merge them by updating the end time
+                merged.back()[1] = max(merged.back()[1], interval[1]);
+            }
+        }
+
+        return merged;
+    }
+};
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<vector<int>> arr(n, vector<int>(2));
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i][0] >> arr[i][1];
+    }
+
+    Solution obj;
+    vector<vector<int>> ans = obj.mergeOverlap(arr);
+
+    for (const auto& interval : ans) {
+        cout << interval[0] << " " << interval[1] << endl;
+    }
+
+    return 0;
+}
