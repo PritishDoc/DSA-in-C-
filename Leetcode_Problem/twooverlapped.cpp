@@ -38,3 +38,55 @@ events[i].length == 3
 1 <= valuei <= 106
 
 */
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    int maxTwoEvents(vector<vector<int>>& events) {
+        // Sort events by endTime
+        sort(events.begin(), events.end(), [](const vector<int>& a, const vector<int>& b) {
+            return a[1] < b[1];
+        });
+
+        int n = events.size();
+        vector<int> maxValue(n, 0);
+        maxValue[0] = events[0][2]; // The value of the first event
+
+        // Populate maxValue array
+        for (int i = 1; i < n; ++i) {
+            maxValue[i] = max(maxValue[i - 1], events[i][2]);
+        }
+
+        int result = 0;
+
+        // Iterate through each event
+        for (int i = 0; i < n; ++i) {
+            // Add the value of the current event
+            int currentValue = events[i][2];
+
+            // Find the last event that ends before this one starts
+            int left = 0, right = i - 1, idx = -1;
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                if (events[mid][1] < events[i][0]) {
+                    idx = mid; // Found a valid event
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+
+            // Add the value of the best compatible event
+            if (idx != -1) {
+                currentValue += maxValue[idx];
+            }
+
+            // Update the result
+            result = max(result, currentValue);
+        }
+
+        return result;
+    }
+};
