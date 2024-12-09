@@ -2,7 +2,7 @@
 
 Special Array II
 Medium
-Topics
+
 Hint
 An array is considered special if every pair of its adjacent elements contains two numbers with different parity.
 
