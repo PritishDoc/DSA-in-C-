@@ -39,3 +39,42 @@ Constraints:
 s consists of only lowercase English letters.
 
 */
+class Solution {
+public:
+    int maximumLength(string s) {
+        int n = s.length();
+        
+        // Start from the maximum possible length and go down to 1
+        for (int len = n; len >= 1; len--) {
+            unordered_map<string, int> freqMap;
+
+            // Generate all substrings of length `len`
+            for (int i = 0; i <= n - len; i++) {
+                string sub = s.substr(i, len);
+
+                // Check if the substring is special (all characters the same)
+                if (isSpecial(sub)) {
+                    freqMap[sub]++;
+                }
+            }
+
+            // Check for any special substring that occurs at least thrice
+            for (const auto& entry : freqMap) {
+                if (entry.second >= 3) {
+                    return len; // Return the current length as it's the longest
+                }
+            }
+        }
+
+        return -1; // No special substring found
+    }
+
+private:
+    bool isSpecial(const string& str) {
+        char c = str[0];
+        for (char ch : str) {
+            if (ch != c) return false;
+        }
+        return true;
+    }
+};
