@@ -1,7 +1,6 @@
 /*
  Find Longest Special Substring That Occurs Thrice I
 Medium
-Topics
 Hint
 You are given a string s that consists of lowercase English letters.
 
