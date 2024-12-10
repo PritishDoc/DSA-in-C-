@@ -20,3 +20,26 @@ Constraints:
 |intervalsi| == 2
 0 ≤ starti < endi <=5*10
 */
+class Solution {
+public:
+    int minRemoval(vector<vector<int>>& intervals) {
+        // Sort intervals by their end time
+        sort(intervals.begin(), intervals.end(), [](const vector<int>& a, const vector<int>& b) {
+            return a[1] < b[1];
+        });
+
+        int countNonOverlapping = 0;
+        int end = INT_MIN; // Track the end of the last included interval
+
+        for (const auto& interval : intervals) {
+            if (interval[0] >= end) {
+                // No overlap, include this interval
+                countNonOverlapping++;
+                end = interval[1];
+            }
+        }
+
+        // Total intervals - non-overlapping intervals = intervals to remove
+        return intervals.size() - countNonOverlapping;
+    }
+};
