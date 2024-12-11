@@ -2,7 +2,6 @@
 Maximum Beauty of an Array After Applying Operation
 Medium
 Topics
-Companies
 Hint
 You are given a 0-indexed array nums and a non-negative integer k.
 
