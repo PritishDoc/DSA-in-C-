@@ -15,8 +15,6 @@ Note that you can apply the operation to each index only once.
 
 A subsequence of an array is a new array generated from the original array by deleting some elements (possibly none) without changing the order of the remaining elements.
 
- 
-
 Example 1:
 
 Input: nums = [4,6,1,2], k = 2
