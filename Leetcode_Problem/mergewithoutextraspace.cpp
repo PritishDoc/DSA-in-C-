@@ -25,3 +25,23 @@ Constraints:
 0 <= a[i], b[i] <= 107
 
 */
+public:
+    void mergeArrays(std::vector<int>& a, std::vector<int>& b) {
+        int n = a.size();
+        int m = b.size();
+        int i = n - 1, j = 0;
+
+        // Step 1: Compare and swap
+        while (i >= 0 && j < m) {
+            if (a[i] > b[j]) {
+                std::swap(a[i], b[j]);
+            }
+            i--;
+            j++;
+        }
+
+        // Step 2: Sort both arrays
+        std::sort(a.begin(), a.end());
+        std::sort(b.begin(), b.end());
+    }
+};
