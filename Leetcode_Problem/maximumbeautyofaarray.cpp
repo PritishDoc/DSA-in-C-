@@ -38,3 +38,26 @@ Constraints:
 0 <= nums[i], k <= 105
 
 */
+class Solution {
+public:
+    int maximumBeauty(std::vector<int>& nums, int k) {
+        // Sort the array
+        std::sort(nums.begin(), nums.end());
+
+        int n = nums.size();
+        int maxBeauty = 0;
+        int start = 0;
+
+        // Sliding window
+        for (int end = 0; end < n; ++end) {
+            // Check if the current window is valid
+            while (nums[end] - nums[start] > 2 * k) {
+                start++;
+            }
+            // Update the maximum beauty
+            maxBeauty = std::max(maxBeauty, end - start + 1);
+        }
+
+        return maxBeauty;
+    }
+};
