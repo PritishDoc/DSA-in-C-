@@ -38,10 +38,6 @@ Constraints:
 1 <= k <= 103
 */
 
-#include <vector>
-#include <queue>
-#include <cmath>
-
 class Solution {
 public:
     long long pickGifts(std::vector<int>& gifts, int k) {
