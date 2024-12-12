@@ -37,3 +37,32 @@ Constraints:
 1 <= gifts[i] <= 109
 1 <= k <= 103
 */
+
+#include <vector>
+#include <queue>
+#include <cmath>
+
+class Solution {
+public:
+    long long pickGifts(std::vector<int>& gifts, int k) {
+        // Use a max-heap (priority queue)
+        std::priority_queue<int> maxHeap(gifts.begin(), gifts.end());
+        
+        // Perform the operation k times
+        while (k-- > 0) {
+            int maxGifts = maxHeap.top(); // Get the max pile
+            maxHeap.pop();
+            int remainingGifts = std::floor(std::sqrt(maxGifts)); // Gifts left behind
+            maxHeap.push(remainingGifts); // Push back the remaining gifts
+        }
+        
+        // Sum up the remaining gifts
+        long long totalGifts = 0;
+        while (!maxHeap.empty()) {
+            totalGifts += maxHeap.top();
+            maxHeap.pop();
+        }
+        
+        return totalGifts;
+    }
+};
