@@ -1,6 +1,5 @@
 /*
-Take Gifts From the Richest Pile
-Easy
+Take Gifts From the Richest Piley
 Hint
 You are given an integer array gifts denoting the number of gifts in various piles. Every second, you do the following:
 
