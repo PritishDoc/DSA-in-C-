@@ -21,3 +21,30 @@ Constraints:
 1 ≤ arr[i] ≤ 109
 
 */
+
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int findMin(vector<int>& arr) {
+        int low = 0, high = arr.size() - 1;
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+
+            // If mid element is greater than the last element,
+            // the minimum is in the right half
+            if (arr[mid] > arr[high]) {
+                low = mid + 1;
+            }
+            // Otherwise, the minimum is in the left half
+            else {
+                high = mid;
+            }
+        }
+
+        // The low pointer points to the minimum element
+        return arr[low];
+    }
+};
