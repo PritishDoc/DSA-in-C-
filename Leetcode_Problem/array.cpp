@@ -1,7 +1,6 @@
 /*
  Find Score of an Array After Marking All Elements
 Medium
-Topics
 Hint
 You are given an array nums consisting of positive integers.
 
