@@ -80,3 +80,42 @@ Constraints:
 
 
 */
+
+#include <vector>
+#include <algorithm>
+#include <set>
+
+class Solution {
+public:
+    long long findScore(std::vector<int>& nums) {
+        int n = nums.size();
+        long long score = 0;
+
+        // Pair values with their indices
+        std::vector<std::pair<int, int>> indexedNums;
+        for (int i = 0; i < n; ++i) {
+            indexedNums.push_back({nums[i], i});
+        }
+
+        // Sort by value, and by index in case of ties
+        std::sort(indexedNums.begin(), indexedNums.end());
+
+        // Set to track marked indices
+        std::set<int> marked;
+
+        for (auto& [value, index] : indexedNums) {
+            // If already marked, skip
+            if (marked.count(index)) continue;
+
+            // Add the value to the score
+            score += value;
+
+            // Mark the current index and its adjacent indices
+            marked.insert(index);
+            if (index > 0) marked.insert(index - 1);
+            if (index < n - 1) marked.insert(index + 1);
+        }
+
+        return score;
+    }
+};
