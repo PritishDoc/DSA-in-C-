@@ -1,7 +1,6 @@
 /*
  Continuous Subarrays
 Medium
-Topics
 Hint
 You are given a 0-indexed integer array nums. A subarray of nums is called continuous if:
 
