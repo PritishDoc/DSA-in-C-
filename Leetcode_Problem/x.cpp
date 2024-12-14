@@ -39,3 +39,30 @@ Constraints:
 1 <= nums.length <= 105
 1 <= nums[i] <= 109
 */
+class Solution {
+public:
+    long long continuousSubarrays(vector<int>& nums) {
+        long long count = 0;
+        int left = 0;
+        map<int, int> freq; // To track frequency of elements in the window
+        
+        for (int right = 0; right < nums.size(); ++right) {
+            // Add the current element to the frequency map
+            freq[nums[right]]++;
+            
+            // Ensure the condition 0 <= |nums[i1] - nums[i2]| <= 2
+            while (freq.rbegin()->first - freq.begin()->first > 2) {
+                freq[nums[left]]--;
+                if (freq[nums[left]] == 0) {
+                    freq.erase(nums[left]);
+                }
+                left++;
+            }
+            
+            // Count the subarrays ending at 'right'
+            count += (right - left + 1);
+        }
+        
+        return count;
+    }
+};
