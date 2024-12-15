@@ -33,3 +33,52 @@ classes[i].length == 2
 1 <= extraStudents <= 105
 
 */
+#include <vector>
+#include <queue>
+#include <utility>
+
+using namespace std;
+
+class Solution {
+public:
+    double maxAverageRatio(vector<vector<int>>& classes, int extraStudents) {
+        // Priority queue to store (-gain, passi, totali)
+        auto gain = [](int pass, int total) {
+            return (double)(pass + 1) / (total + 1) - (double)pass / total;
+        };
+        
+        priority_queue<pair<double, pair<int, int>>> pq;
+        
+        // Initialize the heap
+        for (const auto& cls : classes) {
+            int pass = cls[0], total = cls[1];
+            pq.push({gain(pass, total), {pass, total}});
+        }
+        
+        // Allocate extra students
+        while (extraStudents > 0) {
+            auto [currGain, cls] = pq.top();
+            pq.pop();
+            int pass = cls.first, total = cls.second;
+            
+            // Update the class with an additional passing student
+            pass++;
+            total++;
+            extraStudents--;
+            
+            // Recalculate the gain and push back into the heap
+            pq.push({gain(pass, total), {pass, total}});
+        }
+        
+        // Calculate the final average pass ratio
+        double totalAverage = 0.0;
+        while (!pq.empty()) {
+            auto [_, cls] = pq.top();
+            pq.pop();
+            int pass = cls.first, total = cls.second;
+            totalAverage += (double)pass / total;
+        }
+        
+        return totalAverage / classes.size();
+    }
+};
