@@ -1,4 +1,8 @@
 /*
+
+
+*/
+
 public:
     int peakElement(vector<int> &arr) {
         int n = arr.size();
@@ -24,5 +28,3 @@ public:
         return -1; // This should never happen due to problem constraints
     }
 };
-
-*/
