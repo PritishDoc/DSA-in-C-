@@ -20,23 +20,38 @@ Constraints:
 
 */
 
-#include <vector>
-#include <algorithm>
-
-class Solution {
 public:
-    std::vector<int> getFinalState(std::vector<int>& nums, int k, int multiplier) {
-        for (int i = 0; i < k; ++i) {
-            // Find the index of the first minimum element
-            int minIndex = 0;
-            for (int j = 1; j < nums.size(); ++j) {
-                if (nums[j] < nums[minIndex]) {
-                    minIndex = j;
-                }
-            }
-            // Multiply the minimum value by the multiplier
-            nums[minIndex] *= multiplier;
+    int kthElement(std::vector<int>& a, std::vector<int>& b, int k) {
+        if (a.size() > b.size()) {
+            return kthElement(b, a, k); // Ensure 'a' is the smaller array
         }
-        return nums;
+        
+        int n = a.size();
+        int m = b.size();
+        int low = 0, high = std::min(k, n);
+        
+        while (low <= high) {
+            int i = (low + high) / 2;   // Partition index for 'a'
+            int j = k - i;             // Partition index for 'b'
+            
+            // Boundary conditions
+            int aLeft = (i > 0) ? a[i - 1] : INT_MIN;
+            int aRight = (i < n) ? a[i] : INT_MAX;
+            int bLeft = (j > 0) ? b[j - 1] : INT_MIN;
+            int bRight = (j < m) ? b[j] : INT_MAX;
+            
+            // Valid partition
+            if (aLeft <= bRight && bLeft <= aRight) {
+                return std::max(aLeft, bLeft);
+            }
+            // Adjust the binary search range
+            else if (aLeft > bRight) {
+                high = i - 1;
+            } else {
+                low = i + 1;
+            }
+        }
+        
+        return -1; // This case will never occur due to problem constraints
     }
 };
