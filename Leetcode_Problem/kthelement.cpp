@@ -19,7 +19,6 @@ Constraints:
 0 <= a[i], b[i] < 108
 
 */
-
 public:
     int kthElement(std::vector<int>& a, std::vector<int>& b, int k) {
         if (a.size() > b.size()) {
@@ -28,11 +27,12 @@ public:
         
         int n = a.size();
         int m = b.size();
-        int low = 0, high = std::min(k, n);
+        int low = std::max(0, k - m);  // Minimum possible partition in `a`
+        int high = std::min(k, n);    // Maximum possible partition in `a`
         
         while (low <= high) {
-            int i = (low + high) / 2;   // Partition index for 'a'
-            int j = k - i;             // Partition index for 'b'
+            int i = (low + high) / 2;   // Partition index for `a`
+            int j = k - i;             // Partition index for `b`
             
             // Boundary conditions
             int aLeft = (i > 0) ? a[i - 1] : INT_MIN;
