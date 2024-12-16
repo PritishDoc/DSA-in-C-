@@ -1,8 +1,7 @@
 /*
 Final Array State After K Multiplication Operations I
 Easy
-Topics
-Companies
+
 Hint
 You are given an integer array nums, an integer k, and an integer multiplier.
 
