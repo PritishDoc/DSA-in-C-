@@ -1,7 +1,6 @@
 /*
  Construct String With Repeat Limit
 Medium
-Topics
 Hint
 You are given a string s and an integer repeatLimit. Construct a new string repeatLimitedString using the characters of s such that no letter appears more than repeatLimit times in a row. You do not have to use all characters from s.
 
