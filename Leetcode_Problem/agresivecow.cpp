@@ -27,3 +27,48 @@ Constraints:
 1 <= k <= stalls.size()
 
 */
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    // Function to check if we can place cows with at least 'distance' apart
+    bool canPlaceCows(vector<int> &stalls, int k, int distance) {
+        int cowsPlaced = 1; // Place the first cow in the first stall
+        int lastPosition = stalls[0];
+        
+        for (int i = 1; i < stalls.size(); i++) {
+            if (stalls[i] - lastPosition >= distance) {
+                cowsPlaced++;
+                lastPosition = stalls[i]; // Place the cow at this stall
+                if (cowsPlaced == k) return true; // All cows are placed
+            }
+        }
+        return false; // Cannot place all cows
+    }
+
+    int aggressiveCows(vector<int> &stalls, int k) {
+        // Step 1: Sort the stalls
+        sort(stalls.begin(), stalls.end());
+        
+        // Step 2: Initialize binary search range
+        int low = 1; // Minimum possible distance
+        int high = stalls.back() - stalls.front(); // Maximum possible distance
+        int result = 0;
+        
+        // Step 3: Binary search on distance
+        while (low <= high) {
+            int mid = low + (high - low) / 2; // Mid-point of the distance range
+            
+            if (canPlaceCows(stalls, k, mid)) {
+                result = mid;    // Update result with the valid distance
+                low = mid + 1;   // Try for a larger distance
+            } else {
+                high = mid - 1;  // Reduce the distance
+            }
+        }
+        
+        return result; // Return the largest valid minimum distance
+    }
+};
