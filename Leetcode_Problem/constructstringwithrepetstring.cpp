@@ -38,3 +38,57 @@ Constraints:
 s consists of lowercase English letters.
 
 */
+#include <string>
+#include <vector>
+#include <queue>
+using namespace std;
+
+class Solution {
+public:
+    string repeatLimitedString(string s, int repeatLimit) {
+        // Frequency map to store counts of each character
+        vector<int> freq(26, 0);
+        for (char c : s) {
+            freq[c - 'a']++;
+        }
+        
+        // Max heap to prioritize lexicographically larger characters
+        priority_queue<pair<char, int>> maxHeap;
+        for (int i = 0; i < 26; ++i) {
+            if (freq[i] > 0) {
+                maxHeap.push({char('a' + i), freq[i]});
+            }
+        }
+        
+        string result = "";
+        while (!maxHeap.empty()) {
+            auto [currChar, currCount] = maxHeap.top();
+            maxHeap.pop();
+            
+            // Determine how many times we can use the current character
+            int useCount = min(currCount, repeatLimit);
+            result.append(useCount, currChar);
+            
+            // If there are still remaining characters of this type
+            if (currCount > useCount) {
+                // Check if there's another character to break the repetition
+                if (maxHeap.empty()) break; // No more characters to use
+                
+                auto [nextChar, nextCount] = maxHeap.top();
+                maxHeap.pop();
+                
+                // Use the next largest character to break the repetition
+                result += nextChar;
+                nextCount--;
+                
+                // Push the updated counts back into the heap
+                if (nextCount > 0) {
+                    maxHeap.push({nextChar, nextCount});
+                }
+                maxHeap.push({currChar, currCount - useCount});
+            }
+        }
+        
+        return result;
+    }
+};
