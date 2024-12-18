@@ -37,3 +37,25 @@ Constraints:
 1 <= prices.length <= 500
 1 <= prices[i] <= 1000
 */
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> finalPrices(vector<int>& prices) {
+        int n = prices.size();
+        vector<int> answer(n);
+
+        for (int i = 0; i < n; ++i) {
+            answer[i] = prices[i]; // Default price
+            for (int j = i + 1; j < n; ++j) {
+                if (prices[j] <= prices[i]) {
+                    answer[i] -= prices[j];
+                    break;
+                }
+            }
+        }
+
+        return answer;
+    }
+};
