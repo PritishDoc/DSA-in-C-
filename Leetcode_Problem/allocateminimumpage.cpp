@@ -30,3 +30,58 @@ Constraints:
 1 <= k <= 103 
 
 */
+
+#include <vector>
+#include <numeric>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    // Function to check if it's possible to allocate books such that the max pages is <= mid
+    bool isPossible(vector<int>& arr, int n, int k, int mid) {
+        int studentCount = 1; // Start with one student
+        int currentPages = 0;
+
+        for (int i = 0; i < n; ++i) {
+            if (arr[i] > mid) return false; // A single book has more pages than mid, not possible
+
+            if (currentPages + arr[i] > mid) {
+                // Assign current book to the next student
+                studentCount++;
+                currentPages = arr[i];
+
+                // If the number of students exceeds k, return false
+                if (studentCount > k) return false;
+            } else {
+                currentPages += arr[i];
+            }
+        }
+
+        return true;
+    }
+
+    // Function to find the minimum of the maximum pages
+    int findPages(vector<int>& arr, int k) {
+        int n = arr.size();
+        if (k > n) return -1; // More students than books, not possible
+
+        int low = *max_element(arr.begin(), arr.end()); // Minimum possible max pages
+        int high = accumulate(arr.begin(), arr.end(), 0); // Maximum possible max pages
+        int result = -1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            if (isPossible(arr, n, k, mid)) {
+                result = mid; // Update result and try for a smaller max
+                high = mid - 1;
+            } else {
+                low = mid + 1; // Try for a larger max
+            }
+        }
+
+        return result;
+    }
+};
+``
