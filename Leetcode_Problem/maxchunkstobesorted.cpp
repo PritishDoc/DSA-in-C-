@@ -1,8 +1,7 @@
 /*
 Max Chunks To Make Sorted
 Medium
-Topics
-Companies
+
 Hint
 You are given an integer array arr of length n that represents a permutation of the integers in the range [0, n - 1].
 
