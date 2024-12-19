@@ -8,8 +8,6 @@ We split arr into some number of chunks (i.e., partitions), and individually sor
 
 Return the largest number of chunks we can make to sort the array.
 
- 
-
 Example 1:
 
 Input: arr = [4,3,2,1,0]
