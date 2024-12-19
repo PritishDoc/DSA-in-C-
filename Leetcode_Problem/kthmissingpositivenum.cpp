@@ -22,3 +22,25 @@ Constraints:
 
 
 */
+
+class Solution {
+public:
+    int kthMissing(vector<int>& arr, int k) {
+        int left = 0, right = arr.size() - 1;
+        
+        // Perform binary search
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int missing = arr[mid] - (mid + 1);
+            
+            if (missing < k) {
+                left = mid + 1; // Move to the right
+            } else {
+                right = mid - 1; // Move to the left
+            }
+        }
+        
+        // At the end, `left` points to the first element greater than the k-th missing number
+        return left + k;
+    }
+};
