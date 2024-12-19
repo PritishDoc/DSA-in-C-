@@ -35,3 +35,20 @@ n == arr.length
 0 <= arr[i] < n
 All the elements of arr are unique.
 */
+
+class Solution {
+public:
+    int maxChunksToSorted(vector<int>& arr) {
+        int max_seen = 0; // Tracks the maximum value seen so far
+        int chunks = 0;   // Tracks the number of chunks
+
+        for (int i = 0; i < arr.size(); i++) {
+            max_seen = max(max_seen, arr[i]); // Update max_seen
+            if (max_seen == i) {             // If max_seen matches the current index
+                chunks++;                    // Increment the chunk count
+            }
+        }
+
+        return chunks;
+    }
+};
