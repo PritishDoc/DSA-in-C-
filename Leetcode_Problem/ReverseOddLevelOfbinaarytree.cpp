@@ -1,6 +1,5 @@
 /*
  Reverse Odd Levels of Binary Tree
-Medium
 Hint
 Given the root of a perfect binary tree, reverse the node values at each odd level of the tree.
 
