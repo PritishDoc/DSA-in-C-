@@ -47,3 +47,43 @@ The number of nodes in the tree is in the range [1, 214].
 root is a perfect binary tree.
 
 */
+class Solution {
+public:
+    TreeNode* reverseOddLevels(TreeNode* root) {
+        if (!root) return root;
+
+        // Perform a level-order traversal
+        queue<TreeNode*> q;
+        q.push(root);
+        bool isOddLevel = false;
+
+        while (!q.empty()) {
+            int levelSize = q.size();
+            vector<TreeNode*> currentLevel;
+
+            for (int i = 0; i < levelSize; ++i) {
+                TreeNode* node = q.front();
+                q.pop();
+
+                currentLevel.push_back(node);
+
+                if (node->left) q.push(node->left);
+                if (node->right) q.push(node->right);
+            }
+
+            // Reverse values at odd levels
+            if (isOddLevel) {
+                int left = 0, right = currentLevel.size() - 1;
+                while (left < right) {
+                    swap(currentLevel[left]->val, currentLevel[right]->val);
+                    ++left;
+                    --right;
+                }
+            }
+
+            isOddLevel = !isOddLevel;
+        }
+
+        return root;
+    }
+};
