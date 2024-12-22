@@ -1,7 +1,6 @@
 /*
 Find Building Where Alice and Bob Can Meet
 Hard
-Topics
 Hint
 You are given a 0-indexed array heights of positive integers, where heights[i] represents the height of the ith building.
 
