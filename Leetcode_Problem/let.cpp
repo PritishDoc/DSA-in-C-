@@ -46,3 +46,16 @@ queries[i] = [ai, bi]
 
 
 */
+Wrong Answer
+Runtime: 0 ms
+Case 1
+Case 2
+Input
+heights =
+[6,4,8,5,2,7]
+queries =
+[[0,1],[0,3],[2,4],[3,4],[2,2]]
+Output
+[2,-1,-1,5,2]
+Expected
+[2,5,-1,5,2]
