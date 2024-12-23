@@ -21,6 +21,11 @@ Constraints:
 1 <= x <= 105
 */
 
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
 public:
     // Function to search a given number in row-wise sorted matrix.
     bool searchRowMatrix(vector<vector<int>>& mat, int x) {
