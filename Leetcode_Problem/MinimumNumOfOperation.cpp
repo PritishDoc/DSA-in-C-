@@ -2,7 +2,6 @@
  Minimum Number of Operations to Sort a Binary Tree by Level
 Medium
 Topics
-Companies
 Hint
 You are given the root of a binary tree with unique values.
 
