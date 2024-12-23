@@ -20,3 +20,20 @@ Constraints:
 1 <= mat[i][j] <= 105
 1 <= x <= 105
 */
+
+public:
+    // Function to search a given number in row-wise sorted matrix.
+    bool searchRowMatrix(vector<vector<int>>& mat, int x) {
+        int n = mat.size();
+        int m = mat[0].size();
+        
+        // Perform binary search on each row
+        for (int i = 0; i < n; ++i) {
+            if (binary_search(mat[i].begin(), mat[i].end(), x)) {
+                return true; // Found the element
+            }
+        }
+        
+        return false; // Element not found
+    }
+};
