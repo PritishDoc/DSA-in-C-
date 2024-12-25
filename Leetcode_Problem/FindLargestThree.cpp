@@ -37,19 +37,3 @@ public:
             for (int i = 0; i < levelSize; ++i) {
                 TreeNode* node = q.front();
                 q.pop();
-
-                // Update the maximum value for the current level
-                maxVal = max(maxVal, node->val);
-
-                // Add child nodes to the queue
-                if (node->left) q.push(node->left);
-                if (node->right) q.push(node->right);
-            }
-
-            // Add the largest value of the current level to the result
-            result.push_back(maxVal);
-        }
-
-        return result;
-    }
-};
