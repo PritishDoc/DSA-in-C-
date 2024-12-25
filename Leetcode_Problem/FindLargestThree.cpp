@@ -21,58 +21,35 @@ The number of nodes in the tree will be in the range [0, 104].
 -231 <= Node.val <= 231 - 1
 */
 class Solution {
-  public:
-    void setMatrixZeroes(vector<vector<int>> &mat) {
-        int n = mat.size(), m = mat[0].size();
-        bool firstRowHasZero = false, firstColHasZero = false;
+public:
+    vector<int> largestValues(TreeNode* root) {
+        vector<int> result;
+        if (!root) return result; // Return an empty vector if the tree is empty
 
-        // Check if the first row has any zero
-        for (int j = 0; j < m; j++) {
-            if (mat[0][j] == 0) {
-                firstRowHasZero = true;
-                break;
+        queue<TreeNode*> q;
+        q.push(root);
+
+        while (!q.empty()) {
+            int levelSize = q.size();
+            int maxVal = INT_MIN;
+
+            // Process all nodes at the current level
+            for (int i = 0; i < levelSize; ++i) {
+                TreeNode* node = q.front();
+                q.pop();
+
+                // Update the maximum value for the current level
+                maxVal = max(maxVal, node->val);
+
+                // Add child nodes to the queue
+                if (node->left) q.push(node->left);
+                if (node->right) q.push(node->right);
             }
+
+            // Add the largest value of the current level to the result
+            result.push_back(maxVal);
         }
 
-        // Check if the first column has any zero
-        for (int i = 0; i < n; i++) {
-            if (mat[i][0] == 0) {
-                firstColHasZero = true;
-                break;
-            }
-        }
-
-        // Mark rows and columns to be zeroed
-        for (int i = 1; i < n; i++) {
-            for (int j = 1; j < m; j++) {
-                if (mat[i][j] == 0) {
-                    mat[i][0] = 0;
-                    mat[0][j] = 0;
-                }
-            }
-        }
-
-        // Zero out marked rows and columns
-        for (int i = 1; i < n; i++) {
-            for (int j = 1; j < m; j++) {
-                if (mat[i][0] == 0 || mat[0][j] == 0) {
-                    mat[i][j] = 0;
-                }
-            }
-        }
-
-        // Handle the first row
-        if (firstRowHasZero) {
-            for (int j = 0; j < m; j++) {
-                mat[0][j] = 0;
-            }
-        }
-
-        // Handle the first column
-        if (firstColHasZero) {
-            for (int i = 0; i < n; i++) {
-                mat[i][0] = 0;
-            }
-        }
+        return result;
     }
 };
