@@ -1,7 +1,6 @@
 /*
 Target Sum
 Medium
-Topics
 
 You are given an integer array nums and an integer target.
 
