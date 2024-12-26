@@ -17,3 +17,28 @@ Constraints:
 1 ≤ target ≤ 2*1
 
 */
+#include <unordered_map>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    bool twoSum(vector<int>& arr, int target) {
+        unordered_map<int, int> numMap; // To store numbers and their indices
+
+        for (int i = 0; i < arr.size(); i++) {
+            int complement = target - arr[i];
+
+            // Check if the complement exists in the map
+            if (numMap.find(complement) != numMap.end()) {
+                return true;
+            }
+
+            // Add the current number to the map
+            numMap[arr[i]] = i;
+        }
+
+        // No pair found
+        return false;
+    }
+};
