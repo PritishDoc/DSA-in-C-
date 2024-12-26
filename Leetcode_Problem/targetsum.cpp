@@ -35,3 +35,9 @@ Constraints:
 0 <= sum(nums[i]) <= 1000
 -1000 <= target <= 1000
 */
+class Solution {
+public:
+    int findTargetSumWays(vector<int>& nums, int target) {
+        
+    }
+};
