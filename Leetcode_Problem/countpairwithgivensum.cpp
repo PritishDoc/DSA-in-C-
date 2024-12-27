@@ -19,3 +19,21 @@ Constraints:
 -104 <= arr[i] <= 104
 1 <= target <= 104
 */
+public:
+    int countPairs(vector<int> &arr, int target) {
+        unordered_map<int, int> freqMap; // Hash map to store frequencies
+        int count = 0;
+
+        for (int num : arr) {
+            int complement = target - num;
+            // Check if the complement exists in the map
+            if (freqMap.find(complement) != freqMap.end()) {
+                count += freqMap[complement];
+            }
+            // Update the frequency of the current number
+            freqMap[num]++;
+        }
+
+        return count;
+    }
+};
