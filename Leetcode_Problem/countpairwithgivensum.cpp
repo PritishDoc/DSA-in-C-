@@ -19,6 +19,7 @@ Constraints:
 -104 <= arr[i] <= 104
 1 <= target <= 104
 */
+class Solution {
 public:
     int countPairs(vector<int> &arr, int target) {
         unordered_map<int, int> freqMap; // Hash map to store frequencies
