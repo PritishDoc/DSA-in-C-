@@ -23,6 +23,7 @@ Constraints:
 
 */
 // User function Template for C++class Solution {
+// User function Template for C++class Solution {
   class Solution {
   public:
     vector<vector<int>> findTriplets(vector<int> &arr) {
