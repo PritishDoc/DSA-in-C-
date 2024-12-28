@@ -22,57 +22,40 @@ Constraints:
 -104 <= arr[i] <= 104
 
 */
-public:
+// User function Template for C++class Solution {
+  class Solution {
+  public:
     vector<vector<int>> findTriplets(vector<int> &arr) {
-        vector<vector<int>> result;
+        // Set to handle duplicates
+        set<vector<int>> resSet;
         int n = arr.size();
-        
-        // Step 1: Create a map of value to original indices
-        vector<pair<int, int>> valueIndex;
-        for (int i = 0; i < n; ++i) {
-            valueIndex.push_back({arr[i], i});
+        unordered_map<int, vector<pair<int, int>>> mp;
+
+        // Store sum of all the pairs with their indices
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++)
+                mp[arr[i] + arr[j]].push_back({i, j});
         }
-        sort(valueIndex.begin(), valueIndex.end()); // Sort based on values
-        
-        // Extract the sorted values and maintain their indices
-        vector<int> sortedArr(n);
-        vector<int> indices(n);
-        for (int i = 0; i < n; ++i) {
-            sortedArr[i] = valueIndex[i].first;
-            indices[i] = valueIndex[i].second;
-        }
-        
-        // Step 2: Find triplets
-        for (int i = 0; i < n - 2; ++i) {
-            if (i > 0 && sortedArr[i] == sortedArr[i - 1]) continue; // Skip duplicates for the first element
-            
-            int target = -sortedArr[i];
-            int left = i + 1, right = n - 1;
-            
-            while (left < right) {
-                int sum = sortedArr[left] + sortedArr[right];
-                if (sum == target) {
-                    vector<int> triplet = {indices[i], indices[left], indices[right]};
-                    sort(triplet.begin(), triplet.end()); // Sort indices to maintain lexicographical order
-                    result.push_back(triplet);
-                    
-                    // Move pointers and skip duplicates
-                    while (left < right && sortedArr[left] == sortedArr[left + 1]) ++left;
-                    while (left < right && sortedArr[right] == sortedArr[right - 1]) --right;
-                    ++left;
-                    --right;
-                } else if (sum < target) {
-                    ++left;
-                } else {
-                    --right;
+
+        for (int i = 0; i < n; i++) {
+
+            // Find remaining value to get zero sum
+            int rem = -arr[i];
+            if (mp.find(rem) != mp.end()) {
+                vector<pair<int, int>> pairs = mp[rem];
+                for (auto p : pairs) {
+
+                    // Ensure no two indices are same in triplet
+                    if (p.first != i && p.second != i) {
+                        vector<int> curr = {i, p.first, p.second};
+                        sort(curr.begin(), curr.end());
+                        resSet.insert(curr);
+                    }
                 }
             }
         }
-        
-        // Step 3: Remove duplicates from the result
-        sort(result.begin(), result.end());
-        result.erase(unique(result.begin(), result.end()), result.end());
-        
-        return result;
+
+        vector<vector<int>> res(resSet.begin(), resSet.end());
+        return res;
     }
 };
