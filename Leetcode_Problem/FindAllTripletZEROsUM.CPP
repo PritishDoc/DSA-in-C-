@@ -23,42 +23,24 @@ Constraints:
 
 */
 class Solution {
-public:
-    vector<vector<int>> findTriplets(vector<int> &arr) {
-        vector<vector<int>> result;
-        int n = arr.size();
-        
-        // Step 1: Sort the array
-        sort(arr.begin(), arr.end());
-        
-        // Step 2: Iterate over the array
-        for (int i = 0; i < n - 2; ++i) {
-            // Skip duplicates for the first element
-            if (i > 0 && arr[i] == arr[i - 1]) continue;
-            
-            int target = -arr[i];
-            int left = i + 1, right = n - 1;
-            
-            // Step 3: Two-pointer approach
-            while (left < right) {
-                int sum = arr[left] + arr[right];
-                if (sum == target) {
-                    result.push_back({i, left, right});
-                    
-                    // Skip duplicates for the second and third elements
-                    while (left < right && arr[left] == arr[left + 1]) ++left;
-                    while (left < right && arr[right] == arr[right - 1]) --right;
-                    
-                    ++left;
-                    --right;
-                } else if (sum < target) {
-                    ++left;
-                } else {
-                    --right;
-                }
-            }
-        }
-        
-        return result;
-    }
-};
+Wrong Answer. !!!
+Ask Yogi Bot
+Possibly your code does not work correctly for multiple test-cases (TCs).
+
+The first test case where your code failed:
+
+Test Cases Passed: 
+8 /1110
+For Input: 
+-1 0 1 2 -1 -4
+Your Code's output is: 
+0 1 2
+0 3 4
+It's Correct output is: 
+0 1 2
+0 3 4
+1 2 4
+Output Difference
+0 1 2
+0 3 4
+1 2 4
