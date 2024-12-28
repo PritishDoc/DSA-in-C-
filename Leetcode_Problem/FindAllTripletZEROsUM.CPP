@@ -22,25 +22,57 @@ Constraints:
 -104 <= arr[i] <= 104
 
 */
-class Solution {
-Wrong Answer. !!!
-Ask Yogi Bot
-Possibly your code does not work correctly for multiple test-cases (TCs).
-
-The first test case where your code failed:
-
-Test Cases Passed: 
-8 /1110
-For Input: 
--1 0 1 2 -1 -4
-Your Code's output is: 
-0 1 2
-0 3 4
-It's Correct output is: 
-0 1 2
-0 3 4
-1 2 4
-Output Difference
-0 1 2
-0 3 4
-1 2 4
+public:
+    vector<vector<int>> findTriplets(vector<int> &arr) {
+        vector<vector<int>> result;
+        int n = arr.size();
+        
+        // Step 1: Create a map of value to original indices
+        vector<pair<int, int>> valueIndex;
+        for (int i = 0; i < n; ++i) {
+            valueIndex.push_back({arr[i], i});
+        }
+        sort(valueIndex.begin(), valueIndex.end()); // Sort based on values
+        
+        // Extract the sorted values and maintain their indices
+        vector<int> sortedArr(n);
+        vector<int> indices(n);
+        for (int i = 0; i < n; ++i) {
+            sortedArr[i] = valueIndex[i].first;
+            indices[i] = valueIndex[i].second;
+        }
+        
+        // Step 2: Find triplets
+        for (int i = 0; i < n - 2; ++i) {
+            if (i > 0 && sortedArr[i] == sortedArr[i - 1]) continue; // Skip duplicates for the first element
+            
+            int target = -sortedArr[i];
+            int left = i + 1, right = n - 1;
+            
+            while (left < right) {
+                int sum = sortedArr[left] + sortedArr[right];
+                if (sum == target) {
+                    vector<int> triplet = {indices[i], indices[left], indices[right]};
+                    sort(triplet.begin(), triplet.end()); // Sort indices to maintain lexicographical order
+                    result.push_back(triplet);
+                    
+                    // Move pointers and skip duplicates
+                    while (left < right && sortedArr[left] == sortedArr[left + 1]) ++left;
+                    while (left < right && sortedArr[right] == sortedArr[right - 1]) --right;
+                    ++left;
+                    --right;
+                } else if (sum < target) {
+                    ++left;
+                } else {
+                    --right;
+                }
+            }
+        }
+        
+        // Step 3: Remove duplicates from the result
+        sort(result.begin(), result.end());
+        result.erase(unique(result.begin(), result.end()), result.end());
+        
+        return result;
+    }
+};
