@@ -23,10 +23,37 @@ Constraints:
 0 ≤ a[i], b[i] ≤ 10
 */
 
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
-  public:
-    // Function to return the count of number of elements in union of two arrays.
+public:
+    // Function to return the count of number of elements in the union of two arrays.
     int findUnion(vector<int>& a, vector<int>& b) {
-        // code here
+        // Using an unordered_set to store distinct elements.
+        unordered_set<int> unionSet;
+
+        // Insert all elements of the first array into the set.
+        for (int num : a) {
+            unionSet.insert(num);
+        }
+
+        // Insert all elements of the second array into the set.
+        for (int num : b) {
+            unionSet.insert(num);
+        }
+
+        // The size of the set gives the count of distinct elements.
+        return unionSet.size();
     }
 };
+
+// Driver code to test the function
+int main() {
+    Solution solution;
+    vector<int> a = {85, 25, 1, 32, 54, 6};
+    vector<int> b = {85, 2};
+    
+    cout << "Count of union: " << solution.findUnion(a, b) << endl;
+    return 0;
+}
