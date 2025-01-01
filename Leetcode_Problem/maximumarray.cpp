@@ -2,7 +2,6 @@
 
  Maximum Score After Splitting a String
 Easy
-Topics
 Hint
 Given a string s of zeros and ones, return the maximum score after splitting the string into two non-empty substrings (i.e. left substring and right substring).
 
