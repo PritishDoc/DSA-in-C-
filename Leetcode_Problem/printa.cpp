@@ -24,3 +24,44 @@ Constraints:
 1<= arr[i].size() <=10
 
 */
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    vector<vector<string>> anagrams(vector<string>& arr) {
+        unordered_map<string, vector<string>> anagramGroups;
+
+        // Group strings by their sorted version
+        for (string str : arr) {
+            string sortedStr = str;
+            sort(sortedStr.begin(), sortedStr.end());
+            anagramGroups[sortedStr].push_back(str);
+        }
+
+        // Collect groups of anagrams into a result vector
+        vector<vector<string>> result;
+        for (auto& group : anagramGroups) {
+            vector<string> anagrams = group.second;
+            sort(anagrams.begin(), anagrams.end()); // Sort each group lexicographically
+            result.push_back(anagrams);
+        }
+
+        // Sort the groups lexicographically based on their first element
+        sort(result.begin(), result.end(), [](const vector<string>& a, const vector<string>& b) {
+            return a[0] < b[0];
+        });
+
+        return result;
+    }
+};
+
+// Example usage
+int main() {
+    Solution sol;
+    vector<string> arr1 = {"act", "god", "cat", "dog", "tac"};
+    vector<string> arr2 = {"no", "on", "is"};
+    vector<string> arr3 = {"listen", "silent", "enlist", "abc", "cab", "bac", "rat", "tar", "art"};
+
+    auto result1 = sol.anagrams(arr1);
+    auto result2 = 
