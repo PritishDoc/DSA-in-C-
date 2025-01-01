@@ -37,26 +37,3 @@ The string s consists of characters '0' and '1' only.
 
 */
 
-class Solution {
-public:
-    int maxScore(string s) {
-        int n = s.length();
-        int totalOnes = 0;
-        int maxScore = INT_MIN;
-        int leftZeros = 0;
-
-        // Count total ones in the string
-        for (char c : s) {
-            if (c == '1') totalOnes++;
-        }
-
-        // Traverse the string and calculate scores for each split
-        for (int i = 0; i < n - 1; i++) { // Ensure at least one character in both substrings
-            if (s[i] == '0') leftZeros++;
-            int rightOnes = totalOnes - (i + 1 - leftZeros); // Total ones minus ones in the left substring
-            maxScore = max(maxScore, leftZeros + rightOnes);
-        }
-
-        return maxScore;
-    }
-};
