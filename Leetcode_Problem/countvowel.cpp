@@ -1,7 +1,6 @@
 /*
 Count Vowel Strings in Ranges
 Medium
-Topics
 Hint
 You are given a 0-indexed array of strings words and a 2D array of integers queries.
 
