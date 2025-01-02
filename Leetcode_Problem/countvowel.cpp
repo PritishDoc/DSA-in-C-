@@ -37,3 +37,38 @@ sum(words[i].length) <= 3 * 105
 0 <= li <= ri < words.length
 
 */
+#include <vector>
+#include <string>
+#include <unordered_set>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> vowelStrings(vector<string>& words, vector<vector<int>>& queries) {
+        // Set of vowels for quick lookup
+        unordered_set<char> vowels = {'a', 'e', 'i', 'o', 'u'};
+        
+        // Helper function to check if a word starts and ends with a vowel
+        auto isVowelString = [&](const string& word) {
+            return vowels.count(word.front()) && vowels.count(word.back());
+        };
+
+        int n = words.size();
+        vector<int> prefix(n, 0);
+
+        // Build prefix sum array
+        for (int i = 0; i < n; ++i) {
+            prefix[i] = (i > 0 ? prefix[i - 1] : 0) + (isVowelString(words[i]) ? 1 : 0);
+        }
+
+        // Process each query
+        vector<int> result;
+        for (const auto& query : queries) {
+            int l = query[0], r = query[1];
+            int count = prefix[r] - (l > 0 ? prefix[l - 1] : 0);
+            result.push_back(count);
+        }
+
+        return result;
+    }
+};
