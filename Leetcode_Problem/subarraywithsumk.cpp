@@ -22,3 +22,32 @@ Constraints:
 -107 ≤ k ≤ 10
 
 */
+#include <unordered_map>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int countSubarrays(vector<int> &arr, int k) {
+        unordered_map<int, int> prefixSumCount;
+        int currentSum = 0;
+        int count = 0;
+
+        // Initialize the hash map with 0 sum frequency as 1
+        prefixSumCount[0] = 1;
+
+        for (int num : arr) {
+            currentSum += num;
+
+            // Check if there is a prefix sum that satisfies the condition
+            if (prefixSumCount.find(currentSum - k) != prefixSumCount.end()) {
+                count += prefixSumCount[currentSum - k];
+            }
+
+            // Update the frequency of the current sum
+            prefixSumCount[currentSum]++;
+        }
+
+        return count;
+    }
+};
