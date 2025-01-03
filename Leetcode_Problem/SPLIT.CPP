@@ -1,6 +1,5 @@
 /*
  Number of Ways to Split Array
-Medium
 Hint
 You are given a 0-indexed integer array nums of length n.
 
