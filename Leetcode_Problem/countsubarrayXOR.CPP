@@ -22,3 +22,32 @@ Constraints:
 
 
 */
+#include <unordered_map>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    long subarrayXor(vector<int> &arr, int k) {
+        unordered_map<int, int> freq; // To store frequency of prefixXor
+        int prefixXor = 0;
+        long count = 0;
+        
+        freq[0] = 1; // Initialize for subarrays starting from index 0
+        
+        for (int num : arr) {
+            prefixXor ^= num; // Update prefixXor
+            
+            // Check if prefixXor ⊕ k exists in the map
+            int target = prefixXor ^ k;
+            if (freq.find(target) != freq.end()) {
+                count += freq[target];
+            }
+            
+            // Update frequency of the current prefixXor
+            freq[prefixXor]++;
+        }
+        
+        return count;
+    }
+};
