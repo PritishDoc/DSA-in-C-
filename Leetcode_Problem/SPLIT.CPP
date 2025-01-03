@@ -40,3 +40,30 @@ Constraints:
 -105 <= nums[i] <= 105
 
 */
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int waysToSplitArray(vector<int>& nums) {
+        long long totalSum = 0; // To store the total sum of the array
+        for (int num : nums) {
+            totalSum += num;
+        }
+        
+        long long prefixSum = 0; // To track the running sum of the left part
+        int count = 0; // To count the number of valid splits
+        
+        // Iterate through the array up to n-2
+        for (int i = 0; i < nums.size() - 1; ++i) {
+            prefixSum += nums[i]; // Update the prefix sum
+            
+            // Check the condition for a valid split
+            if (2 * prefixSum >= totalSum) {
+                count++;
+            }
+        }
+        
+        return count;
+    }
+};
