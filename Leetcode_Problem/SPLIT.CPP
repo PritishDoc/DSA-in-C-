@@ -60,3 +60,7 @@ public:
                 count++;
             }
         }
+        
+        return count;
+    }
+};
