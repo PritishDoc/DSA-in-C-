@@ -42,3 +42,39 @@ Constraints:
 3 <= s.length <= 105
 s consists of only lowercase English letters.
 */
+
+#include <unordered_set>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int countPalindromicSubsequence(string s) {
+        vector<int> first(26, -1), last(26, -1);
+        int n = s.length();
+
+        // Record the first and last occurrence of each character
+        for (int i = 0; i < n; ++i) {
+            int idx = s[i] - 'a';
+            if (first[idx] == -1) {
+                first[idx] = i;
+            }
+            last[idx] = i;
+        }
+
+        int count = 0;
+
+        // Check for unique palindromic subsequences
+        for (int i = 0; i < 26; ++i) {
+            if (first[i] != -1 && first[i] < last[i]) {
+                unordered_set<char> uniqueChars;
+                for (int j = first[i] + 1; j < last[i]; ++j) {
+                    uniqueChars.insert(s[j]);
+                }
+                count += uniqueChars.size();
+            }
+        }
+
+        return count;
+    }
+};
