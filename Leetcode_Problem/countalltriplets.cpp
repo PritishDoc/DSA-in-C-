@@ -21,14 +21,25 @@ Constraints:
 -105 ≤ arr[i], target ≤ 105
 
 */
-Compilation Completed
-For Input: 
--3 -1 -1 0 1 2
--2
-Your Output: 
-3
-Expected Output: 
-4
-Output Difference
-Ask Yogi Bot
-34
+class Solution {
+  public:
+    int countTriplets(vector<int> &arr, int target) {
+           int count=0;
+        int n=arr.size();
+        for(int i=0;i<=n-3;i++){
+            int j=i+1,k=n-1;
+            while(j<k){
+                int sum=arr[i]+arr[j]+arr[k];
+                if(sum>target) k--;
+                else if(sum<target)j++;
+                else if(sum==target){
+                    count++;
+                    int temp=j+1;
+                    while(temp<k&& arr[temp]==arr[temp-1])count++,temp++;
+                    k--;
+                }
+            }
+        }
+        return count;
+    }
+};
