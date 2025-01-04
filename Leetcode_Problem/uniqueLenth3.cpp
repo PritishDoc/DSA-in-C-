@@ -2,7 +2,6 @@
 
 Unique Length-3 Palindromic Subsequences
 Medium
-Topics
 Hint
 Given a string s, return the number of unique palindromes of length three that are a subsequence of s.
 
