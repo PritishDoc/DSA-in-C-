@@ -37,3 +37,38 @@ shifts[i].length == 3
 s consists of lowercase English letters.
 
 */
+#include <vector>
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    string shiftingLetters(string s, vector<vector<int>>& shifts) {
+        int n = s.length();
+        vector<int> delta(n + 1, 0);
+
+        // Populate the difference array
+        for (auto& shift : shifts) {
+            int start = shift[0], end = shift[1], direction = shift[2];
+            if (direction == 1) {
+                delta[start] += 1;
+                delta[end + 1] -= 1;
+            } else {
+                delta[start] -= 1;
+                delta[end + 1] += 1;
+            }
+        }
+
+        // Apply the prefix sum to compute net shifts
+        int shift = 0;
+        for (int i = 0; i < n; ++i) {
+            shift += delta[i];
+            // Shift the current character
+            int netShift = (s[i] - 'a' + shift) % 26;
+            if (netShift < 0) netShift += 26; // Handle negative shifts
+            s[i] = 'a' + netShift;
+        }
+
+        return s;
+    }
+};
