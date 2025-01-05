@@ -22,3 +22,30 @@ Constraints:
 
 
 */
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    int countPairs(vector<int> &arr, int target) {
+        // Sort the array
+        sort(arr.begin(), arr.end());
+        
+        int count = 0;
+        int i = 0, j = arr.size() - 1;
+
+        // Use two pointers to find valid pairs
+        while (i < j) {
+            if (arr[i] + arr[j] < target) {
+                // All pairs from i to j are valid
+                count += (j - i);
+                i++; // Move the start pointer forward
+            } else {
+                j--; // Move the end pointer backward
+            }
+        }
+
+        return count;
+    }
+};
