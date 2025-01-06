@@ -2,7 +2,6 @@
  Minimum Number of Operations to Move All Balls to Each Box
 Medium
 Topics
-Companies
 Hint
 You have n boxes. You are given a binary string boxes of length n, where boxes[i] is '0' if the ith box is empty, and '1' if it contains one ball.
 
