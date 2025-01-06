@@ -21,3 +21,42 @@ Constraints:
 0 <= arr[i] <= 105
 
 */
+#include <vector>
+#include <algorithm>
+#include <cmath>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> sumClosest(vector<int>& arr, int target) {
+        if (arr.size() < 2) return {}; // If the array has less than 2 elements, return empty array.
+        
+        sort(arr.begin(), arr.end()); // Sort the array.
+        int left = 0, right = arr.size() - 1;
+        int closestSum = INT_MAX; // Closest sum to the target.
+        vector<int> result;
+        
+        while (left < right) {
+            int sum = arr[left] + arr[right];
+            
+            // Check if this pair is closer to the target
+            if (abs(target - sum) < abs(target - closestSum) || 
+                (abs(target - sum) == abs(target - closestSum) && (arr[right] - arr[left] > result[1] - result[0]))) {
+                closestSum = sum;
+                result = {arr[left], arr[right]};
+            }
+            
+            // Move pointers based on the sum
+            if (sum < target) {
+                left++;
+            } else if (sum > target) {
+                right--;
+            } else {
+                // Exact match found
+                return {arr[left], arr[right]};
+            }
+        }
+        
+        return result;
+    }
+};
