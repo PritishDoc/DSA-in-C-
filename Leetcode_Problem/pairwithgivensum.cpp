@@ -22,3 +22,46 @@ Constraints:
 -105 <= arr[i] <= 105
 
 */
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int countPairs(vector<int> &arr, int target) {
+        int left = 0, right = arr.size() - 1;
+        int count = 0;
+
+        while (left < right) {
+            int sum = arr[left] + arr[right];
+            if (sum == target) {
+                // Count the current pair
+                int leftCount = 1, rightCount = 1;
+
+                // Count duplicates for the left pointer
+                while (left + 1 < right && arr[left] == arr[left + 1]) {
+                    leftCount++;
+                    left++;
+                }
+
+                // Count duplicates for the right pointer
+                while (right - 1 > left && arr[right] == arr[right - 1]) {
+                    rightCount++;
+                    right--;
+                }
+
+                // Add the number of pairs formed by leftCount and rightCount
+                count += leftCount * rightCount;
+
+                // Move pointers inward
+                left++;
+                right--;
+            } else if (sum < target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return count;
+    }
+};
