@@ -37,3 +37,50 @@ words[i] contains only lowercase English letters.
 All the strings of words are unique.
 
 */
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int countPairs(vector<int> &arr, int target) {
+        int left = 0, right = arr.size() - 1;
+        int count = 0;
+
+        while (left < right) {
+            int sum = arr[left] + arr[right];
+            if (sum == target) {
+                // Count duplicates for arr[left]
+                int leftCount = 1, rightCount = 1;
+
+                while (left + 1 < right && arr[left] == arr[left + 1]) {
+                    leftCount++;
+                    left++;
+                }
+
+                // Count duplicates for arr[right]
+                while (right - 1 > left && arr[right] == arr[right - 1]) {
+                    rightCount++;
+                    right--;
+                }
+
+                if (arr[left] == arr[right]) {
+                    // If both pointers point to the same element, handle it
+                    count += (leftCount * (leftCount - 1)) / 2;
+                } else {
+                    // Count pairs formed by leftCount and rightCount
+                    count += leftCount * rightCount;
+                }
+
+                // Move pointers inward
+                left++;
+                right--;
+            } else if (sum < target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return count;
+    }
+};
