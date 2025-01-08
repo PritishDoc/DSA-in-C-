@@ -52,3 +52,41 @@ Constraints:
 words[i] consists only of lowercase English letters.
 
 */
+#include <vector>
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    int countPrefixSuffixPairs(vector<string>& words) {
+        int count = 0;
+        int n = words.size();
+
+        // Helper lambda to check if str1 is both prefix and suffix of str2
+        auto isPrefixAndSuffix = [](const string& str1, const string& str2) {
+            int len1 = str1.length();
+            int len2 = str2.length();
+
+            if (len1 > len2) return false; // str1 cannot be prefix and suffix if it's longer than str2
+
+            // Check if str1 is a prefix of str2
+            if (str2.substr(0, len1) != str1) return false;
+
+            // Check if str1 is a suffix of str2
+            if (str2.substr(len2 - len1) != str1) return false;
+
+            return true;
+        };
+
+        // Iterate through all pairs (i, j) with i < j
+        for (int i = 0; i < n; ++i) {
+            for (int j = i + 1; j < n; ++j) {
+                if (isPrefixAndSuffix(words[i], words[j])) {
+                    ++count;
+                }
+            }
+        }
+
+        return count;
+    }
+};
