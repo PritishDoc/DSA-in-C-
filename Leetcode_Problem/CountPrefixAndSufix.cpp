@@ -2,7 +2,6 @@
  Count Prefix and Suffix Pairs I
 Easy
 Topics
-Companies
 Hint
 You are given a 0-indexed string array words.
 
