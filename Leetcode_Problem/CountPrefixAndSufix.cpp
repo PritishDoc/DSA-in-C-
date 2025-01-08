@@ -1,7 +1,6 @@
 /*
  Count Prefix and Suffix Pairs I
 Easy
-Topics
 Hint
 You are given a 0-indexed string array words.
 
