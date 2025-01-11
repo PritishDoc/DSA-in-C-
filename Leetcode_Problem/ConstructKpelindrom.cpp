@@ -34,3 +34,28 @@ s consists of lowercase English letters.
 
 
 */
+#include <unordered_map>
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    bool canConstruct(string s, int k) {
+        if (k > s.length()) return false; // Not enough characters for k palindromes
+        
+        unordered_map<char, int> freq;
+        for (char c : s) {
+            freq[c]++;
+        }
+        
+        int oddCount = 0;
+        for (auto& entry : freq) {
+            if (entry.second % 2 != 0) {
+                oddCount++;
+            }
+        }
+        
+        // Check if the odd count can fit into k palindromes
+        return oddCount <= k;
+    }
+};
