@@ -19,3 +19,32 @@ Constraints:
 All the characters are in lowercase
 
 */
+
+#include <unordered_map>
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    int longestUniqueSubstr(string &s) {
+        unordered_map<char, int> lastIndex; // Stores the last index of each character
+        int start = 0, maxLength = 0;
+        
+        for (int end = 0; end < s.size(); ++end) {
+            char currentChar = s[end];
+            
+            // If the character is already in the map and within the current window
+            if (lastIndex.find(currentChar) != lastIndex.end() && lastIndex[currentChar] >= start) {
+                start = lastIndex[currentChar] + 1; // Move the start pointer
+            }
+            
+            // Update the last index of the current character
+            lastIndex[currentChar] = end;
+            
+            // Update the maximum length
+            maxLength = max(maxLength, end - start + 1);
+        }
+        
+        return maxLength;
+    }
+};
