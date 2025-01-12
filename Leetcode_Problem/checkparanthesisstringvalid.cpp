@@ -48,3 +48,40 @@ s[i] is either '(' or ')'.
 locked[i] is either '0' or '1'.
 
 */
+class Solution {
+public:
+    bool canBeValid(string s, string locked) {
+        int n = s.length();
+        if (n % 2 != 0) return false; // A valid parentheses string must have an even length.
+
+        // Forward pass
+        int openCount = 0; // Tracks the potential balance
+        int flexibleCount = 0; // Tracks the number of unlocked positions
+        for (int i = 0; i < n; ++i) {
+            if (locked[i] == '1') {
+                openCount += (s[i] == '(' ? 1 : -1);
+            } else {
+                ++flexibleCount;
+            }
+            if (openCount + flexibleCount < 0) {
+                return false; // Too many ')' at this point
+            }
+        }
+
+        // Backward pass
+        int closeCount = 0; // Tracks the potential balance
+        flexibleCount = 0; // Reset the number of unlocked positions
+        for (int i = n - 1; i >= 0; --i) {
+            if (locked[i] == '1') {
+                closeCount += (s[i] == ')' ? 1 : -1);
+            } else {
+                ++flexibleCount;
+            }
+            if (closeCount + flexibleCount < 0) {
+                return false; // Too many '(' at this point
+            }
+        }
+
+        return true;
+    }
+};
