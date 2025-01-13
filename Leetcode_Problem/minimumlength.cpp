@@ -41,3 +41,30 @@ s consists only of lowercase English letters.
 
 
 */
+
+#include <string>
+using namespace std;
+
+class Solution {
+public:
+    int minimumLength(string s) {
+        int left = 0, right = s.size() - 1;
+
+        while (left < right && s[left] == s[right]) {
+            char currentChar = s[left];
+
+            // Move the left pointer to skip matching characters
+            while (left <= right && s[left] == currentChar) {
+                left++;
+            }
+
+            // Move the right pointer to skip matching characters
+            while (left <= right && s[right] == currentChar) {
+                right--;
+            }
+        }
+
+        // Remaining string length
+        return right - left + 1;
+    }
+};
