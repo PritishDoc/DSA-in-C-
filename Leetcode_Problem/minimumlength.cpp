@@ -48,23 +48,19 @@ using namespace std;
 class Solution {
 public:
     int minimumLength(string s) {
-        int left = 0, right = s.size() - 1;
-
-        while (left < right && s[left] == s[right]) {
-            char currentChar = s[left];
-
-            // Move the left pointer to skip matching characters
-            while (left <= right && s[left] == currentChar) {
-                left++;
-            }
-
-            // Move the right pointer to skip matching characters
-            while (left <= right && s[right] == currentChar) {
-                right--;
+        vector<int> charFrequency(26, 0);
+        int totalLength = 0;
+        for (char currentChar : s) {
+            charFrequency[currentChar - 'a']++;
+        }
+        for (int frequency : charFrequency) {
+            if (frequency == 0) continue;
+            if (frequency % 2 == 0) {
+                totalLength += 2;
+            } else {
+                totalLength += 1;
             }
         }
-
-        // Remaining string length
-        return right - left + 1;
+        return totalLength;
     }
 };
