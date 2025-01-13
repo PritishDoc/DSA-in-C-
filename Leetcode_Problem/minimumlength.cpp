@@ -1,7 +1,6 @@
 /*
 Minimum Length of String After Operations
 Medium
-Topics
 Hint
 You are given a string s.
 
