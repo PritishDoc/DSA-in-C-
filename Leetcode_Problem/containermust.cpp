@@ -24,3 +24,34 @@ Constraints:
 
 
 */
+
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    int maxWater(vector<int> &arr) {
+        int left = 0, right = arr.size() - 1;
+        int maxArea = 0;
+
+        while (left < right) {
+            // Calculate the current area
+            int height = min(arr[left], arr[right]);
+            int width = right - left;
+            int area = height * width;
+
+            // Update the maximum area
+            maxArea = max(maxArea, area);
+
+            // Move the pointers
+            if (arr[left] < arr[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return maxArea;
+    }
+};
