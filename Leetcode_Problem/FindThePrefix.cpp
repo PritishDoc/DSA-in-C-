@@ -44,31 +44,30 @@ using namespace std;
 
 class Solution {
 public:
-    // Function to find the equilibrium point in the array.
-    int findEquilibrium(vector<int> &arr) {
-        int totalSum = 0; // Total sum of the array
-        int leftSum = 0;  // Sum of elements to the left of the current index
+    vector<int> findThePrefixCommonArray(vector<int>& A, vector<int>& B) {
+        int n = A.size();
+        vector<int> C(n);       // Resultant prefix common array
+        vector<int> count(n + 1, 0); // To track occurrences of numbers
+        int commonCount = 0;    // Counter for common elements
 
-        // Calculate total sum of the array
-        for (int num : arr) {
-            totalSum += num;
-        }
+        for (int i = 0; i < n; i++) {
+            // Increment count for current elements in A and B
+            count[A[i]]++;
+            count[B[i]]++;
 
-        // Traverse the array to find the equilibrium index
-        for (int i = 0; i < arr.size(); i++) {
-            // Right sum is totalSum - leftSum - arr[i]
-            int rightSum = totalSum - leftSum - arr[i];
-
-            // Check if leftSum equals rightSum
-            if (leftSum == rightSum) {
-                return i; // Return the index
+            // If count of A[i] becomes 2, it is common
+            if (count[A[i]] == 2) {
+                commonCount++;
+            }
+            // If count of B[i] becomes 2 (and it's different from A[i]), it is common
+            if (A[i] != B[i] && count[B[i]] == 2) {
+                commonCount++;
             }
 
-            // Update leftSum for the next iteration
-            leftSum += arr[i];
+            // Update the prefix common count
+            C[i] = commonCount;
         }
 
-        // If no equilibrium index is found, return -1
-        return -1;
+        return C;
     }
 };
