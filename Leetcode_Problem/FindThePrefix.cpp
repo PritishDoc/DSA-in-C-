@@ -1,6 +1,5 @@
 /*
 Find the Prefix Common Array of Two Arrays
-Medium
 Hint
 You are given two 0-indexed integer permutations A and B of length n.
 
