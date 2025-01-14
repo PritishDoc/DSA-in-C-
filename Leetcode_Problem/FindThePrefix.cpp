@@ -39,3 +39,36 @@ It is guaranteed that A and B are both a permutation of n integers.
 
 
 */
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    // Function to find the equilibrium point in the array.
+    int findEquilibrium(vector<int> &arr) {
+        int totalSum = 0; // Total sum of the array
+        int leftSum = 0;  // Sum of elements to the left of the current index
+
+        // Calculate total sum of the array
+        for (int num : arr) {
+            totalSum += num;
+        }
+
+        // Traverse the array to find the equilibrium index
+        for (int i = 0; i < arr.size(); i++) {
+            // Right sum is totalSum - leftSum - arr[i]
+            int rightSum = totalSum - leftSum - arr[i];
+
+            // Check if leftSum equals rightSum
+            if (leftSum == rightSum) {
+                return i; // Return the index
+            }
+
+            // Update leftSum for the next iteration
+            leftSum += arr[i];
+        }
+
+        // If no equilibrium index is found, return -1
+        return -1;
+    }
+};
