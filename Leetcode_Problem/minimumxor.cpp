@@ -3,7 +3,6 @@
 Minimize XOR
 Medium
 Topics
-Companies
 Hint
 Given two positive integers num1 and num2, find the positive integer x such that:
 
