@@ -22,3 +22,36 @@ Constraints:
 -109 ≤ k ≤ 109
 
 */
+#include <unordered_map>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int longestSubarray(vector<int>& arr, int k) {
+        unordered_map<int, int> prefixSumIndex;
+        int prefixSum = 0;
+        int maxLength = 0;
+
+        for (int i = 0; i < arr.size(); i++) {
+            prefixSum += arr[i];
+
+            // Check if the current prefix sum equals k
+            if (prefixSum == k) {
+                maxLength = i + 1;
+            }
+
+            // Check if (prefixSum - k) exists in the map
+            if (prefixSumIndex.find(prefixSum - k) != prefixSumIndex.end()) {
+                maxLength = max(maxLength, i - prefixSumIndex[prefixSum - k]);
+            }
+
+            // Store the first occurrence of prefixSum
+            if (prefixSumIndex.find(prefixSum) == prefixSumIndex.end()) {
+                prefixSumIndex[prefixSum] = i;
+            }
+        }
+
+        return maxLength;
+    }
+};
