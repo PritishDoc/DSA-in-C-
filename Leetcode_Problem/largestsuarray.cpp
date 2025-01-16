@@ -19,3 +19,32 @@ Constraints:
 0 <= arr[i] <= 1
 
 */
+class Solution {
+public:
+    int maxLen(vector<int>& arr) {
+        unordered_map<int, int> sumIndexMap; // Map to store first occurrence of cumulative sum
+        int maxLength = 0;
+        int cumulativeSum = 0;
+        
+        for (int i = 0; i < arr.size(); ++i) {
+            // Replace 0 with -1
+            cumulativeSum += (arr[i] == 0) ? -1 : 1;
+            
+            // If cumulativeSum is 0, we found a subarray from index 0 to i
+            if (cumulativeSum == 0) {
+                maxLength = i + 1;
+            }
+            
+            // Check if this cumulativeSum has been seen before
+            if (sumIndexMap.find(cumulativeSum) != sumIndexMap.end()) {
+                // Update maxLength if the subarray is longer
+                maxLength = max(maxLength, i - sumIndexMap[cumulativeSum]);
+            } else {
+                // Store the first occurrence of the cumulativeSum
+                sumIndexMap[cumulativeSum] = i;
+            }
+        }
+        
+        return maxLength;
+    }
+};
