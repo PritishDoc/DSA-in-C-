@@ -43,3 +43,26 @@ n == derived.length
 The values in derived are either 0's or 1's
 
 */
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    bool doesValidArrayExist(vector<int>& derived) {
+        int n = derived.size();
+        
+        // Function to check validity for a given starting value
+        auto isValid = [&](int start) {
+            vector<int> original(n);
+            original[0] = start;
+            for (int i = 1; i < n; ++i) {
+                original[i] = derived[i - 1] ^ original[i - 1];
+            }
+            // Check the circular condition
+            return (original[n - 1] ^ original[0]) == derived[n - 1];
+        };
+        
+        // Try both possible starting values for original[0]
+        return isValid(0) || isValid(1);
+    }
+};
