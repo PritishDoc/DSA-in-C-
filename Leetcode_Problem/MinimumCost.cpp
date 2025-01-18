@@ -1,6 +1,5 @@
 /*
 Minimum Cost to Make at Least One Valid Path in a Grid
-Hard
 Hint
 Given an m x n grid. Each cell of the grid has a sign pointing to the next cell you should visit if you are currently in this cell. The sign of grid[i][j] can be:
 
