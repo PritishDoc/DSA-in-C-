@@ -22,3 +22,20 @@ Constraints:
 
 
 */
+class Solution {
+  public:
+    Node* reverseList(struct Node* head) {
+        Node* prev = NULL;
+        Node* curr = head;
+        Node* next = NULL;
+
+        while (curr != NULL) {
+            next = curr->next;   // Store next node
+            curr->next = prev;   // Reverse the current node's pointer
+            prev = curr;         // Move prev and curr one step forward
+            curr = next;
+        }
+
+        return prev;  // prev is the new head of the reversed list
+    }
+};
