@@ -49,3 +49,45 @@ n == grid[i].length
 1 <= grid[i][j] <= 4
 
 */
+#include <vector>
+#include <deque>
+#include <utility>
+
+using namespace std;
+
+class Solution {
+public:
+    int minCost(vector<vector<int>>& grid) {
+        int m = grid.size(), n = grid[0].size();
+        vector<vector<int>> cost(m, vector<int>(n, INT_MAX)); // To store the minimum cost to reach each cell
+        deque<pair<int, int>> dq; // Deque for 0-1 BFS
+        vector<pair<int, int>> directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}}; // Right, Left, Down, Up
+        
+        dq.push_front({0, 0});
+        cost[0][0] = 0;
+
+        while (!dq.empty()) {
+            auto [x, y] = dq.front();
+            dq.pop_front();
+
+            for (int dir = 0; dir < 4; ++dir) {
+                int nx = x + directions[dir].first;
+                int ny = y + directions[dir].second;
+
+                if (nx >= 0 && nx < m && ny >= 0 && ny < n) {
+                    int newCost = cost[x][y] + (grid[x][y] != dir + 1); // Add 1 if direction does not match
+                    if (newCost < cost[nx][ny]) {
+                        cost[nx][ny] = newCost;
+                        if (grid[x][y] == dir + 1) {
+                            dq.push_front({nx, ny}); // Push to front if no cost
+                        } else {
+                            dq.push_back({nx, ny}); // Push to back if cost is 1
+                        }
+                    }
+                }
+            }
+        }
+
+        return cost[m - 1][n - 1]; // Minimum cost to reach bottom-right
+    }
+};
