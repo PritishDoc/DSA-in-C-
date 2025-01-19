@@ -24,6 +24,7 @@ Constraints:
 0 <= data of node <= 10
 
 */
+class Solution {
   public:
     Node* rotate(Node* head, int k) {
         if (!head || k == 0) return head; // Edge cases: empty list or no rotations
