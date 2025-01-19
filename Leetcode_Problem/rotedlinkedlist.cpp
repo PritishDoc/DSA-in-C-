@@ -42,11 +42,13 @@ class Solution {
         
         // Calculate the effective rotations
         k = k % length;
-        int breakPoint = length - k;
+        if (k == 0) { // If no rotation is needed
+            current->next = NULL; // Break the circular link
+            return head;
+        }
         
-        // Traverse to the node just before the break point
-        current = head;
-        for (int i = 1; i < breakPoint; i++) {
+        // Traverse to the node just before the new head
+        for (int i = 0; i < k; i++) {
             current = current->next;
         }
         
