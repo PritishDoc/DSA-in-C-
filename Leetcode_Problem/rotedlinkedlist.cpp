@@ -24,3 +24,35 @@ Constraints:
 0 <= data of node <= 10
 
 */
+  public:
+    Node* rotate(Node* head, int k) {
+        if (!head || k == 0) return head; // Edge cases: empty list or no rotations
+        
+        // Find the length of the list
+        Node* current = head;
+        int length = 1;
+        while (current->next) {
+            current = current->next;
+            length++;
+        }
+        
+        // Connect the last node to the head to make it circular
+        current->next = head;
+        
+        // Calculate the effective rotations
+        k = k % length;
+        int breakPoint = length - k;
+        
+        // Traverse to the node just before the break point
+        current = head;
+        for (int i = 1; i < breakPoint; i++) {
+            current = current->next;
+        }
+        
+        // Break the loop and set the new head
+        head = current->next;
+        current->next = NULL;
+        
+        return head;
+    }
+};
