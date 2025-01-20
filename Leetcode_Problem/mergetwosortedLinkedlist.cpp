@@ -19,3 +19,35 @@ Constraints:
 0 <= node->data <= 10
 
 */
+class Solution {
+public:
+    Node* sortedMerge(Node* head1, Node* head2) {
+        // Create a dummy node to act as the starting point of the merged list
+        Node* dummy = new Node(-1);
+        Node* current = dummy;
+
+        // Traverse both lists and pick the smaller node
+        while (head1 != nullptr && head2 != nullptr) {
+            if (head1->data <= head2->data) {
+                current->next = head1;
+                head1 = head1->next;
+            } else {
+                current->next = head2;
+                head2 = head2->next;
+            }
+            current = current->next;
+        }
+
+        // Attach the remaining nodes of the non-empty list
+        if (head1 != nullptr) {
+            current->next = head1;
+        } else if (head2 != nullptr) {
+            current->next = head2;
+        }
+
+        // Return the merged list (skip the dummy node)
+        Node* mergedHead = dummy->next;
+        delete dummy; // Free the dummy node
+        return mergedHead;
+    }
+};
