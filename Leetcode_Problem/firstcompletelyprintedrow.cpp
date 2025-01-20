@@ -39,3 +39,40 @@ All the integers of arr are unique.
 All the integers of mat are unique.
 
 */
+class Solution {
+public:
+    int firstCompleteIndex(vector<int>& arr, vector<vector<int>>& mat) {
+        int m = mat.size();
+        int n = mat[0].size();
+        unordered_map<int, pair<int, int>> valueToIndex;
+        
+        // Map each value in mat to its (row, col) position
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                valueToIndex[mat[i][j]] = {i, j};
+            }
+        }
+
+        // Track painted rows and columns
+        vector<int> rowPaintCount(m, 0);
+        vector<int> colPaintCount(n, 0);
+
+        // Process elements in arr
+        for (int i = 0; i < arr.size(); ++i) {
+            int val = arr[i];
+            auto [row, col] = valueToIndex[val];
+
+            // Paint the cell and update counters
+            rowPaintCount[row]++;
+            colPaintCount[col]++;
+
+            // Check if a row or column is fully painted
+            if (rowPaintCount[row] == n || colPaintCount[col] == m) {
+                return i;
+            }
+        }
+
+        // This should never be reached due to problem constraints
+        return -1;
+    }
+};
