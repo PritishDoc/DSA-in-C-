@@ -21,3 +21,47 @@ Constraints:
 
 
 */
+class Solution {
+public:
+    Node* reverseKGroup(Node* head, int k) {
+        if (!head || k == 1) return head; // Base cases
+
+        Node* dummy = new Node(0); // Dummy node to simplify operations
+        dummy->next = head;
+        Node* prevGroupEnd = dummy;
+        Node* current = head;
+
+        while (current) {
+            // Check if there are at least k nodes left
+            Node* groupEnd = current;
+            for (int i = 1; i < k && groupEnd; ++i) {
+                groupEnd = groupEnd->next;
+            }
+
+            if (!groupEnd) break; // If less than k nodes are left, stop
+
+            Node* nextGroupStart = groupEnd->next; // Save the next group start
+            groupEnd->next = nullptr; // Temporarily disconnect the group
+
+            // Reverse the current group
+            Node* prev = nullptr;
+            Node* curr = current;
+            while (curr) {
+                Node* temp = curr->next;
+                curr->next = prev;
+                prev = curr;
+                curr = temp;
+            }
+
+            // Connect the reversed group back to the list
+            prevGroupEnd->next = groupEnd;
+            current->next = nextGroupStart;
+
+            // Move to the next group
+            prevGroupEnd = current;
+            current = nextGroupStart;
+        }
+
+        return dummy->next; // Return the new head
+    }
+};
