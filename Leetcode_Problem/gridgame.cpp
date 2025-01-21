@@ -48,3 +48,39 @@ n == grid[r].length
 1 <= grid[r][c] <= 105
 
 */
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    long long gridGame(vector<vector<int>>& grid) {
+        int n = grid[0].size();
+
+        // Prefix sums for both rows
+        vector<long long> prefixTop(n + 1, 0); // Prefix sum for the top row
+        vector<long long> prefixBottom(n + 1, 0); // Prefix sum for the bottom row
+
+        for (int i = 0; i < n; ++i) {
+            prefixTop[i + 1] = prefixTop[i] + grid[0][i];
+            prefixBottom[i + 1] = prefixBottom[i] + grid[1][i];
+        }
+
+        long long result = LLONG_MAX;
+
+        // Iterate over all possible points where the first robot can switch rows
+        for (int i = 0; i < n; ++i) {
+            // Points collected by the second robot
+            long long pointsTop = prefixTop[n] - prefixTop[i + 1]; // Top row after column i
+            long long pointsBottom = prefixBottom[i]; // Bottom row before column i
+
+            // The second robot maximizes its points, so we take the maximum of these two
+            long long secondRobotPoints = max(pointsTop, pointsBottom);
+
+            // The first robot minimizes the points the second robot can collect
+            result = min(result, secondRobotPoints);
+        }
+
+        return result;
+    }
+};
