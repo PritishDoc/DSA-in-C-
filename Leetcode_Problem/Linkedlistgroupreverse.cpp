@@ -22,46 +22,31 @@ Constraints:
 
 */
 class Solution {
-public:
-    Node* reverseKGroup(Node* head, int k) {
-        if (!head || k == 1) return head; // Base cases
-
-        Node* dummy = new Node(0); // Dummy node to simplify operations
-        dummy->next = head;
-        Node* prevGroupEnd = dummy;
-        Node* current = head;
-
-        while (current) {
-            // Check if there are at least k nodes left
-            Node* groupEnd = current;
-            for (int i = 1; i < k && groupEnd; ++i) {
-                groupEnd = groupEnd->next;
+  public:
+    Node *reverseKGroup(Node *head, int k) {
+        Node* ans = new Node(-1);
+        Node* temp = ans;
+        Node* op = head;
+        stack<int> st;
+        int cnt = 0;
+        while(op != NULL){
+            st.push(op->data);
+            cnt++;
+            op=op->next;
+            if(cnt==k){
+                while(!st.empty()){
+                    temp->next = new Node(st.top());
+                    temp = temp->next;
+                    st.pop();
+                }
+                cnt = 0;
             }
-
-            if (!groupEnd) break; // If less than k nodes are left, stop
-
-            Node* nextGroupStart = groupEnd->next; // Save the next group start
-            groupEnd->next = nullptr; // Temporarily disconnect the group
-
-            // Reverse the current group
-            Node* prev = nullptr;
-            Node* curr = current;
-            while (curr) {
-                Node* temp = curr->next;
-                curr->next = prev;
-                prev = curr;
-                curr = temp;
-            }
-
-            // Connect the reversed group back to the list
-            prevGroupEnd->next = prev; // 'prev' is the new head of this group
-            current->next = nextGroupStart;
-
-            // Move to the next group
-            prevGroupEnd = current;
-            current = nextGroupStart;
         }
-
-        return dummy->next; // Return the new head
+         while(!st.empty()){
+                    temp->next = new Node(st.top());
+                    temp = temp->next;
+                    st.pop();
+                }
+        return ans->next;
     }
 };
