@@ -54,7 +54,7 @@ public:
             }
 
             // Connect the reversed group back to the list
-            prevGroupEnd->next = groupEnd;
+            prevGroupEnd->next = prev; // 'prev' is the new head of this group
             current->next = nextGroupStart;
 
             // Move to the next group
