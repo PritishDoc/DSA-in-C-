@@ -25,26 +25,61 @@ Constraints:
 
 
 */
-Wrong Answer. !!!
-Ask Yogi Bot
-Possibly your code does not work correctly for multiple test-cases (TCs).
-
-The first test case where your code failed:
-
-Test Cases Passed: 
-211 /1111
-For Input: 
-0 3 4 3 4 7 9 1 7 3 0 5 5 0 5 1 4 9 3 7 4 0 5 0 5 3 3 8 7 0 1 7 7 2 1 6 9 5 0 2 9 8 0 6 7 6 7 2 7 2 4 2 1 6 8 9 1 4 6 9 0 2 0 3 3 5 8 0 5 8 6 9 9 8 3 2 2 5 2 0 4 0 6 8 1 5 3 4 6 9 1 2 1 5 6 3 7 9 2 8 ...
- Input is too large Download Full File 
-Your Code's output is: 
-0 6 5 5 6 4 7 1 6 5 5 7 9 8 5 0 7 9 8 3 3 3 6 0 7 1 5 0 6 5 6 3 5 6 0 8 1 1 7 0 2 5 6 7 6 7 6 2 1 2 7 7 9 7 7 4 7 8 1 5 9 5 0 7 9 8 8 5 8 9 3 3 2 6 5 9 0 3 0 9 7 7 8 3 4 7 2 7 1 8 5 6 1 4 9 1 6 3 8 2 ...
- Your Output is too large Download Full File 
-It's Correct output is: 
-6 5 5 6 4 7 1 6 5 5 7 9 8 5 0 7 9 8 3 3 3 6 0 7 1 5 0 6 5 6 3 5 6 0 8 1 1 7 0 2 5 6 7 6 7 6 2 1 2 7 7 9 7 7 4 7 8 1 5 9 5 0 7 9 8 8 5 8 9 3 3 2 6 5 9 0 3 0 9 7 7 8 3 4 7 2 7 1 8 5 6 1 4 9 1 6 3 8 2 2 ...
- Correct Output is too large Download Full File 
-Kick start your career with GfG 160!
-arrow
-Geek Tip:
-Solving the sample test case does not guarantee correctness of solution as your code is checked against multiple test cases.
-Avoid using static/global variables in your code.
-Do not print anything unless mentioned in the problem statement. Avoid unnecessary new line characters.
+  public:
+    // Function to reverse a linked list
+    Node* reverseList(Node* head) {
+        Node* prev = NULL;
+        Node* current = head;
+        Node* next = NULL;
+        while (current) {
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+        return prev;
+    }
+    
+    Node* addTwoLists(Node* num1, Node* num2) {
+        // Step 1: Reverse both linked lists
+        num1 = reverseList(num1);
+        num2 = reverseList(num2);
+        
+        Node* result = NULL; // Head of the result list
+        Node* temp = NULL;   // Pointer for the current node
+        int carry = 0;       // To store carry from addition
+        
+        // Step 2: Add the two lists
+        while (num1 || num2 || carry) {
+            int sum = carry;
+            
+            if (num1) {
+                sum += num1->data;
+                num1 = num1->next;
+            }
+            
+            if (num2) {
+                sum += num2->data;
+                num2 = num2->next;
+            }
+            
+            carry = sum / 10; // Calculate carry for the next step
+            sum = sum % 10;   // Get the current digit
+            
+            // Create a new node with the sum
+            Node* newNode = new Node(sum);
+            
+            // Append the new node to the result list
+            if (!result) {
+                result = newNode;
+            } else {
+                temp->next = newNode;
+            }
+            temp = newNode;
+        }
+        
+        // Step 3: Reverse the result list
+        result = reverseList(result);
+        return result;
+    }
+};
