@@ -25,61 +25,46 @@ Constraints:
 
 
 */
+class Solution {
   public:
-    // Function to reverse a linked list
-    Node* reverseList(Node* head) {
-        Node* prev = NULL;
-        Node* current = head;
-        Node* next = NULL;
-        while (current) {
-            next = current->next;
-            current->next = prev;
-            prev = current;
-            current = next;
+    Node* reverseList(struct Node* head) {
+        //CodeGenius
+        Node *curr=head, *prev=NULL, *next=curr->next;
+        while(curr){
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
         }
         return prev;
     }
-    
     Node* addTwoLists(Node* num1, Node* num2) {
-        // Step 1: Reverse both linked lists
-        num1 = reverseList(num1);
-        num2 = reverseList(num2);
-        
-        Node* result = NULL; // Head of the result list
-        Node* temp = NULL;   // Pointer for the current node
-        int carry = 0;       // To store carry from addition
-        
-        // Step 2: Add the two lists
-        while (num1 || num2 || carry) {
-            int sum = carry;
-            
-            if (num1) {
-                sum += num1->data;
-                num1 = num1->next;
+        //CodeGenius
+        num1=reverseList(num1);
+        num2=reverseList(num2);
+        int carry=0;
+        Node* ans=new Node(0);
+        Node* first=ans;
+        while(num1 || num2 || carry){
+            int sum=carry;
+            if(num1){
+                sum+=num1->data;
+                num1=num1->next;
             }
-            
-            if (num2) {
-                sum += num2->data;
-                num2 = num2->next;
+            if(num2){
+                sum+=num2->data;
+                num2=num2->next;
             }
-            
-            carry = sum / 10; // Calculate carry for the next step
-            sum = sum % 10;   // Get the current digit
-            
-            // Create a new node with the sum
-            Node* newNode = new Node(sum);
-            
-            // Append the new node to the result list
-            if (!result) {
-                result = newNode;
-            } else {
-                temp->next = newNode;
+            ans->data=(sum%10);
+            carry=sum/10;
+            if(num1 || num2 || carry){
+                ans->next=new Node(0);
+                ans=ans->next;
             }
-            temp = newNode;
         }
+        reverseList(first);
+        while(ans->data==0 && ans->next) ans=ans->next;
+        return ans;
         
-        // Step 3: Reverse the result list
-        result = reverseList(result);
-        return result;
     }
 };
