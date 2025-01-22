@@ -1,6 +1,5 @@
 /*
 Map of Highest Peak
-Medium
 Hint
 You are given an integer matrix isWater of size m x n that represents a map of land and water cells.
 
