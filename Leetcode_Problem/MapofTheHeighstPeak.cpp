@@ -2,7 +2,6 @@
 Map of Highest Peak
 Medium
 Topics
-Companies
 Hint
 You are given an integer matrix isWater of size m x n that represents a map of land and water cells.
 
