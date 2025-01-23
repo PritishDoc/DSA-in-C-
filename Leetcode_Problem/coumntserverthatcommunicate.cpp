@@ -41,3 +41,33 @@ n == grid[i].length
 1 <= n <= 250
 grid[i][j] == 0 or 1
 */
+class Solution {
+public:
+    int countServers(std::vector<std::vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+
+        // Count the number of servers in each row and column
+        std::vector<int> rowCount(m, 0), colCount(n, 0);
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (grid[i][j] == 1) {
+                    rowCount[i]++;
+                    colCount[j]++;
+                }
+            }
+        }
+
+        // Count the servers that can communicate
+        int count = 0;
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (grid[i][j] == 1 && (rowCount[i] > 1 || colCount[j] > 1)) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+};
