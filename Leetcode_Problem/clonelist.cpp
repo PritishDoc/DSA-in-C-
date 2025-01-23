@@ -39,3 +39,42 @@ Constraints:
 0 <= node->data <= 1000
 
 */
+class Solution {
+public:
+    Node* cloneLinkedList(Node* head) {
+        if (!head) return nullptr;
+
+        // Step 1: Create new nodes and insert them after each original node.
+        Node* curr = head;
+        while (curr) {
+            Node* newNode = new Node(curr->data);
+            newNode->next = curr->next;
+            curr->next = newNode;
+            curr = newNode->next;
+        }
+
+        // Step 2: Set the random pointers for the new nodes.
+        curr = head;
+        while (curr) {
+            if (curr->random) {
+                curr->next->random = curr->random->next;
+            }
+            curr = curr->next->next;
+        }
+
+        // Step 3: Separate the original and copied lists.
+        Node* newHead = head->next;
+        Node* original = head;
+        Node* copy = newHead;
+
+        while (original && copy) {
+            original->next = original->next->next;
+            copy->next = copy->next ? copy->next->next : nullptr;
+
+            original = original->next;
+            copy = copy->next;
+        }
+
+        return newHead;
+    }
+};
