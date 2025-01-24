@@ -71,3 +71,4 @@ public:
         return count;
     }
 };
+Detecty
