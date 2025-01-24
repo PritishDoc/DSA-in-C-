@@ -39,3 +39,46 @@ The graph may contain self-loops.
 The number of edges in the graph will be in the range [1, 4 * 104].
 
 */
+public:
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        int n = graph.size();
+        vector<vector<int>> reversedGraph(n); // To store the reversed graph
+        vector<int> inDegree(n, 0);          // To count incoming edges for each node
+
+        // Reverse the graph and compute in-degrees
+        for (int i = 0; i < n; ++i) {
+            for (int neighbor : graph[i]) {
+                reversedGraph[neighbor].push_back(i);
+                inDegree[i]++;
+            }
+        }
+
+        // Queue for nodes with no incoming edges
+        queue<int> q;
+        for (int i = 0; i < n; ++i) {
+            if (inDegree[i] == 0) {
+                q.push(i);
+            }
+        }
+
+        vector<int> safeNodes;
+
+        // Process nodes in topological order
+        while (!q.empty()) {
+            int node = q.front();
+            q.pop();
+            safeNodes.push_back(node);
+
+            for (int neighbor : reversedGraph[node]) {
+                inDegree[neighbor]--;
+                if (inDegree[neighbor] == 0) {
+                    q.push(neighbor);
+                }
+            }
+        }
+
+        // Sort the safe nodes in ascending order
+        sort(safeNodes.begin(), safeNodes.end());
+        return safeNodes;
+    }
+};
