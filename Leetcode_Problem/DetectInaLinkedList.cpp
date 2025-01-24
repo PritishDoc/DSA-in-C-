@@ -55,3 +55,18 @@ class Solution {
         return false;
     }
 };
+int main() {
+    Node* head = new Node(1);
+    head->next = new Node(3);
+    head->next->next = new Node(4);
+    head->next->next->next = head->next; // Creates a loop.
+
+    Solution obj;
+    if (obj.detectLoop(head)) {
+        std::cout << "Loop detected" << std::endl;
+    } else {
+        std::cout << "No loop detected" << std::endl;
+    }
+
+    return 0;
+}
