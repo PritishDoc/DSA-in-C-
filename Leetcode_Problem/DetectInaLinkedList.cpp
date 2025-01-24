@@ -30,3 +30,28 @@ Constraints:
 
 
 */
+class Solution {
+  public:
+    // Function to check if the linked list has a loop.
+    bool detectLoop(Node* head) {
+        // Initialize two pointers, slow and fast.
+        Node* slow = head;
+        Node* fast = head;
+
+        while (fast != nullptr && fast->next != nullptr) {
+            // Move slow pointer one step.
+            slow = slow->next;
+
+            // Move fast pointer two steps.
+            fast = fast->next->next;
+
+            // If slow and fast pointers meet, there is a loop.
+            if (slow == fast) {
+                return true;
+            }
+        }
+
+        // If fast pointer reaches the end of the list, there is no loop.
+        return false;
+    }
+};
