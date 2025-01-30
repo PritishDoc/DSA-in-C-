@@ -43,3 +43,88 @@ ai != bi
 There is at most one edge between any pair of vertices.
 
 */
+#include <vector>
+#include <queue>
+#include <unordered_map>
+using namespace std;
+
+class Solution {
+public:
+    int magnificentSets(int n, vector<vector<int>>& edges) {
+        vector<vector<int>> graph(n + 1);
+        
+        // Build adjacency list
+        for (auto& edge : edges) {
+            graph[edge[0]].push_back(edge[1]);
+            graph[edge[1]].push_back(edge[0]);
+        }
+
+        vector<int> component(n + 1, -1);
+        vector<vector<int>> components;
+        int compIdx = 0;
+
+        // Step 1: Find connected components & check if bipartite
+        for (int i = 1; i <= n; i++) {
+            if (component[i] == -1) {
+                queue<int> q;
+                q.push(i);
+                component[i] = compIdx;
+                vector<int> nodes;
+                nodes.push_back(i);
+                bool isBipartite = true;
+                unordered_map<int, int> color;
+                color[i] = 0;
+                
+                while (!q.empty()) {
+                    int node = q.front();
+                    q.pop();
+                    for (int neighbor : graph[node]) {
+                        if (component[neighbor] == -1) {
+                            component[neighbor] = compIdx;
+                            color[neighbor] = 1 - color[node];  // Alternate colors
+                            q.push(neighbor);
+                            nodes.push_back(neighbor);
+                        } else if (color[neighbor] == color[node]) {
+                            return -1; // Not bipartite
+                        }
+                    }
+                }
+                components.push_back(nodes);
+                compIdx++;
+            }
+        }
+
+        // Step 2: Find the max depth of each component
+        int result = 0;
+        for (auto& comp : components) {
+            int maxGroups = 0;
+            for (int node : comp) {
+                maxGroups = max(maxGroups, bfsMaxDepth(graph, node, n));
+            }
+            result += maxGroups;
+        }
+        return result;
+    }
+
+private:
+    int bfsMaxDepth(vector<vector<int>>& graph, int start, int n) {
+        queue<int> q;
+        vector<int> dist(n + 1, -1);
+        q.push(start);
+        dist[start] = 0;
+        int maxDepth = 0;
+
+        while (!q.empty()) {
+            int node = q.front();
+            q.pop();
+            maxDepth = max(maxDepth, dist[node]);
+            for (int neighbor : graph[node]) {
+                if (dist[neighbor] == -1) {
+                    dist[neighbor] = dist[node] + 1;
+                    q.push(neighbor);
+                }
+            }
+        }
+        return maxDepth + 1;
+    }
+};
