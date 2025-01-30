@@ -2,7 +2,6 @@
 Divide Nodes Into the Maximum Number of Groups
 Hard
 Topics
-Companies
 Hint
 You are given a positive integer n representing the number of nodes in an undirected graph. The nodes are labeled from 1 to n.
 
