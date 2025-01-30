@@ -26,3 +26,42 @@ Constraints:
 1 ≤ n ≤ 10
 
 */
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    vector<vector<int>> result;
+
+    bool isSafe(vector<int>& board, int row, int col, int n) {
+        for (int prevCol = 0; prevCol < col; prevCol++) {
+            int prevRow = board[prevCol];
+
+            // Check if same row or same diagonal
+            if (prevRow == row || abs(prevRow - row) == abs(prevCol - col)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void solve(int col, vector<int>& board, int n) {
+        if (col == n) {
+            result.push_back(board);
+            return;
+        }
+
+        for (int row = 1; row <= n; row++) {
+            if (isSafe(board, row, col, n)) {
+                board[col] = row;
+                solve(col + 1, board, n);
+            }
+        }
+    }
+
+    vector<vector<int>> nQueen(int n) {
+        vector<int> board(n, 0); // Store row placements per column
+        solve(0, board, n);
+        return result;
+    }
+};
