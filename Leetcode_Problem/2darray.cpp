@@ -27,3 +27,40 @@ Constraints:
 mat and word consists of only lowercase and uppercase English letters.
 
 */
+class Solution {
+public:
+    bool dfs(vector<vector<char>>& mat, string& word, int i, int j, int index, vector<vector<bool>>& visited) {
+        if (index == word.length()) return true; // Word is completely found
+        
+        int n = mat.size();
+        int m = mat[0].size();
+        
+        if (i < 0 || j < 0 || i >= n || j >= m || mat[i][j] != word[index] || visited[i][j])
+            return false;
+        
+        visited[i][j] = true;
+        
+        // Explore all 4 possible directions (up, down, left, right)
+        bool found = dfs(mat, word, i + 1, j, index + 1, visited) ||
+                     dfs(mat, word, i - 1, j, index + 1, visited) ||
+                     dfs(mat, word, i, j + 1, index + 1, visited) ||
+                     dfs(mat, word, i, j - 1, index + 1, visited);
+        
+        visited[i][j] = false; // Backtrack
+        return found;
+    }
+    
+    bool isWordExist(vector<vector<char>>& mat, string& word) {
+        int n = mat.size(), m = mat[0].size();
+        vector<vector<bool>> visited(n, vector<bool>(m, false));
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (mat[i][j] == word[0]) { // Start DFS from matching first letter
+                    if (dfs(mat, word, i, j, 0, visited)) return true;
+                }
+            }
+        }
+        return false;
+    }
+};
