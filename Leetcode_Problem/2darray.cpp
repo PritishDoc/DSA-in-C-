@@ -1,3 +1,5 @@
+/*
+
 Word Search
 Difficulty: MediumAccuracy: 32.69%Submissions: 63K+Points: 4
 You are given a two-dimensional mat[][] of size n*m containing English alphabets and a string word. Check if the word exists on the mat. The word can be constructed by using letters from adjacent cells, either horizontally or vertically. The same cell cannot be used more than once.
@@ -23,3 +25,5 @@ Constraints:
 1 ≤ n, m ≤ 6
 1 ≤ L ≤ 15
 mat and word consists of only lowercase and uppercase English letters.
+
+*/
