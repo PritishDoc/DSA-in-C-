@@ -39,3 +39,76 @@ Constraints:
 
 
 */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// Definition for a Binary Tree Node
+class Node {
+  public:
+    int data;
+    Node* left;
+    Node* right;
+
+    // Constructor
+    Node(int val) {
+        data = val;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+class Solution {
+  public:
+    vector<vector<int>> levelOrder(Node *root) {
+        vector<vector<int>> result;
+        if (!root) return result; // Edge case: If tree is empty
+        
+        queue<Node*> q;
+        q.push(root);
+        
+        while (!q.empty()) {
+            int size = q.size();
+            vector<int> level;
+            
+            for (int i = 0; i < size; i++) {
+                Node* node = q.front();
+                q.pop();
+                level.push_back(node->data);
+                
+                if (node->left) q.push(node->left);
+                if (node->right) q.push(node->right);
+            }
+            result.push_back(level);
+        }
+        
+        return result;
+    }
+};
+
+// Function to build a tree (for testing)
+Node* buildTree() {
+    Node* root = new Node(10);
+    root->left = new Node(20);
+    root->right = new Node(30);
+    root->left->left = new Node(40);
+    root->left->right = new Node(50);
+    return root;
+}
+
+// Driver Code
+int main() {
+    Node* root = buildTree();
+    Solution sol;
+    vector<vector<int>> result = sol.levelOrder(root);
+
+    // Printing the level order traversal
+    for (auto level : result) {
+        cout << "[ ";
+        for (int num : level) {
+            cout << num << " ";
+        }
+        cout << "]" << endl;
+    }
+    return 0;
+}
