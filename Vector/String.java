@@ -37,7 +37,18 @@ public class Main
 		
 		String str6="www.udemy.com";
 		System.out.println(str6.indexOf("udemy"));
-		System.out.println(str6.indexof)
+	//	System.out.println(str6.indexof);
 		
+		
+		
+		String k="Java";
+		String p="JavA";
+		
+		String m=new String("Java");
+		
+		System.out.println(k.equals(m));
+		System.out.println(k.equalsIgnoreCase(p));
+		System.out.println(k==m);
+		System.out.println(k.compareTo(p));
 	}
 }
