@@ -67,3 +67,29 @@ Constraints:
 
 
 */
+
+class Solution {
+public:
+    int longestMonotonicSubarray(vector<int>& nums) {
+        int n = nums.size();
+        if (n == 1) return 1; // Only one element, longest subarray is 1
+        
+        int maxLength = 1;
+        int incLength = 1, decLength = 1; // Track both increasing and decreasing
+
+        for (int i = 1; i < n; i++) {
+            if (nums[i] > nums[i - 1]) {
+                incLength++;  // Increasing subarray continues
+                decLength = 1; // Reset decreasing count
+            } else if (nums[i] < nums[i - 1]) {
+                decLength++;  // Decreasing subarray continues
+                incLength = 1; // Reset increasing count
+            } else {
+                incLength = decLength = 1; // Reset both if elements are equal
+            }
+            maxLength = max(maxLength, max(incLength, decLength));
+        }
+
+        return maxLength;
+    }
+};
