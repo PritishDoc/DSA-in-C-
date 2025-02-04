@@ -41,3 +41,22 @@ Constraints:
 
 
 */
+class Solution {
+public:
+    
+    int maxAscendingSum(vector<int>& nums) {
+        int maxSum = nums[0];  // Store maximum sum
+        int currentSum = nums[0]; // Store current subarray sum
+        
+        for (int i = 1; i < nums.size(); i++) {
+            if (nums[i] > nums[i - 1]) {
+                currentSum += nums[i];  // Extend the ascending subarray
+            } else {
+                currentSum = nums[i];  // Reset to new subarray
+            }
+            maxSum = max(maxSum, currentSum); // Update maximum sum
+        }
+        return maxSum;
+    }
+};
+
