@@ -23,3 +23,61 @@ Constraints:
 
 
 */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+
+class Solution {
+public:
+    int maxDiameter = 0;
+
+    int findHeight(Node* root) {
+        if (!root) return 0;
+
+        int leftHeight = findHeight(root->left);
+        int rightHeight = findHeight(root->right);
+
+        // Update the maximum diameter
+        maxDiameter = max(maxDiameter, leftHeight + rightHeight);
+
+        return 1 + max(leftHeight, rightHeight);
+    }
+
+    int diameter(Node* root) {
+        maxDiameter = 0; // Reset before computation
+        findHeight(root);
+        return maxDiameter;
+    }
+};
+
+// Utility function to create a new node
+Node* newNode(int val) {
+    return new Node(val);
+}
+
+// Driver code
+int main() {
+    Node* root = newNode(5);
+    root->left = newNode(8);
+    root->right = newNode(6);
+    root->left->left = newNode(3);
+    root->left->right = newNode(7);
+    root->right->right = newNode(9);
+
+    Solution sol;
+    cout << "Diameter of the tree: " << sol.diameter(root) << endl;
+
+    return 0;
+}
