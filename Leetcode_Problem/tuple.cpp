@@ -34,3 +34,32 @@ Constraints:
 All elements in nums are distinct.
 
 */
+
+#include <unordered_map>
+#include <vector>
+
+class Solution {
+public:
+    int tupleSameProduct(std::vector<int>& nums) {
+        std::unordered_map<int, int> productCount;
+        int n = nums.size();
+        int result = 0;
+
+        // Count pairs forming the same product
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int product = nums[i] * nums[j];
+                productCount[product]++;
+            }
+        }
+
+        // Calculate tuples using frequency
+        for (auto& [product, freq] : productCount) {
+            if (freq > 1) {
+                result += (freq * (freq - 1) / 2) * 8;
+            }
+        }
+
+        return result;
+    }
+};
