@@ -1,3 +1,6 @@
+/*
+
+
 Find the Number of Distinct Colors Among the Balls
 Medium
 Topics
@@ -51,3 +54,5 @@ Constraints:
 queries[i].length == 2
 0 <= queries[i][0] <= limit
 1 <= queries[i][1] <= 109
+
+*/
