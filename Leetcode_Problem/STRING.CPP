@@ -56,3 +56,40 @@ queries[i].length == 2
 1 <= queries[i][1] <= 109
 
 */
+#include <vector>
+#include <unordered_map>
+#include <unordered_set>
+
+using namespace std;
+
+class Solution {
+public:
+    vector<int> queryResults(int limit, vector<vector<int>>& queries) {
+        unordered_map<int, int> ballColor;  // Stores ball -> color mapping
+        unordered_map<int, int> colorCount; // Stores frequency of each color
+        unordered_set<int> distinctColors;  // Stores distinct colors
+        vector<int> result;
+        
+        for (auto& query : queries) {
+            int ball = query[0], color = query[1];
+
+            // If ball already has a color, decrease its count
+            if (ballColor.count(ball)) {
+                int oldColor = ballColor[ball];
+                if (--colorCount[oldColor] == 0) {
+                    distinctColors.erase(oldColor); // Remove if no ball uses it
+                }
+            }
+
+            // Assign new color and update frequency
+            ballColor[ball] = color;
+            colorCount[color]++;
+            distinctColors.insert(color);
+
+            // Store the distinct color count after this query
+            result.push_back(distinctColors.size());
+        }
+        
+        return result;
+    }
+};
