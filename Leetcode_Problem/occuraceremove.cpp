@@ -1,3 +1,5 @@
+/*
+
  Remove All Occurrences of a Substring
 Medium
 Topics
@@ -38,3 +40,5 @@ Constraints:
 1 <= s.length <= 1000
 1 <= part.length <= 1000
 s​​​​​​ and part consists of lowercase English letters.
+
+*/
