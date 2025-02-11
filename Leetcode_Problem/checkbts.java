@@ -36,3 +36,21 @@ Constraints:
 1 ≤ number of nodes ≤ 105
 1 ≤ node->data ≤ 109
  */
+class Solution {
+    public:
+      bool isBSTUtil(Node* root, long long minVal, long long maxVal) {
+          if (root == NULL) return true; // Empty tree is a BST
+  
+          // Check if node violates the BST property
+          if (root->data <= minVal || root->data >= maxVal) return false;
+  
+          // Recursively check left and right subtrees with updated ranges
+          return isBSTUtil(root->left, minVal, root->data) &&
+                 isBSTUtil(root->right, root->data, maxVal);
+      }
+  
+      bool isBST(Node* root) {
+          return isBSTUtil(root, LLONG_MIN, LLONG_MAX);
+      }
+  };
+  
