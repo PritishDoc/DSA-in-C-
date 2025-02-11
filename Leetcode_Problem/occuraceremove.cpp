@@ -42,3 +42,12 @@ Constraints:
 s​​​​​​ and part consists of lowercase English letters.
 
 */
+class Solution {
+public:
+    string removeOccurrences(string s, string part) {
+        while (s.find(part) != string::npos) { // Check if part exists in s
+            s.erase(s.find(part), part.length()); // Erase the first occurrence
+        }
+        return s;
+    }
+};
