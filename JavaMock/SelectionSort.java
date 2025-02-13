@@ -2,13 +2,13 @@ public class SelectionSort {
     static void sort(int arr[]){
         for(int i=0;i<arr.length-1;i++){
             int si=i;
-            for(int j=i+1;j<arr.length-1;j++){
+            for(int j=i+1;j<arr.length;j++){
                 if(arr[j]<arr[si]){
                     si=j;
                 }
-                int temp=arr[j];
-                     arr[j]=arr[j+1];
-                     arr[j+1]=temp;
+                int temp = arr[si];
+            arr[si] = arr[i];
+            arr[i] = temp;
             }
         }
     }
