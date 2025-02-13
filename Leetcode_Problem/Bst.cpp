@@ -20,3 +20,28 @@ Constraints:
 
 */
 
+#include <unordered_set>
+
+class Solution {
+  public:
+    bool findPair(Node* root, int target, unordered_set<int>& s) {
+        if (!root) return false;
+        
+        // Check left subtree
+        if (findPair(root->left, target, s)) return true;
+        
+        // Check if (target - current node's value) exists in the set
+        if (s.find(target - root->data) != s.end()) return true;
+        
+        // Insert current node's value into the set
+        s.insert(root->data);
+        
+        // Check right subtree
+        return findPair(root->right, target, s);
+    }
+
+    bool findTarget(Node *root, int target) {
+        unordered_set<int> s;
+        return findPair(root, target, s);
+    }
+};
