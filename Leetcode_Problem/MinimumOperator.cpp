@@ -47,3 +47,31 @@ The input is gener
 
 
 */
+import java.util.PriorityQueue;
+
+class Solution {
+    public int minOperations(int[] nums, int k) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        
+        // Add all elements to the min-heap
+        for (int num : nums) {
+            minHeap.add(num);
+        }
+
+        int operations = 0;
+
+        // Continue while the smallest element is less than k
+        while (minHeap.size() > 1 && minHeap.peek() < k) {
+            int x = minHeap.poll(); // Smallest element
+            int y = minHeap.poll(); // Second smallest element
+            
+            int newElement = x * 2 + y;
+            minHeap.add(newElement);
+            
+            operations++;
+        }
+
+        // Return the number of operations
+        return operations;
+    }
+}
