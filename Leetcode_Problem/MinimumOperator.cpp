@@ -2,7 +2,6 @@
 
  Minimum Operations to Exceed Threshold Value II
 Medium
-Topics
 Hint
 You are given a 0-indexed integer array nums, and an integer k.
 
