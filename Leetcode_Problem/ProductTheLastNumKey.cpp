@@ -41,3 +41,34 @@ productOfNumbers.getProduct(2); // return 32. The product of the last 2 numbers 
  
 
 */
+#include <vector>
+
+class ProductOfNumbers {
+public:
+    std::vector<int> prefixProduct;
+    
+    ProductOfNumbers() {
+        prefixProduct = {1}; // Initial product = 1 (to handle division)
+    }
+    
+    void add(int num) {
+        if (num == 0) {
+            prefixProduct = {1}; // Reset on zero
+        } else {
+            prefixProduct.push_back(prefixProduct.back() * num);
+        }
+    }
+    
+    int getProduct(int k) {
+        int n = prefixProduct.size();
+        if (k >= n) return 0; // Zero encountered within last k numbers
+        return prefixProduct[n - 1] / prefixProduct[n - k - 1];
+    }
+};
+
+/**
+ * Example usage:
+ * ProductOfNumbers* obj = new ProductOfNumbers();
+ * obj->add(num);
+ * int param_2 = obj->getProduct(k);
+ */
