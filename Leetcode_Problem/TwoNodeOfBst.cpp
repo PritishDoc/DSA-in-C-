@@ -20,4 +20,34 @@ Constraints:
 1 ≤ Number of nodes ≤ 103
 
 
-*/
+*/class Solution {
+public:
+Node *first = NULL, *middle = NULL, *last = NULL, *prev = NULL;
+
+void inorder(Node* root) {
+    if (!root) return;
+
+    inorder(root->left);
+
+    // Detect swapped nodes
+    if (prev && root->data < prev->data) {
+        if (!first) {  // First occurrence
+            first = prev;
+            middle = root;
+        } else {  // Second occurrence
+            last = root;
+        }
+    }
+
+    prev = root; // Update previous node
+    inorder(root->right);
+}
+
+void correctBST(Node* root) {
+    inorder(root);
+
+    // Swap values
+    if (first && last) swap(first->data, last->data);  // Case 1: Non-adjacent swap
+    else if (first && middle) swap(first->data, middle->data);  // Case 2: Adjacent swap
+}
+};
