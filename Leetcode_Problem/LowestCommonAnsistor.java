@@ -30,3 +30,18 @@ Constraints:
 1 <= node->data <= 105
 1 <= n1, n2 <= 105
  */
+class Solution {
+    public:
+      Node* LCA(Node* root, Node* n1, Node* n2) {
+          while (root) {
+              if (root->data > n1->data && root->data > n2->data)
+                  root = root->left; // Move left
+              else if (root->data < n1->data && root->data < n2->data)
+                  root = root->right; // Move right
+              else
+                  return root; // Found LCA
+          }
+          return NULL;
+      }
+  };
+  
