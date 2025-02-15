@@ -36,3 +36,33 @@ Hence, the punishment number of 37 is 1 + 81 + 100 + 1296 = 1478
 Constraints:
 
 */
+class Solution {
+    public:
+        bool isValid(string &sq, int target, int index, int sum) {
+            if (index == sq.size()) {
+                return sum == target;
+            }
+    
+            int num = 0;
+            for (int i = index; i < sq.size(); i++) {
+                num = num * 10 + (sq[i] - '0');
+                if (num + sum <= target && isValid(sq, target, i + 1, sum + num)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    
+        int punishmentNumber(int n) {
+            int total = 0;
+            for (int i = 1; i <= n; i++) {
+                int square = i * i;
+                string sqStr = to_string(square);
+                if (isValid(sqStr, i, 0, 0)) {
+                    total += square;
+                }
+            }
+            return total;
+        }
+    };
+    
