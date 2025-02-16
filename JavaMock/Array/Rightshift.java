@@ -1,6 +1,6 @@
 package Array;
 
-public class LeftShipt {
+public class Rightshift {
     public static void main(String[] args) {
         int arr[]={3,2,4,1,7};
         
