@@ -34,3 +34,43 @@ Constraints:
 
 
 */
+class Solution {
+    public int[] constructDistancedSequence(int n) {
+        int len = 2 * n - 1;
+        int[] result = new int[len];
+        boolean[] used = new boolean[n + 1]; // To track which numbers are used
+        backtrack(result, used, 0, n);
+        return result;
+    }
+
+    private boolean backtrack(int[] result, boolean[] used, int index, int n) {
+        // If we have filled the array, return true
+        if (index == result.length) return true;
+
+        // If this position is already filled, move to the next
+        if (result[index] != 0) return backtrack(result, used, index + 1, n);
+
+        // Try placing the largest number first
+        for (int num = n; num >= 1; num--) {
+            if (!used[num]) {
+                // If num == 1, it occupies only one position
+                if (num == 1) {
+                    result[index] = 1;
+                    used[1] = true;
+                    if (backtrack(result, used, index + 1, n)) return true;
+                    used[1] = false;
+                    result[index] = 0;
+                } 
+                // If num > 1, it needs two positions
+                else if (index + num < result.length && result[index + num] == 0) {
+                    result[index] = result[index + num] = num;
+                    used[num] = true;
+                    if (backtrack(result, used, index + 1, n)) return true;
+                    used[num] = false;
+                    result[index] = result[index + num] = 0; // Backtrack
+                }
+            }
+        }
+        return false; // If no valid placement is found
+    }
+}
