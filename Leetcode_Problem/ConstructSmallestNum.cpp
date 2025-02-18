@@ -38,3 +38,22 @@ Constraints:
 pattern consists of only the letters 'I' and 'D'.
 
 */
+class Solution {
+    public String smallestNumber(String pattern) {
+        StringBuilder result = new StringBuilder();
+        int n = pattern.length();
+        int num = 1;  // Digits from 1 to 9
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i <= n; i++) {
+            stack.push(num++);
+            // When encountering 'I' or at the last index, pop the stack
+            if (i == n || pattern.charAt(i) == 'I') {
+                while (!stack.isEmpty()) {
+                    result.append(stack.pop());
+                }
+            }
+        }
+        return result.toString();
+    }
+}
