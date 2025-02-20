@@ -4,25 +4,24 @@ import java.util.Scanner;
 
 public class LetterFrequencyString {
     public static String countLetters(String str) {
-        String result = "";
-        int len = str.length();
-
-        for (int i = 0; i < len; i++) {
-            char currentChar = str.charAt(i);
-            int count = 1;
-
-            // Count consecutive occurrences of currentChar
-            while (i + 1 < len && str.charAt(i + 1) == currentChar) {
+        String result="";
+        int length=str.length();
+        
+        for(int i=0;i<length;i++){
+            char currentletter=str.charAt(i);
+            int count=1;
+            while(i+1<length && str.charAt(i+1)==currentletter){
                 count++;
-                i++; // Move to the next occurrence
+                i++;
+            }
+            result +=currentletter;
+            if(count>1){
+                result+=count;
             }
 
-            result += currentChar; // Add character to result
-            if (count > 1) {
-                result += count; // Add count if more than 1
-            }
         }
         return result;
+
     }
 
     public static void main(String[] args) {
