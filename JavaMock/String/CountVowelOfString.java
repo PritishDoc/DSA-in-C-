@@ -16,6 +16,9 @@ public class CountVowelOfString {
                 count++;
             }
         }System.out.println("The total no of vowel are : "+count);
+    
+    
+     
     }
     
 }
