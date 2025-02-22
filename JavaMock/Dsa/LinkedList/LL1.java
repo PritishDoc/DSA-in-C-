@@ -1,5 +1,9 @@
 public class LL1{
     Node head;
+    private int size;
+    LL1(){
+        this.size=0;
+    }
     class Node{
         String data;
         Node next;
@@ -18,6 +22,7 @@ public class LL1{
         }
         newNode.next=head;
         head=newNode;
+        size++;
     }
     //addLast
     public void addLast(String data){
@@ -31,6 +36,7 @@ public class LL1{
             currNode=currNode.next;
         }
         currNode.next=newNode;
+        size++;
     }
 
     //Delete First
@@ -39,6 +45,7 @@ public class LL1{
             System.out.println("This list is empty");
             return;
         }
+        size--;
         head=head.next;
 
     }
@@ -50,7 +57,7 @@ public class LL1{
         }
         Node secondLast=head;
         Node lastNode=head.next;//if its null then last node must be null 
-
+        size--;
         if(head.next==null){
             head=null;
             return;
@@ -59,6 +66,12 @@ public class LL1{
             lastNode=lastNode.next;
             secondLast=secondLast.next;
         }
+        
+        secondLast.next=null;
+    }
+
+    public int getsize(){
+        return size;
     }
     public void PrintList(){
         if(head==null){
@@ -67,7 +80,7 @@ public class LL1{
         }
         Node currNode =head;
         while(currNode!=null){
-            System.out.print(currNode.data+"->");
+            System.out.println(currNode.data+"->");
             currNode=currNode.next;
         }
         System.out.print("null");
@@ -77,7 +90,16 @@ public class LL1{
         list.addFirst("A");
         list.addFirst("B");
         list.addLast("c");
+        System.out.println(list.getsize());
         list.PrintList();
+
+        list.DeleteFirst();
+        list.PrintList();
+
+        list.DeleteFirst();
+        list.PrintList();
+        
+  
 
 
     }
