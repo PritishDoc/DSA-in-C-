@@ -35,7 +35,30 @@ public class LL1{
 
     //Delete First
     public void DeleteFirst(){
-        
+        if(head==null){
+            System.out.println("This list is empty");
+            return;
+        }
+        head=head.next;
+
+    }
+    //delete last
+    public void deleteLast(){
+        if(head==null){
+            System.out.println("This list is empty");
+            return;
+        }
+        Node secondLast=head;
+        Node lastNode=head.next;//if its null then last node must be null 
+
+        if(head.next==null){
+            head=null;
+            return;
+        }
+        while(lastNode.next!=null){//null.next  null then throw error
+            lastNode=lastNode.next;
+            secondLast=secondLast.next;
+        }
     }
     public void PrintList(){
         if(head==null){
