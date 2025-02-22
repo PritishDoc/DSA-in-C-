@@ -32,6 +32,11 @@ public class LL1{
         }
         currNode.next=newNode;
     }
+
+    //Delete First
+    public void DeleteFirst(){
+        
+    }
     public void PrintList(){
         if(head==null){
             System.out.println("List is empty");
