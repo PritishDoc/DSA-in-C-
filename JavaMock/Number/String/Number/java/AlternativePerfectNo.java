@@ -18,14 +18,20 @@ public class AlternativePerfectNo {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a number to check: ");
-        int num = sc.nextInt();
+        System.out.print("Enter a Starting and Ending number: ");
+        int start = sc.nextInt();
+        int end = sc.nextInt();
         sc.close();
 
-        if (isPerfectNumber(num)) {
-            System.out.println(num + " is a Perfect Number.");
-        } else {
-            System.out.println(num + " is NOT a Perfect Number.");
+        int count = 1; // To track alternative perfect numbers
+
+        for (int i = start; i <= end; i++) {
+            if (isPerfectNumber(i)) {
+                if (count % 2 == 1) { // Print only alternate perfect numbers
+                    System.out.println(i + " is a Perfect Number.");
+                }
+                count++; // Increment count when a perfect number is found
+            }
         }
     }
 }
