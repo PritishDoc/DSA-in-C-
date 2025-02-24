@@ -12,7 +12,7 @@ public class AutoMorphicNum {
                 n/=10;
             sq/=10;
             
-            
+            //POW OF 5 =25 THEN 5 ISIN LAST DIGIT
         }
         if(flag){
             System.out.println("Its a automorphic num");
