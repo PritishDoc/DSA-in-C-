@@ -1,4 +1,5 @@
 public class InsertionSort {
+    
     static void in(int arr[]){
         for(int i=1;i<arr.length;i++){
             int cur=arr[i];
