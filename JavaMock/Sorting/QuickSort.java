@@ -10,6 +10,7 @@ public class QuickSort {
                      arr[j]=temp;
             }
         }
+        //ADJUSTING PIVOT 
             
             int temp=arr[i+1];
             arr[i+1]=pivot;
