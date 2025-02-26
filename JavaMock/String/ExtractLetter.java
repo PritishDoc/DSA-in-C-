@@ -12,6 +12,8 @@ public class ExtractLetter {
         }
         return result;
     }
+    //a5b7n8f9
+    //op-abnf
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         String s=sc.nextLine();
