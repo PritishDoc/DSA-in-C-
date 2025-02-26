@@ -14,16 +14,17 @@ public class StringManipulation {
         // 3. Convert to lowercase
         System.out.println("3) " + input.toLowerCase());
 
-        // 4. Reverse word order
+        // 4. Reverse word order using Collections
         String[] words = input.split(" ");
-        Collections.reverse(Arrays.asList(words));
-        String reversedWords = String.join(" ", words);
-        System.out.println("4) " + reversedWords);
+        List<String> wordList = new ArrayList<>(Arrays.asList(words));
+        Collections.reverse(wordList);
+        System.out.println("4) " + String.join(" ", wordList));
 
-        //using array
-        String []arr=input.split(" ");
-        for(int i=arr.length-1;i>=0;i--){
-            System.out.println(arr[i]);
+        // 5. Reverse word order using array (Alternative)
+        StringBuilder reversedWordOrder = new StringBuilder();
+        for (int i = words.length - 1; i >= 0; i--) {
+            reversedWordOrder.append(words[i]).append(" ");
         }
+        System.out.println("5) " + reversedWordOrder.toString().trim());
     }
 }
