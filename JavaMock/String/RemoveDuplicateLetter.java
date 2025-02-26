@@ -13,6 +13,7 @@ public class RemoveDuplicateLetter {
         }
         return result;
     }
+    //banana --- op- ban
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
 

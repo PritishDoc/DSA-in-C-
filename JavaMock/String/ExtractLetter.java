@@ -6,7 +6,7 @@ public class ExtractLetter {
         for(int i=0;i<str.length();i++){
             char currentChar =str.charAt(i);
 
-            if(Character.isLetter(currentChar)){
+            if(Character.isLetter(currentChar)){//if you want to print only digit then you print Charater.toDigit();
                 result+=currentChar;
             }
         }
