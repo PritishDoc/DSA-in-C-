@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Encoding {
+public class Main {
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
 
@@ -13,12 +13,16 @@ public class Encoding {
         for(int i=0;i<arr.length;i++){
             char c=arr[i];
             int index=c-97;
-            index=(index+c)%26;
+            index=(index+n)%26;
             System.out.println(index);
+            
+            
+            
             arr[i]=alpha[index];
+        }
             String s2=new String(arr);
             System.out.println(s2);
-        }
+        
     }
     
 }
