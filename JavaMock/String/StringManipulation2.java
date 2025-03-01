@@ -1,9 +1,11 @@
+package String;
+
 import java.util.Scanner;
 
 public class StringManipulation2 {
     public static void main(String[] args) {
         // Input String
-        String str = "Java is a Programming Language 12345";
+        String str = "Java is a Programming Language";
         
         // Step 1: Convert to Lowercase
         String lowerCaseStr = str.toLowerCase();
