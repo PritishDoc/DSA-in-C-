@@ -26,4 +26,4 @@ public static void main(String[] args) {
     Bubblesort(arr);
     Print(arr);
 }
-};;
+}
