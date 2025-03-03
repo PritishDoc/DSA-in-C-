@@ -34,3 +34,24 @@ n == height.length
 2 <= n <= 105
 0 <= height[i] <= 104
  */
+class Solution {
+    public int maxArea(int[] height) {
+        int left=0;
+        int right=height.length-1;
+        //apply two way pointer
+        int MaxArea=0;
+        while(left<right){
+            int width=right-left;
+            int MinHeight=Math.min(height[left],height[right]);
+                 MaxArea=Math.max(MaxArea,width*MinHeight);
+                //Traversing Array
+            if(height[left]<height[right]){
+                left++;
+            }
+            else{
+                right--;
+            }
+        }
+        return MaxArea;
+    }
+}
