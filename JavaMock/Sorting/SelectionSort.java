@@ -6,10 +6,11 @@ public class SelectionSort {
                 if(arr[j]<arr[si]){
                     si=j;
                 }
+            }
                 int temp = arr[si];
             arr[si] = arr[i];
             arr[i] = temp;
-            }
+            
         }
     }
     
