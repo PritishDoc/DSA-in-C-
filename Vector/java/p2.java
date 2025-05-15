@@ -7,8 +7,8 @@ public class p2 {
     int sq=n*n;
     int sum=0;
     while(sq>0){
-        int num=sq%10;
-        sum=sum+num;
+         sum+=sq%10;
+        
         n/=10;
     }
     if(sum==n){
