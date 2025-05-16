@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pritish Kumar Ray | Futuristic Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #0f0f0f, #000000);
+      color: #ffffff;
+      padding: 2rem;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      color: #00ffe0;
+      text-shadow: 0 0 10px #00ffe0;
+    }
+
+    header p {
+      color: #aaa;
+      margin-top: 0.5rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    nav a {
+      color: #00ffe0;
+      text-decoration: none;
+      font-weight: bold;
+      border: 1px solid #00ffe0;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      transition: all 0.3s;
+    }
+
+    nav a:hover {
+      background: #00ffe0;
+      color: #000;
+      box-shadow: 0 0 10px #00ffe0;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0, 255, 224, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .glass-card:hover {
+      transform: scale(1.02);
+    }
+
+    h2 {
+      color: #00ffe0;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #00ffe0;
+      padding-bottom: 0.5rem;
+    }
+
+    a {
+      color: #00ffe0;
+      text-decoration: underline;
+    }
+
+    ul li {
+      margin: 0.5rem 0;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #666;
+      padding-top: 2rem;
+      border-top: 1px solid #333;
+    }
+
+    .icon-link {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pritish Kumar Ray</h1>
+    <p>Full Stack Developer | ML Researcher | DSA Enthusiast</p>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#dsa">DSA</a>
+    <a href="#papers">Papers</a>
+    <a href="#vlogs">Vlogs</a>
+    <a href="#work">Work</a>
+  </nav>
+
+  <section id="about" class="glass-card">
+    <h2><i class="fas fa-user icon-link"></i>About Me</h2>
+    <p>I am a passionate developer focused on backend technologies, DSA, and machine learning. Actively contributing to open source and aiming for a Ph.D. in Computer Science.</p>
+  </section>
+
+  <section id="projects" class="glass-card">
+    <h2><i class="fas fa-code icon-link"></i>My Projects</h2>
+    <ul>
+      <li><strong>Hotel Booking System:</strong> Spring Boot, MySQL, AWS</li>
+      <li><strong>Phone Validator:</strong> Python + Regex + Flask + AWS</li>
+      <li><strong>Plant Disease Detector:</strong> CNN + TensorFlow</li>
+      <li><a href="https://github.com/pritishray" target="_blank">Explore More on GitHub</a></li>
+    </ul>
+  </section>
+
+  <section id="dsa" class="glass-card">
+    <h2><i class="fas fa-chart-line icon-link"></i>DSA & Profiles</h2>
+    <p>LeetCode: <a href="https://leetcode.com/YOUR_USERNAME" target="_blank">leetcode.com/YOUR_USERNAME</a></p>
+    <p>GFG: <a href="https://auth.geeksforgeeks.org/user/YOUR_USERNAME" target="_blank">gfg/YOUR_USERNAME</a></p>
+    <p id="streak">🔥 Current LeetCode Streak: Fetching...</p>
+  </section>
+
+  <section id="papers" class="glass-card">
+    <h2><i class="fas fa-file-alt icon-link"></i>Research Papers</h2>
+    <ul>
+      <li><strong>Adversarial Attacks & Defenses in ML (Healthcare)</strong> - <a href="LINK_TO_PAPER" target="_blank">Read Full Paper</a></li>
+    </ul>
+  </section>
+
+  <section id="vlogs" class="glass-card">
+    <h2><i class="fas fa-video icon-link"></i>Vlogs</h2>
+    <p>📹 Check out my technical vlogs: <a href="YOUR_VLOG_LINK" target="_blank">Watch Now</a></p>
+  </section>
+
+  <section id="work" class="glass-card">
+    <h2><i class="fas fa-briefcase icon-link"></i>Work Experience</h2>
+    <p>Selected as Software Engineer at <strong>Eastern Software System</strong>, Noida.</p>
+    <p>Contributing to AI Voice API integration with Vicidial and backend services in Spring Boot.</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Pritish Kumar Ray | All rights reserved</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const streak = 67; // Simulated data
+      document.getElementById("streak").textContent = `🔥 Current LeetCode Streak: ${streak} days!`;
+    });
+  </script>
+</body>
+</html>
