@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pritish Kumar Ray | Futuristic Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Roboto', sans-serif;
     }
 
     body {
-      background: radial-gradient(circle at top, #0f0f0f, #000000);
+      background: linear-gradient(135deg, #000428, #004e92);
       color: #ffffff;
       padding: 2rem;
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     header {
@@ -27,75 +28,98 @@
     }
 
     header h1 {
-      font-size: 3rem;
+      font-size: 3.5rem;
       color: #00ffe0;
-      text-shadow: 0 0 10px #00ffe0;
+      text-shadow: 0 0 20px #00ffe0, 0 0 40px #0ff;
+      font-family: 'Orbitron', sans-serif;
     }
 
     header p {
-      color: #aaa;
+      font-size: 1.2rem;
+      color: #ccc;
       margin-top: 0.5rem;
     }
 
     nav {
       display: flex;
       justify-content: center;
-      gap: 2rem;
       flex-wrap: wrap;
+      gap: 1.2rem;
       margin-bottom: 3rem;
+      animation: fadeIn 1.2s ease-in-out;
     }
 
     nav a {
-      color: #00ffe0;
-      text-decoration: none;
+      background: #00ffe0;
+      color: #000;
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
       font-weight: bold;
-      border: 1px solid #00ffe0;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
+      text-decoration: none;
       transition: all 0.3s;
     }
 
     nav a:hover {
-      background: #00ffe0;
-      color: #000;
-      box-shadow: 0 0 10px #00ffe0;
+      background: #000;
+      color: #00ffe0;
+      border: 1px solid #00ffe0;
+      box-shadow: 0 0 12px #00ffe0;
     }
 
     .glass-card {
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 16px;
       padding: 2rem;
       margin-bottom: 2rem;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 20px rgba(0, 255, 224, 0.3);
-      transition: transform 0.3s ease;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 25px rgba(0, 255, 224, 0.2);
+      transition: transform 0.4s ease;
+      position: relative;
     }
 
     .glass-card:hover {
-      transform: scale(1.02);
+      transform: translateY(-5px);
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(0,255,224,0.1), transparent);
+      z-index: 0;
     }
 
     h2 {
       color: #00ffe0;
       margin-bottom: 1rem;
-      border-bottom: 1px solid #00ffe0;
-      padding-bottom: 0.5rem;
+      font-size: 1.8rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    ul li, p {
+      font-size: 1rem;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
     }
 
     a {
       color: #00ffe0;
-      text-decoration: underline;
+      text-decoration: none;
     }
 
-    ul li {
-      margin: 0.5rem 0;
+    a:hover {
+      text-decoration: underline;
     }
 
     footer {
       text-align: center;
       margin-top: 3rem;
-      color: #666;
+      color: #999;
+      font-size: 0.9rem;
       padding-top: 2rem;
       border-top: 1px solid #333;
     }
@@ -103,12 +127,17 @@
     .icon-link {
       margin-right: 10px;
     }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Pritish Kumar Ray</h1>
-    <p>Full Stack Developer | ML Researcher | DSA Enthusiast</p>
+    <p>🚀 Full Stack Developer | 🎯 DSA Enthusiast | 📊 ML Researcher</p>
   </header>
 
   <nav>
@@ -122,51 +151,51 @@
 
   <section id="about" class="glass-card">
     <h2><i class="fas fa-user icon-link"></i>About Me</h2>
-    <p>I am a passionate developer focused on backend technologies, DSA, and machine learning. Actively contributing to open source and aiming for a Ph.D. in Computer Science.</p>
+    <p>I am a developer and researcher with a passion for solving real-world problems through backend systems, machine learning, and algorithms. My goal is to contribute impactful work in the tech community and pursue a Ph.D. in Computer Science.</p>
   </section>
 
   <section id="projects" class="glass-card">
     <h2><i class="fas fa-code icon-link"></i>My Projects</h2>
     <ul>
-      <li><strong>Hotel Booking System:</strong> Spring Boot, MySQL, AWS</li>
-      <li><strong>Phone Validator:</strong> Python + Regex + Flask + AWS</li>
-      <li><strong>Plant Disease Detector:</strong> CNN + TensorFlow</li>
-      <li><a href="https://github.com/pritishray" target="_blank">Explore More on GitHub</a></li>
+      <li><strong>Hotel Dining Slot Booking System:</strong> Spring Boot, EC2, S3, RDS</li>
+      <li><strong>Phone Validator App:</strong> Flask + AWS Integration + React UI</li>
+      <li><strong>Plant Disease Classifier:</strong> TensorFlow CNN, Accuracy 98.2%</li>
+      <li><a href="https://github.com/pritishray" target="_blank">🔗 View All Projects on GitHub</a></li>
     </ul>
   </section>
 
   <section id="dsa" class="glass-card">
-    <h2><i class="fas fa-chart-line icon-link"></i>DSA & Profiles</h2>
-    <p>LeetCode: <a href="https://leetcode.com/YOUR_USERNAME" target="_blank">leetcode.com/YOUR_USERNAME</a></p>
-    <p>GFG: <a href="https://auth.geeksforgeeks.org/user/YOUR_USERNAME" target="_blank">gfg/YOUR_USERNAME</a></p>
+    <h2><i class="fas fa-brain icon-link"></i>DSA & Profiles</h2>
+    <p>🔗 LeetCode: <a href="https://leetcode.com/YOUR_USERNAME" target="_blank">leetcode.com/YOUR_USERNAME</a></p>
+    <p>🔗 GeeksforGeeks: <a href="https://auth.geeksforgeeks.org/user/YOUR_USERNAME" target="_blank">gfg/YOUR_USERNAME</a></p>
     <p id="streak">🔥 Current LeetCode Streak: Fetching...</p>
   </section>
 
   <section id="papers" class="glass-card">
     <h2><i class="fas fa-file-alt icon-link"></i>Research Papers</h2>
     <ul>
-      <li><strong>Adversarial Attacks & Defenses in ML (Healthcare)</strong> - <a href="LINK_TO_PAPER" target="_blank">Read Full Paper</a></li>
+      <li><strong>Adversarial Attacks & Defenses in ML (Healthcare)</strong><br/>📝 <a href="LINK_TO_PAPER" target="_blank">Read the Full Paper</a></li>
     </ul>
   </section>
 
   <section id="vlogs" class="glass-card">
     <h2><i class="fas fa-video icon-link"></i>Vlogs</h2>
-    <p>📹 Check out my technical vlogs: <a href="YOUR_VLOG_LINK" target="_blank">Watch Now</a></p>
+    <p>🎥 Dive into my tech journey: <a href="YOUR_VLOG_LINK" target="_blank">Watch on YouTube</a></p>
   </section>
 
   <section id="work" class="glass-card">
     <h2><i class="fas fa-briefcase icon-link"></i>Work Experience</h2>
-    <p>Selected as Software Engineer at <strong>Eastern Software System</strong>, Noida.</p>
-    <p>Contributing to AI Voice API integration with Vicidial and backend services in Spring Boot.</p>
+    <p>💼 Selected as Software Engineer at <strong>Eastern Software System</strong>, Noida.</p>
+    <p>🛠️ Currently working on AI Voice Integration with Vicidial and backend development using Spring Boot + REST APIs.</p>
   </section>
 
   <footer>
-    <p>&copy; 2025 Pritish Kumar Ray | All rights reserved</p>
+    <p>&copy; 2025 Pritish Kumar Ray | Made with futuristic vibes 🚀</p>
   </footer>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const streak = 67; // Simulated data
+      const streak = 67; // Simulated LeetCode streak
       document.getElementById("streak").textContent = `🔥 Current LeetCode Streak: ${streak} days!`;
     });
   </script>
